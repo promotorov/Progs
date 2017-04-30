@@ -1,0 +1,17 @@
+<classWrapper>
+    <theCollection>
+        <name>Masdam</name>
+        <weight>50</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>Gert</name>
+        <weight>32</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>Bsad</name>
+        <weight>122</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+</classWrapper>

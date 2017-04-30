@@ -1,0 +1,15 @@
+#leftPane{
+    -fx-background-color: #ffecd7;
+}
+#rightPane{
+     -fx-background-color: #fefce0;
+}
+#buttonFiltr{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
+#buttonFiltr:hover{
+    -fx-background-color: #a8c6fa;
+}
