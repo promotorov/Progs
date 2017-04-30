@@ -16,4 +16,13 @@ public class MainScreenController {
             }
         });
     }
+    public static void buttonInfo(Button button){
+        EventHandler<ActionEvent> eH = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("sdfghjkl");
+            }
+        };
+        button.setOnAction(eH);
+    }
 }

@@ -10,6 +10,15 @@
     -fx-border-radius: 4;
     -fx-background-color: #ffffff;
 }
+#buttonInfo{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
 #buttonFiltr:hover{
+    -fx-background-color: #a8c6fa;
+}
+#buttonInfo:hover{
     -fx-background-color: #a8c6fa;
 }

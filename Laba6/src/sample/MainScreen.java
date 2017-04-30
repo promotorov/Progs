@@ -37,6 +37,7 @@ public class MainScreen{
     private static TableColumn<FoodResidus, String> columnName;
     private static TableColumn<FoodResidus, Integer> columnWeight;
     private static Button buttonFiltr;
+    private static Button buttonInfo;
 
     private static void drawAncor(){
         mainPane=new AnchorPane();
@@ -59,6 +60,7 @@ public class MainScreen{
         leftPane.setId("leftPane");
         rightPane.setId("rightPane");
         buttonFiltr.setId("buttonFiltr");
+        buttonInfo.setId("buttonInfo");
     }
 
     private static void drawTable(){
@@ -100,10 +102,18 @@ public class MainScreen{
         AnchorPane.setBottomAnchor(buttonFiltr, 30.0);
         AnchorPane.setLeftAnchor(buttonFiltr, 46.25);
         AnchorPane.setRightAnchor(buttonFiltr, 208.75);
+
+        buttonInfo=new Button("Инфа");
+        rightPane.getChildren().add(buttonInfo);
+        AnchorPane.setTopAnchor(buttonFiltr, 480.0);
+        AnchorPane.setBottomAnchor(buttonFiltr, 30.0);
+        AnchorPane.setLeftAnchor(buttonFiltr, 46.25);
+        AnchorPane.setRightAnchor(buttonFiltr, 208.75);
     }
 
     public static void setControllers(){
         MainScreenController.buttonFiltr(buttonFiltr);
+        MainScreenController.buttonInfo(buttonInfo);
     }
 
     public static void loadMainScreen(){
