@@ -1,0 +1,6 @@
+#leftPane{
+    -fx-background-color: #000000;
+}
+#rightPane{
+    -fx-background-color: red;
+}

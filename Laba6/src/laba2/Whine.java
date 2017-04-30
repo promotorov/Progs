@@ -4,16 +4,14 @@
 package laba2;
 
 public class Whine extends FoodResidus{
-    public Whine(int wheight){
-        this.name="whine";
-        this.wheight=wheight;
+    public Whine(int weight){
+        super("whine", weight);
     }
     public Whine(String name){
-        this.name=name;
-        this.wheight=50;
+        super(name, 50);
     }
-    public Whine(String name,int wheight){
-        this.name=name;
-        this.wheight=wheight;
+    public Whine(String name,int weight)
+    {
+        super(name, weight);
     }
 }

@@ -4,16 +4,13 @@
 package laba2;
 
 public class Meet extends FoodResidus{
-    public Meet(int wheight){
-        this.name="meet";
-        this.wheight=wheight;
+    public Meet(int weight){
+        super("meet", weight);
     }
     public Meet(String name){
-        this.name=name;
-        this.wheight=50;
+        super(name, 50);
     }
-    public Meet(String name,int wheight){
-        this.name=name;
-        this.wheight=wheight;
+    public Meet(String name,int weight){
+        super(name, weight);
     }
 }
