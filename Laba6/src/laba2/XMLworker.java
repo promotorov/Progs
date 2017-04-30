@@ -34,7 +34,7 @@ public class XMLworker {
             ClassWrapper returnedHS = JAXB.unmarshal(br, ClassWrapper.class);
             return returnedHS.getTheCollection();
         }catch(IOException e){
-            System.out.println("Введите корректный путь файла");
+            System.out.println("Введите корректный путь файл");
             return null;
         }
     }

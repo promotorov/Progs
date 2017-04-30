@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.glass.events.MouseEvent;
 import com.sun.glass.ui.CommonDialogs;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -8,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,15 +29,12 @@ import laba2.Whine;
 import java.io.File;
 
 public class Main extends Application {
-
     private ObservableList<FoodResidus> data =
-            FXCollections.observableArrayList(new FoodResidus("Ads", 22), new FoodResidus("Basd", 26), new FoodResidus("Casd",21));
+            FXCollections.observableArrayList(new Meet("Ads", 22), new Whine("Basd", 26), new Meet("Casd",21));
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("Hello World");
-        AnchorPane mainPane=new AnchorPane();
-        mainPane.setId("mainPane");
+        /*AnchorPane mainPane=new AnchorPane();
         AnchorPane leftPane=new AnchorPane();
         AnchorPane rightPane=new AnchorPane();
         leftPane.setId("leftPane");
@@ -87,7 +86,7 @@ public class Main extends Application {
         buttonFiltrRemove.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("Hello World!");
+                primaryStage.setScene(new Scene(new AnchorPane(), 330, 330));;
             }
         });
         leftPane.getChildren().add(buttonFiltrRemove);
@@ -154,10 +153,8 @@ public class Main extends Application {
         rightPane.getChildren().add(buttonSave);
         AnchorPane.setTopAnchor(buttonSave, 450.0);
         AnchorPane.setRightAnchor(buttonSave, 280.0);
-
-        primaryStage.setScene(new Scene(mainPane, 750, 550));
-        primaryStage.getScene().getStylesheets().add("css/Main.css");
-        primaryStage.show();
+        */
+        MainScreen.loadMainScreen();
     }
 
 
@@ -165,30 +162,4 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static class Person {
-
-        private final SimpleStringProperty firstName;
-        private final SimpleStringProperty lastName;
-
-        private Person(String fName, String lName) {
-            this.firstName = new SimpleStringProperty(fName);
-            this.lastName = new SimpleStringProperty(lName);
-        }
-
-        public String getFirstName() {
-            return firstName.get();
-        }
-
-        public void setFirstName(String fName) {
-            firstName.set(fName);
-        }
-
-        public String getLastName() {
-            return lastName.get();
-        }
-
-        public void setLastName(String fName) {
-            lastName.set(fName);
-        }
-    }
 }
