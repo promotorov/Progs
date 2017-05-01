@@ -29,8 +29,6 @@ import laba2.Whine;
 import java.io.File;
 
 public class Main extends Application {
-    private ObservableList<FoodResidus> data =
-            FXCollections.observableArrayList(new Meet("Ads", 22), new Whine("Basd", 26), new Meet("Casd",21));
 
     @Override
     public void start(Stage primaryStage) throws Exception{

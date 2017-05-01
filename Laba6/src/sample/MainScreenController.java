@@ -12,17 +12,56 @@ public class MainScreenController {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("Click");
+                System.out.println("Устанавливаем фильтры");
+            }
+        });
+    }
+    public static void buttonDelFiltr(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Удаляем фильтры");
             }
         });
     }
     public static void buttonInfo(Button button){
-        EventHandler<ActionEvent> eH = new EventHandler<ActionEvent>() {
+        button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                System.out.println("sdfghjkl");
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Выводим инфу");
             }
-        };
-        button.setOnAction(eH);
+        });
+    }
+    public static void buttonRemoveEl(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Удаляем элементы");
+            }
+        });
+    }
+    public static void buttonChoose(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Выбираем элемент");
+            }
+        });
+    }
+    public static void buttonSave(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Сохраняем");
+            }
+        });
+    }
+    public static void buttonClear(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Очищаем");
+            }
+        });
     }
 }
