@@ -2,12 +2,14 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -80,6 +82,21 @@ public class MainScreen{
         table=new TableView<>();
         table.setEditable(true);
         columnName=new TableColumn<>("Name");
+        columnName.setPrefWidth(162.5);
+        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnName.setCellFactory(TextFieldTableCell.<FoodResidus>forTableColumn());
+        columnName.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<FoodResidus, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<FoodResidus, String> t) {
+                        t.getTableView().getItems().get(
+                                t.getTablePosition().getRow()).setName(t.getNewValue());
+                        for(int i=0; i<data.size(); i++){
+                            System.out.println(data.get(i).getName()+data.get(i).getWeight());
+                        }
+                    }
+                }
+        );
         columnName.prefWidthProperty().bind(table.widthProperty().multiply(0.5));
         columnName.setCellValueFactory(new PropertyValueFactory<FoodResidus, String>("name"));
         columnWeight=new TableColumn<>("Weight");
@@ -105,6 +122,7 @@ public class MainScreen{
         }
         catch (Exception e){
             System.out.println(e.getMessage());
+            System.out.println("sd");
         }
     }
 
