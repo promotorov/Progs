@@ -1,15 +1,34 @@
 package sample;
 
+import com.sun.glass.events.MouseEvent;
+import com.sun.glass.ui.CommonDialogs;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.control.TableView;
+import laba2.Cheese;
 import laba2.FoodResidus;
+import laba2.Meet;
 import laba2.Whine;
 
+import java.io.File;
+
 public class Main extends Application {
-    private ObservableList<FoodResidus> data =
-            FXCollections.observableArrayList(new Whine("Ads", 22), new Whine("Basd", 26), new Whine("Casd",21));
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -134,7 +153,6 @@ public class Main extends Application {
         AnchorPane.setRightAnchor(buttonSave, 280.0);
         */
         MainScreen.loadMainScreen();
-        System.out.println("sd");
     }
 
 

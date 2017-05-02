@@ -3,7 +3,6 @@ package sample;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import laba2.FoodResidus;
 
 class EditingCell extends TableCell<FoodResidus, String> {
@@ -35,27 +34,23 @@ class EditingCell extends TableCell<FoodResidus, String> {
     @Override
     public void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
+
         if (empty) {
             setText(null);
             setGraphic(null);
         } else {
-            System.out.println("fer");
-            setTextFill(Color.RED);
             if (isEditing()) {
-                System.out.println("ger");
-                if (textField != null) {;
+                if (textField != null) {
                     textField.setText(getString());
                 }
                 setText(null);
-                setGraphic(null);
+                setGraphic(textField);
             } else {
-                System.out.println(getString());
-
+                setText(getString());
                 setGraphic(null);
             }
         }
     }
-
     private void createTextField() {
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);

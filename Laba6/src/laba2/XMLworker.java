@@ -3,7 +3,6 @@ package laba2;
 import javax.xml.bind.*;
 import java.io.*;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by danil on 23.02.2017.
@@ -11,7 +10,7 @@ import java.util.List;
 
 public class XMLworker {
 
-    public static void saveCollection(String path,List<FoodResidus> hs)throws JAXBException{
+    public static void saveCollection(String path, HashSet hs)throws JAXBException{
         try{
             JAXBContext context = JAXBContext.newInstance(ClassWrapper.class);
             ClassWrapper cw = new ClassWrapper();
@@ -27,7 +26,7 @@ public class XMLworker {
         }
     }
 
-    public static List<FoodResidus> getCollection(String path)throws JAXBException{
+    public static HashSet getCollection(String path)throws JAXBException{
         try{
             File fileRead = new File(path);
             FileReader fr = new FileReader(fileRead);

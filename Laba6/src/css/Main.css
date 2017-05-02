@@ -4,7 +4,13 @@
 #rightPane{
      -fx-background-color: #fefce0;
 }
-#buttonFiltr{
+#buttonFilter{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
+#buttonDelFilter{
     -fx-border-color: #000000;
     -fx-border-width: 2;
     -fx-border-radius: 4;
@@ -16,9 +22,49 @@
     -fx-border-radius: 4;
     -fx-background-color: #ffffff;
 }
-#buttonFiltr:hover{
+#buttonClear{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
+#buttonRemoveEl{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
+#buttonChoose{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
+#buttonSave{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
+
+#buttonFilter:hover{
+    -fx-background-color: #a8c6fa;
+}
+#buttonDelFilter:hover{
     -fx-background-color: #a8c6fa;
 }
 #buttonInfo:hover{
+    -fx-background-color: #a8c6fa;
+}
+#buttonClear:hover{
+    -fx-background-color: #a8c6fa;
+}
+#buttonRemoveEl:hover{
+    -fx-background-color: #a8c6fa;
+}
+#buttonChoose:hover{
+    -fx-background-color: #a8c6fa;
+}
+#buttonSave:hover{
     -fx-background-color: #a8c6fa;
 }
