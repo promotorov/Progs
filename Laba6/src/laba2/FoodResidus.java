@@ -3,16 +3,14 @@
  */
 package laba2;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
-@XmlAccessorType(XmlAccessType.FIELD)
 public  class FoodResidus implements Comparable {
-    @XmlElement(name="name")
-    public String name = "";
-    @XmlElement(name="weight")
-    public int wheight = 0;
+//TODO dfghj
+    public SimpleStringProperty name;
+
+    public SimpleIntegerProperty wheight;
 
     public boolean fliesAttraction=false;
 
@@ -20,7 +18,7 @@ public  class FoodResidus implements Comparable {
     public int compareTo(Object o) {
         FoodResidus comparedFoodResidus = (FoodResidus) o;
         int result;
-        result = wheight-comparedFoodResidus.wheight;
+        result = wheight.get()-comparedFoodResidus.wheight.get();
         if(result!=0){return (int) result/Math.abs(result);}
         return 0;
     }
@@ -40,19 +38,17 @@ public  class FoodResidus implements Comparable {
         }
     }
 
-    public String getName(){
-        return this.name;
-    }
+    public String getName(){return name.get();}
 
     public void setName(String name){
-        this.name=name;
+        this.name.set(name);
     }
 
-    public int getWeight(){
-        return this.wheight;
+    public Integer getWeight(){
+        return wheight.get();
     }
 
     public void setWeight(int weight){
-        this.wheight=weight;
+        this.wheight.set(weight);
     }
 }
