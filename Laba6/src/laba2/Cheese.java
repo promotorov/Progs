@@ -3,17 +3,20 @@
  */
 package laba2;
 
-public class Whine extends FoodResidus{
-    public Whine(int wheight){
-        this.name="whine";
+
+
+public class Cheese extends FoodResidus{
+    public Cheese(int wheight){
+        this.name="cheese";
         this.wheight=wheight;
     }
-    public Whine(String name){
+    public Cheese(String name){
         this.name=name;
         this.wheight=50;
     }
-    public Whine(String name,int wheight){
+    public Cheese(String name,int wheight){
         this.name=name;
         this.wheight=wheight;
     }
 }
+
