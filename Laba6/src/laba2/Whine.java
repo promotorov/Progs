@@ -3,17 +3,20 @@
  */
 package laba2;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Whine extends FoodResidus{
     public Whine(int wheight){
-        this.name="whine";
-        this.wheight=wheight;
+        this.name=new SimpleStringProperty("whine");
+        this.wheight=new SimpleIntegerProperty(wheight);
     }
     public Whine(String name){
-        this.name=name;
-        this.wheight=50;
+        this.name=new SimpleStringProperty(name);
+        this.wheight=new SimpleIntegerProperty(50);
     }
     public Whine(String name,int wheight){
-        this.name=name;
-        this.wheight=wheight;
+        this.name=new SimpleStringProperty(name);
+        this.wheight=new SimpleIntegerProperty(wheight);
     }
 }

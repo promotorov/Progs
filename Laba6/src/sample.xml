@@ -10,8 +10,13 @@
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
-        <name>Bsad</name>
+        <name>Vlew</name>
         <weight>122</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>Ds</name>
+        <weight>22</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
 </classWrapper>

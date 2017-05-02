@@ -2,25 +2,27 @@ package laba2;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by danil on 24.02.2017.
  */
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 public class ClassWrapper {
 
-    private HashSet<FoodResidus> theCollection;
+    private List<FoodResidus> theCollection;
 
     public ClassWrapper(){
-        theCollection = new HashSet<FoodResidus>();
+        theCollection = new LinkedList<FoodResidus>();
     }
-    public HashSet<FoodResidus> getTheCollection(){
+    public List<FoodResidus> getTheCollection(){
         return theCollection;
     }
-    public void setTheCollection(HashSet<FoodResidus> theCollection){
+    public void setTheCollection(List<FoodResidus> theCollection){
         this.theCollection=theCollection;
     }
 }
