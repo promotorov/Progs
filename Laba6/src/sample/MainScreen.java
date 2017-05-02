@@ -74,7 +74,6 @@ public class MainScreen{
         columnName=new TableColumn<>("Name");
         columnName.setPrefWidth(162.5);
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cellFactory = (TableColumn<FoodResidus, String> p) -> new EditingCell();
         columnName.setCellFactory(TextFieldTableCell.<FoodResidus>forTableColumn());
         columnName.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<FoodResidus, String>>() {
