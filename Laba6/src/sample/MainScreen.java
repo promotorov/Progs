@@ -122,6 +122,7 @@ public class MainScreen{
         }
         catch (Exception e){
             System.out.println(e.getMessage());
+            System.out.println("sd");
         }
     }
 
