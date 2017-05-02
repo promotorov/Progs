@@ -1,8 +1,11 @@
 package sample;
 
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
@@ -13,6 +16,8 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import laba2.FoodResidus;
 import laba2.XMLworker;
@@ -32,7 +37,8 @@ public class MainScreen{
     private static AnchorPane mainPane;
     private static SplitPane splitPane;
     private static AnchorPane leftPane;
-    private static GridPane filtrButtonsContainer;
+    private static HBox leftFilterButtonsContainer;
+    private static VBox rightFilterButtonsContainer;
     private static AnchorPane rightPane;
     private static TableView<FoodResidus> table;
     private static TableColumn<FoodResidus, String> columnName;
@@ -126,55 +132,40 @@ public class MainScreen{
         }
     }
 
-    public static void drawButton(){ //TODO Сделать адекватое изменеие размера и местоположения для кнопок при расширенни окна
+    public static void drawButton(){
         buttonFiler =new Button("Фильтровать");
-        leftPane.getChildren().add(buttonFiler);
-        AnchorPane.setTopAnchor(buttonFiler, 480.0);
-        AnchorPane.setBottomAnchor(buttonFiler, 30.0);
-        AnchorPane.setLeftAnchor(buttonFiler, 46.25);
-        AnchorPane.setRightAnchor(buttonFiler, 208.75);
-
         buttonDelFiler =new Button("Удалить фильтр");
-        leftPane.getChildren().add(buttonDelFiler);
-        AnchorPane.setTopAnchor(buttonDelFiler, 480.0);
-        AnchorPane.setBottomAnchor(buttonDelFiler, 30.0);
-        AnchorPane.setLeftAnchor(buttonDelFiler, 208.75);
-        AnchorPane.setRightAnchor(buttonDelFiler, 46.25);
+
+        leftFilterButtonsContainer = new HBox();
+        leftFilterButtonsContainer.setSpacing(40);
+        leftFilterButtonsContainer.setAlignment(Pos.CENTER);
+        leftFilterButtonsContainer.getChildren().add(buttonFiler);
+        leftFilterButtonsContainer.getChildren().add(buttonDelFiler);
+
+        leftPane.getChildren().add(leftFilterButtonsContainer);
+        AnchorPane.setBottomAnchor(leftFilterButtonsContainer, 32.0);
+        AnchorPane.setLeftAnchor(leftFilterButtonsContainer, 0.0);
+        AnchorPane.setRightAnchor(leftFilterButtonsContainer, 0.0);
 
         buttonInfo=new Button("Информация");
-        rightPane.getChildren().add(buttonInfo);
-        AnchorPane.setTopAnchor(buttonInfo, 30.0);
-        AnchorPane.setBottomAnchor(buttonInfo, 480.0);
-        AnchorPane.setLeftAnchor(buttonInfo, 40.25);
-        AnchorPane.setRightAnchor(buttonInfo, 210.75);
-
         buttonClear=new Button("Очистить");
-        rightPane.getChildren().add(buttonClear);
-        AnchorPane.setTopAnchor(buttonClear, 90.0);
-        AnchorPane.setBottomAnchor(buttonClear, 420.0);
-        AnchorPane.setLeftAnchor(buttonClear, 40.25);
-        AnchorPane.setRightAnchor(buttonClear, 210.75);
-
         buttonRemoveEl=new Button("Удалить элементы");
-        rightPane.getChildren().add(buttonRemoveEl);
-        AnchorPane.setTopAnchor(buttonRemoveEl, 150.0);
-        AnchorPane.setBottomAnchor(buttonRemoveEl, 360.0);
-        AnchorPane.setLeftAnchor(buttonRemoveEl, 40.25);
-        AnchorPane.setRightAnchor(buttonRemoveEl, 210.75);
-
         buttonChoose=new Button("Выбрать файл");
-        rightPane.getChildren().add(buttonChoose);
-        AnchorPane.setTopAnchor(buttonChoose, 210.0);
-        AnchorPane.setBottomAnchor(buttonChoose, 300.0);
-        AnchorPane.setLeftAnchor(buttonChoose, 40.25);
-        AnchorPane.setRightAnchor(buttonChoose, 210.75);
-
         buttonSave=new Button("Сохранить");
-        rightPane.getChildren().add(buttonSave);
-        AnchorPane.setTopAnchor(buttonSave, 270.0);
-        AnchorPane.setBottomAnchor(buttonSave, 240.0);
-        AnchorPane.setLeftAnchor(buttonSave, 40.25);
-        AnchorPane.setRightAnchor(buttonSave, 210.75);
+        rightFilterButtonsContainer=new VBox();
+        rightFilterButtonsContainer.setAlignment(Pos.CENTER_LEFT);
+        rightFilterButtonsContainer.setSpacing(30);
+        rightFilterButtonsContainer.getChildren().add(buttonInfo);
+        rightFilterButtonsContainer.getChildren().add(buttonClear);
+        rightFilterButtonsContainer.getChildren().add(buttonRemoveEl);
+        rightFilterButtonsContainer.getChildren().add(buttonChoose);
+        rightFilterButtonsContainer.getChildren().add(buttonSave);
+
+        rightPane.getChildren().add(rightFilterButtonsContainer);
+        AnchorPane.setTopAnchor(rightFilterButtonsContainer, 0.0);
+        AnchorPane.setBottomAnchor(rightFilterButtonsContainer, 0.0);
+        AnchorPane.setLeftAnchor(rightFilterButtonsContainer, 30.0);
+        AnchorPane.setRightAnchor(rightFilterButtonsContainer, 100.0);
     }
 
     public static void setControllers(){
