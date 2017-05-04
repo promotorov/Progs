@@ -17,6 +17,27 @@ public  class FoodResidus implements Comparable {
     public boolean fliesAttraction=false;
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FoodResidus)) return false;
+
+        FoodResidus that = (FoodResidus) o;
+
+        if (wheight != that.wheight) return false;
+        if (fliesAttraction != that.fliesAttraction) return false;
+        return name.equals(that.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + wheight;
+        result = 31 * result + (fliesAttraction ? 1 : 0);
+        return result;
+    }
+
+    @Override
     public int compareTo(Object o) {
         FoodResidus comparedFoodResidus = (FoodResidus) o;
         int result;

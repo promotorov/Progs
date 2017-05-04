@@ -19,6 +19,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import laba2.FoodResidus;
 import laba2.XMLworker;
 
@@ -89,30 +91,16 @@ public class MainScreen{
         table.setEditable(true);
         columnName=new TableColumn<>("Name");
         columnName.setPrefWidth(162.5);
-        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        columnName.setCellFactory(TextFieldTableCell.<FoodResidus>forTableColumn());
-        columnName.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<FoodResidus, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<FoodResidus, String> t) {
-                        t.getTableView().getItems().get(
-                                t.getTablePosition().getRow()).setName(t.getNewValue());
-                        for(int i=0; i<data.size(); i++){
-                            System.out.println(data.get(i).getName()+data.get(i).getWeight());
-                        }
-                    }
-                }
-        );
         columnName.prefWidthProperty().bind(table.widthProperty().multiply(0.5));
-        columnName.setCellValueFactory(new PropertyValueFactory<FoodResidus, String>("name"));
         columnWeight=new TableColumn<>("Weight");
         columnWeight.prefWidthProperty().bind(table.widthProperty().multiply(0.5));
-        columnWeight.setCellValueFactory(new PropertyValueFactory<FoodResidus, Integer>("weight"));
         table.getColumns().addAll(columnName,columnWeight);
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         AnchorPane.setTopAnchor(table, 20.0);
         AnchorPane.setBottomAnchor(table, 100.0);
         AnchorPane.setRightAnchor(table, 25.0);
         AnchorPane.setLeftAnchor(table, 25.0);
+
         leftPane.getChildren().add(table);
     }
 
@@ -176,6 +164,8 @@ public class MainScreen{
         MainScreenController.buttonRemoveEl(buttonRemoveEl);
         MainScreenController.buttonChoose(buttonChoose);
         MainScreenController.buttonSave(buttonSave);
+        MainScreenController.editName(columnName, data);
+        MainScreenController.editWeight(columnWeight, data);
     }
 
     public static void loadMainScreen(){
