@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import laba2.FoodResidus;
 
@@ -35,6 +36,16 @@ public class MainScreenController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Выводим инфу");
+                InfoWindow.loadInfoWindow();
+            }
+        });
+    }
+    public static void InfoOKbutton(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage stage = (Stage) InfoWindow.InfoOKbutton.getScene().getWindow();
+                stage.close();
             }
         });
     }

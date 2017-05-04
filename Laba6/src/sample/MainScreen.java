@@ -31,8 +31,8 @@ import java.util.Iterator;
 /**
  * Created by vladp on 30.04.2017.
  */
-public class MainScreen{
-    private static ObservableList<FoodResidus> data;
+public class MainScreen{//TODO определить для всех окон максимальные и минимальные размеры
+    public static ObservableList<FoodResidus> data;
 
     private static Stage primaryStage;
     private static Scene scene;
