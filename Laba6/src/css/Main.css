@@ -46,7 +46,6 @@
     -fx-border-radius: 4;
     -fx-background-color: #ffffff;
 }
-
 #buttonFilter:hover{
     -fx-background-color: #a8c6fa;
 }
