@@ -28,7 +28,31 @@
     -fx-border-radius: 4;
     -fx-background-color: #ffffff;
 }
+#ClearOKbutton{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
+#ClearCancelButton{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
 #buttonRemoveEl{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
+#RemoveElOKbutton{
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+}
+#RemoveElCancelButton{
     -fx-border-color: #000000;
     -fx-border-width: 2;
     -fx-border-radius: 4;
@@ -64,7 +88,19 @@
 #buttonClear:hover{
     -fx-background-color: #a8c6fa;
 }
+#ClearOKbutton:hover{
+    -fx-background-color: #a8c6fa;
+}
+#ClearCancelButton:hover{
+    -fx-background-color: #a8c6fa;
+}
 #buttonRemoveEl:hover{
+    -fx-background-color: #a8c6fa;
+}
+#RemoveElOKbutton:hover{
+    -fx-background-color: #a8c6fa;
+}
+#RemoveElCancelButton:hover{
     -fx-background-color: #a8c6fa;
 }
 #buttonChoose:hover{

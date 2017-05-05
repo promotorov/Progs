@@ -23,6 +23,7 @@ public class InfoWindow {
         setControllers();
         setCSS();
         primaryStage=new Stage();
+        primaryStage.setResizable(false);
         //primaryStage.getIcons().add(new Image("file:icon.png"));//TODO определить иконку
         scene=new Scene(mainPane, 550, 150);
         primaryStage.setScene(scene);

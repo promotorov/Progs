@@ -9,7 +9,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import laba2.ClearWindow;
 import laba2.FoodResidus;
+import laba2.RemoveElWindow;
+
+import java.io.IOException;
+import java.util.Iterator;
+
+import static laba2.JSONworker.toJavaObject;
 
 /**
  * Created by vladp on 30.04.2017.
@@ -54,6 +61,38 @@ public class MainScreenController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Удаляем элементы");
+                RemoveElWindow.loadRemoveElWindow();
+            }
+        });
+    }
+    public static void RemoveElOKbutton(Button button){//TODO доделать
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    FoodResidus jsonCompared = toJavaObject(RemoveElWindow.textField.getText());
+                    Iterator<FoodResidus> iterator = MainScreen.data.iterator();
+                    while(iterator.hasNext()){
+                        FoodResidus compared = iterator.next();
+                        if(compared.compareTo(jsonCompared)>0){
+                            iterator.remove();
+                        }
+                    }
+                    System.out.println("Все элементы превышающие данный удалены");
+                } catch (IOException e) {
+                    System.out.println("Не верный аргумент");
+                }
+                Stage stage = (Stage) RemoveElWindow.RemoveElOKbutton.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
+    public static void RemoveElCancelButton(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage stage = (Stage) RemoveElWindow.RemoveElCancelButton.getScene().getWindow();
+                stage.close();
             }
         });
     }
@@ -78,6 +117,26 @@ public class MainScreenController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Очищаем");
+                ClearWindow.loadClearWindow();
+            }
+        });
+    }
+    public static void ClearOKbutton(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                MainScreen.data.clear();
+                Stage stage = (Stage) ClearWindow.ClearOKbutton.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
+    public static void ClearCancelButton(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage stage = (Stage) ClearWindow.ClearOKbutton.getScene().getWindow();
+                stage.close();
             }
         });
     }

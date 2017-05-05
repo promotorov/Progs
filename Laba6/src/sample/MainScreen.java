@@ -176,6 +176,8 @@ public class MainScreen{//TODO определить для всех окон м�
         setControllers();
         setCSS();
         primaryStage=new Stage();
+        primaryStage.setMinHeight(550.0);
+        primaryStage.setMinWidth(750.0);
         //primaryStage.getIcons().add(new Image("file:icon.png"));//TODO определить иконку
         scene=new Scene(mainPane, 750, 550);
         primaryStage.setScene(scene);
