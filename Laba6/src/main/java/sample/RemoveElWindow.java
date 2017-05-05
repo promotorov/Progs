@@ -1,10 +1,13 @@
-package laba2;
+package sample;
+
+/**
+ * Created by vladp on 05.05.2017.
+ */
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.MainScreenController;
 
@@ -60,3 +63,4 @@ public class RemoveElWindow {
         MainScreenController.RemoveElCancelButton(RemoveElCancelButton);
     }
 }
+
