@@ -61,6 +61,7 @@ public  class FoodResidus implements Comparable {
         }
     }
 
+
     public String getName(){
         return this.name;
     }
