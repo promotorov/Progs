@@ -1,7 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <classWrapper>
     <theCollection>
-        <name>Masdam</name>
-        <weight>50</weight>
+        <name>asdBDs</name>
+        <weight>122</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>lkBDs</name>
+        <weight>122</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>etBDs</name>
+        <weight>122</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
@@ -10,37 +21,7 @@
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
-        <name>Bsad</name>
-        <weight>122</weight>
-        <fliesAttraction>false</fliesAttraction>
-    </theCollection>
-    <theCollection>
-        <name>Bsad</name>
-        <weight>122</weight>
-        <fliesAttraction>false</fliesAttraction>
-    </theCollection>
-    <theCollection>
         <name>asdd</name>
-        <weight>122</weight>
-        <fliesAttraction>false</fliesAttraction>
-    </theCollection>
-    <theCollection>
-        <name>BDsasd</name>
-        <weight>122</weight>
-        <fliesAttraction>false</fliesAttraction>
-    </theCollection>
-    <theCollection>
-        <name>asdBDs</name>
-        <weight>122</weight>
-        <fliesAttraction>false</fliesAttraction>
-    </theCollection>
-    <theCollection>
-        <name>hghBDs</name>
-        <weight>122</weight>
-        <fliesAttraction>false</fliesAttraction>
-    </theCollection>
-    <theCollection>
-        <name>lkBDs</name>
         <weight>122</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
@@ -55,6 +36,21 @@
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
+        <name>Bsad</name>
+        <weight>122</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>BDsasd</name>
+        <weight>122</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>hghBDs</name>
+        <weight>122</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
         <name>qw</name>
         <weight>122</weight>
         <fliesAttraction>false</fliesAttraction>
@@ -65,8 +61,13 @@
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
-        <name>etBDs</name>
+        <name>treBDs</name>
         <weight>122</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>Masdam</name>
+        <weight>50</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
@@ -75,8 +76,8 @@
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
-        <name>treBDs</name>
-        <weight>122</weight>
+        <name>nwe</name>
+        <weight>97</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
 </classWrapper>

@@ -57,17 +57,8 @@ public class MainScreen{//TODO определить для всех окон м�
     private static void drawPanes(){
         mainPane=new AnchorPane();
         splitPane=new SplitPane();
-
         leftPane=new AnchorPane();
-        AnchorPane.setTopAnchor(leftPane, 0.0);
-        AnchorPane.setLeftAnchor(leftPane, 0.0);
-        AnchorPane.setBottomAnchor(leftPane, 0.0);
-        AnchorPane.setRightAnchor(leftPane, 375.0);
         rightPane=new AnchorPane();
-        AnchorPane.setTopAnchor(rightPane, 0.0);
-        AnchorPane.setLeftAnchor(rightPane, 375.0);
-        AnchorPane.setBottomAnchor(rightPane, 0.0);
-        AnchorPane.setRightAnchor(rightPane, 0.0);
         splitPane.getItems().add(leftPane);
         splitPane.getItems().add(rightPane);
         mainPane.getChildren().add(splitPane);
@@ -77,13 +68,13 @@ public class MainScreen{//TODO определить для всех окон м�
         mainPane.setId("mainPane");
         leftPane.setId("leftPane");
         rightPane.setId("rightPane");
-        buttonFiler.setId("buttonFilter");
-        buttonDelFiler.setId("buttonDelFilter");
-        buttonInfo.setId("buttonInfo");
-        buttonClear.setId("buttonClear");
-        buttonRemoveEl.setId("buttonRemoveEl");
-        buttonChoose.setId("buttonChoose");
-        buttonSave.setId("buttonSave");
+        buttonFiler.setId("button");
+        buttonDelFiler.setId("button");
+        buttonInfo.setId("button");
+        buttonClear.setId("button");
+        buttonRemoveEl.setId("button");
+        buttonChoose.setId("button");
+        buttonSave.setId("button");
     }
 
     private static void drawTable(){
@@ -178,9 +169,10 @@ public class MainScreen{//TODO определить для всех окон м�
         setCSS();
         primaryStage=new Stage();
         primaryStage.setMinHeight(550.0);
-        primaryStage.setMinWidth(750.0);
+        primaryStage.setMinWidth(950.0);
         //primaryStage.getIcons().add(new Image("file:icon.png"));//TODO определить иконку
-        scene=new Scene(mainPane, 750, 550);
+        primaryStage.setTitle("Остатки еды");
+        scene=new Scene(mainPane, 950, 550);
         primaryStage.setScene(scene);
         splitPane.prefWidthProperty().bind(scene.widthProperty());
         splitPane.prefHeightProperty().bind(scene.heightProperty());

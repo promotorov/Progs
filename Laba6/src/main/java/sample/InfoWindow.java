@@ -44,7 +44,7 @@ public class InfoWindow {
         AnchorPane.setBottomAnchor(InfoOKbutton, 32.0);
     }
     private static void setCSS(){
-        InfoOKbutton.setId("InfoOKbutton");
+        InfoOKbutton.setId("button");
     }
     private static void setControllers(){
         MainScreenController.InfoOKbutton(InfoOKbutton);

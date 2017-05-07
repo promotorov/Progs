@@ -9,16 +9,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import laba2.FoodResidus;
 import laba2.Whine;
+import laba2.XMLworker;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import static laba2.JSONworker.toJavaObject;
+import static laba2.XMLworker.saveCollection;
 
 /**
  * Created by vladp on 30.04.2017.
@@ -114,6 +119,50 @@ public class MainScreenController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Сохраняем");
+                SaveWindow.loadSaveWindow();
+            }
+        });
+    }
+    public static void SaveChooseButton(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FileChooser fileChooser=new FileChooser();
+                File selectedFile=fileChooser.showOpenDialog(null);
+
+                ObservableList<FoodResidus> ob=MainScreen.data;
+                HashSet<FoodResidus> set=new HashSet<>();
+                Iterator<FoodResidus> iterator=ob.iterator();
+                while(iterator.hasNext()){
+                    set.add(iterator.next());
+                }
+                try {
+                    saveCollection(selectedFile, set);
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+                Stage stage = (Stage) SaveWindow.SaveChooseButton.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
+    public static void SaveDefaultButton(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ObservableList<FoodResidus> ob=MainScreen.data;
+                HashSet<FoodResidus> set=new HashSet<>();
+                Iterator<FoodResidus> iterator=ob.iterator();
+                while(iterator.hasNext()){
+                    set.add(iterator.next());
+                }
+                try {
+                    saveCollection(new File("src\\main\\java\\sample.xml"), set);
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+                Stage stage = (Stage) SaveWindow.SaveDefaultButton.getScene().getWindow();
+                stage.close();
             }
         });
     }

@@ -1,5 +1,7 @@
 package laba2;
 
+import javafx.collections.ObservableList;
+
 import javax.xml.bind.*;
 import java.io.*;
 import java.util.HashSet;
@@ -18,6 +20,21 @@ public class XMLworker {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             File fileWrite = new File(path);
+            FileWriter fw = new FileWriter(fileWrite);
+            BufferedWriter bw = new BufferedWriter(fw);
+            marshaller.marshal(cw, bw);
+        }catch(IOException e){
+            System.out.println("Введён не верный путь файла");
+        }
+    }
+
+    public static void saveCollection(File fileWrite, HashSet hs)throws JAXBException{
+        try{
+            JAXBContext context = JAXBContext.newInstance(ClassWrapper.class);
+            ClassWrapper cw = new ClassWrapper();
+            cw.setTheCollection(hs);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             FileWriter fw = new FileWriter(fileWrite);
             BufferedWriter bw = new BufferedWriter(fw);
             marshaller.marshal(cw, bw);

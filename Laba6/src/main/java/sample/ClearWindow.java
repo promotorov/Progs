@@ -52,8 +52,8 @@ public class ClearWindow {
         AnchorPane.setBottomAnchor(ClearCancelButton, 32.0);
     }
     private static void setCSS(){
-        ClearOKbutton.setId("ClearOKbutton");
-        ClearCancelButton.setId("ClearCancelButton");
+        ClearOKbutton.setId("button");
+        ClearCancelButton.setId("button");
     }
     private static void setControllers(){
         MainScreenController.ClearOKbutton(ClearOKbutton);
