@@ -4,6 +4,7 @@ package sample;
  * Created by vladp on 05.05.2017.
  */
 
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -21,10 +22,10 @@ public class RemoveElWindow {
     public static Button RemoveElOKbutton;
     public static Button RemoveElCancelButton;
     public static TextField textField;
-    public static void loadRemoveElWindow(){
+    public static void loadRemoveElWindow(ObservableList data){
         drawPanes();
         drawButton();
-        setControllers();
+        setControllers(data);
         setCSS();
         primaryStage=new Stage();
         primaryStage.setResizable(false);
@@ -58,8 +59,8 @@ public class RemoveElWindow {
         RemoveElOKbutton.setId("RemoveElOKbutton");
         RemoveElCancelButton.setId("RemoveElCancelButton");
     }
-    private static void setControllers(){
-        MainScreenController.RemoveElOKbutton(RemoveElOKbutton);
+    private static void setControllers(ObservableList data){
+        MainScreenController.RemoveElOKbutton(RemoveElOKbutton, data);
         MainScreenController.RemoveElCancelButton(RemoveElCancelButton);
     }
 }

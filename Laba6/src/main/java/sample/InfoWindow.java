@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -16,8 +17,8 @@ public class InfoWindow {
     public static Button InfoOKbutton;
 
     private static Text text;
-    public static void loadInfoWindow(){//TODO сделать окно инфы не расширяющимся
-        drawPanes();
+    public static void loadInfoWindow(ObservableList data){//TODO сделать окно инфы не расширяющимся
+        drawPanes(data);
         drawButton();
         setControllers();
         setCSS();
@@ -29,9 +30,9 @@ public class InfoWindow {
         primaryStage.getScene().getStylesheets().add("css/Main.css");
         primaryStage.show();
     }
-    public static void drawPanes(){
+    public static void drawPanes(ObservableList data){
         mainPane=new AnchorPane();
-        text = new Text("Тип коллекции: "+MainScreen.data.getClass()+"\nКоличество элементов: "+MainScreen.data.size());
+        text = new Text("Тип коллекции: "+data.getClass()+"\nКоличество элементов: "+data.size());
         mainPane.getChildren().add(text);
         AnchorPane.setTopAnchor(text,20.0);
         AnchorPane.setLeftAnchor(text,20.0);

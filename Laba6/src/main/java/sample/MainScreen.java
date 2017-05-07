@@ -1,29 +1,19 @@
 package sample;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.Image;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import javafx.util.StringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import laba2.FoodResidus;
 import laba2.XMLworker;
 
+import javax.swing.text.html.*;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -32,7 +22,7 @@ import java.util.Iterator;
  * Created by vladp on 30.04.2017.
  */
 public class MainScreen{//TODO определить для всех окон максимальные и минимальные размеры
-    public static ObservableList<FoodResidus> data;
+    private static ObservableList<FoodResidus> data;
 
     private static Stage primaryStage;
     private static Scene scene;
@@ -45,6 +35,8 @@ public class MainScreen{//TODO определить для всех окон м�
     private static TableView<FoodResidus> table;
     private static TableColumn<FoodResidus, String> columnName;
     private static TableColumn<FoodResidus, Integer> columnWeight;
+    private static HBox ListViewContainer;
+    private static ListView listView;
     private static Button buttonFiler;
     private static Button buttonDelFiler;
     private static Button buttonInfo;
@@ -111,7 +103,7 @@ public class MainScreen{//TODO определить для всех окон м�
         }
     }
 
-    public static void drawButton(){
+    public static void drawItems(){
         buttonFiler =new Button("Фильтровать");
         buttonDelFiler =new Button("Удалить фильтр");
 
@@ -129,7 +121,7 @@ public class MainScreen{//TODO определить для всех окон м�
         buttonInfo=new Button("Информация");
         buttonClear=new Button("Очистить");
         buttonRemoveEl=new Button("Удалить элементы");
-        buttonChoose=new Button("Выбрать файл");
+        buttonChoose=new Button("Выбрать файлы");
         buttonSave=new Button("Сохранить");
         rightFilterButtonsContainer=new VBox();
         rightFilterButtonsContainer.setAlignment(Pos.CENTER_LEFT);
@@ -144,17 +136,28 @@ public class MainScreen{//TODO определить для всех окон м�
         AnchorPane.setTopAnchor(rightFilterButtonsContainer, 0.0);
         AnchorPane.setBottomAnchor(rightFilterButtonsContainer, 0.0);
         AnchorPane.setLeftAnchor(rightFilterButtonsContainer, 30.0);
-        AnchorPane.setRightAnchor(rightFilterButtonsContainer, 100.0);
+        AnchorPane.setRightAnchor(rightFilterButtonsContainer, 280.0);
+
+        ListViewContainer=new HBox();
+        listView=new ListView();
+        ListViewContainer.getChildren().add(listView);
+        ListViewContainer.setAlignment(Pos.CENTER);
+        rightPane.getChildren().add(ListViewContainer);
+        AnchorPane.setTopAnchor(ListViewContainer, 100.0);
+        AnchorPane.setBottomAnchor(ListViewContainer, 100.0);
+        AnchorPane.setLeftAnchor(ListViewContainer, 170.0);
+        AnchorPane.setRightAnchor(ListViewContainer, 0.0);
+
     }
 
     public static void setControllers(){
         MainScreenController.buttonFiltr(buttonFiler);
         MainScreenController.buttonDelFiltr(buttonDelFiler);
-        MainScreenController.buttonInfo(buttonInfo);
-        MainScreenController.buttonClear(buttonClear);
-        MainScreenController.buttonRemoveEl(buttonRemoveEl);
-        MainScreenController.buttonChoose(buttonChoose);
-        MainScreenController.buttonSave(buttonSave);
+        MainScreenController.buttonInfo(buttonInfo, data);
+        MainScreenController.buttonClear(buttonClear, data);
+        MainScreenController.buttonRemoveEl(buttonRemoveEl, data);
+        MainScreenController.buttonChoose(buttonChoose,listView);
+        MainScreenController.buttonSave(buttonSave, data);
         MainScreenController.editName(columnName, data);
         MainScreenController.editWeight(columnWeight, data);
         MainScreenController.tableViewRightClick(table);
@@ -164,7 +167,7 @@ public class MainScreen{//TODO определить для всех окон м�
         drawPanes();
         drawTable();
         initTable();
-        drawButton();
+        drawItems();
         setControllers();
         setCSS();
         primaryStage=new Stage();

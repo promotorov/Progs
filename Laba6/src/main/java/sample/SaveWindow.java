@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -17,10 +18,10 @@ public class SaveWindow {
     public static Button SaveChooseButton;
 
     private static Text text;
-    public static void loadSaveWindow(){
+    public static void loadSaveWindow(ObservableList data){
         drawPanes();
         drawButton();
-        setControllers();
+        setControllers(data);
         setCSS();
         primaryStage=new Stage();
         primaryStage.setResizable(false);
@@ -54,8 +55,8 @@ public class SaveWindow {
         SaveDefaultButton.setId("button");
         SaveChooseButton.setId("button");
     }
-    private static void setControllers(){
-        MainScreenController.SaveDefaultButton(SaveDefaultButton);
-        MainScreenController.SaveChooseButton(SaveChooseButton);
+    private static void setControllers(ObservableList data){
+        MainScreenController.SaveDefaultButton(SaveDefaultButton,data);
+        MainScreenController.SaveChooseButton(SaveChooseButton,data);
     }
 }

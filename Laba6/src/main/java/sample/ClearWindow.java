@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -18,10 +19,10 @@ public class ClearWindow {
     public static Button ClearCancelButton;
 
     private static Text text;
-    public static void loadClearWindow(){
+    public static void loadClearWindow(ObservableList data){
         drawPanes();
         drawButton();
-        setControllers();
+        setControllers(data);
         setCSS();
         primaryStage=new Stage();
         primaryStage.setResizable(false);
@@ -55,8 +56,8 @@ public class ClearWindow {
         ClearOKbutton.setId("button");
         ClearCancelButton.setId("button");
     }
-    private static void setControllers(){
-        MainScreenController.ClearOKbutton(ClearOKbutton);
+    private static void setControllers(ObservableList data){
+        MainScreenController.ClearOKbutton(ClearOKbutton,data);
         MainScreenController.ClearCancelButton(ClearCancelButton);
     }
 }

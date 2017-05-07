@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 import static laba2.JSONworker.toJavaObject;
 import static laba2.XMLworker.saveCollection;
@@ -48,12 +49,12 @@ public class MainScreenController {
             }
         });
     }
-    public static void buttonInfo(Button button){
+    public static void buttonInfo(Button button,ObservableList data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Выводим инфу");
-                InfoWindow.loadInfoWindow();
+                InfoWindow.loadInfoWindow(data);
             }
         });
     }
@@ -66,22 +67,22 @@ public class MainScreenController {
             }
         });
     }
-    public static void buttonRemoveEl(Button button){
+    public static void buttonRemoveEl(Button button, ObservableList data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Удаляем элементы");
-                RemoveElWindow.loadRemoveElWindow();
+                RemoveElWindow.loadRemoveElWindow(data);
             }
         });
     }
-    public static void RemoveElOKbutton(Button button){//TODO доделать
+    public static void RemoveElOKbutton(Button button, ObservableList<FoodResidus> data){//TODO доделать
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
                     FoodResidus jsonCompared = toJavaObject(RemoveElWindow.textField.getText());
-                    Iterator<FoodResidus> iterator = MainScreen.data.iterator();
+                    Iterator<FoodResidus> iterator = data.iterator();
                     while(iterator.hasNext()){
                         FoodResidus compared = iterator.next();
                         if(compared.compareTo(jsonCompared)>0){
@@ -106,31 +107,40 @@ public class MainScreenController {
             }
         });
     }
-    public static void buttonChoose(Button button){
+    public static void buttonChoose(Button button, ListView listView){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("Выбираем элемент");
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML файлы","*.xml"));
+                List<File> selectedFiles = fileChooser.showOpenMultipleDialog(null);
+                if(selectedFiles!=null) {
+                    for (int i = 0; i < selectedFiles.size(); i++) {
+                        listView.getItems().add(selectedFiles.get(i).getAbsolutePath());
+                    }
+                }else{
+                    System.out.println("Файл не выбрали");
+                }
             }
         });
     }
-    public static void buttonSave(Button button){
+    public static void buttonSave(Button button, ObservableList data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Сохраняем");
-                SaveWindow.loadSaveWindow();
+                SaveWindow.loadSaveWindow(data);
             }
         });
     }
-    public static void SaveChooseButton(Button button){
+    public static void SaveChooseButton(Button button, ObservableList<FoodResidus> data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 FileChooser fileChooser=new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML файлы","*.xml"));
                 File selectedFile=fileChooser.showOpenDialog(null);
-
-                ObservableList<FoodResidus> ob=MainScreen.data;
+                ObservableList<FoodResidus> ob=data;
                 HashSet<FoodResidus> set=new HashSet<>();
                 Iterator<FoodResidus> iterator=ob.iterator();
                 while(iterator.hasNext()){
@@ -146,11 +156,11 @@ public class MainScreenController {
             }
         });
     }
-    public static void SaveDefaultButton(Button button){
+    public static void SaveDefaultButton(Button button, ObservableList<FoodResidus> data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ObservableList<FoodResidus> ob=MainScreen.data;
+                ObservableList<FoodResidus> ob=data;
                 HashSet<FoodResidus> set=new HashSet<>();
                 Iterator<FoodResidus> iterator=ob.iterator();
                 while(iterator.hasNext()){
@@ -166,20 +176,20 @@ public class MainScreenController {
             }
         });
     }
-    public static void buttonClear(Button button){
+    public static void buttonClear(Button button, ObservableList data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("Очищаем");
-                ClearWindow.loadClearWindow();
+                ClearWindow.loadClearWindow(data);
             }
         });
     }
-    public static void ClearOKbutton(Button button){
+    public static void ClearOKbutton(Button button, ObservableList<FoodResidus> data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                MainScreen.data.clear();
+                data.clear();
                 Stage stage = (Stage) ClearWindow.ClearOKbutton.getScene().getWindow();
                 stage.close();
             }
