@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,28 +31,40 @@ import static laba2.XMLworker.saveCollection;
  * Created by vladp on 30.04.2017.
  */
 public class MainScreenController {
-    public static void buttonFiltr(Button button){
-        /*button.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {//TODO Это какой-то экспериментальный кусок кода?
+    public static void buttonFiltr(Button button, ObservableList data,ObservableList UnSeeingData, TableView<FoodResidus> table){
+        /*button.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent m) {
                 if(m.getButton()==MouseButton.SECONDARY) System.out.println("R");
                 if(m.getButton()==MouseButton.PRIMARY) System.out.println("L");
                 if(m.getButton()==MouseButton.MIDDLE)System.out.println("M");
+                if(m.getClickCount()==2) System.out.println("Double");
                 System.out.println("Устанавливаем фильтры");
             }
         });*/
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                SetFiltersWindow.loadSetFiltersWindow();
+                SetFiltersWindow.loadSetFiltersWindow(data, UnSeeingData, table);
                 System.out.println("Удаляем фильтры");
             }
         });
     }
-    public static void buttonDelFiltr(Button button){
+    public static void buttonDelFiltr(Button button, ObservableList data, ObservableList UnSeeingData,TableView<FoodResidus> table){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                try {
+                    Iterator<FoodResidus> iterator=UnSeeingData.iterator();
+                    while(iterator.hasNext()){
+                        data.add(iterator.next());
+                    }
+                    table.setItems(data);
+                }
+                catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+                UnSeeingData.clear();
                 System.out.println("Удаляем фильтры");
             }
         });
@@ -83,7 +96,7 @@ public class MainScreenController {
             }
         });
     }
-    public static void RemoveElOKbutton(Button button, ObservableList<FoodResidus> data){//TODO доделать
+    public static void RemoveElOKbutton(Button button, ObservableList<FoodResidus> data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -208,6 +221,41 @@ public class MainScreenController {
             public void handle(ActionEvent actionEvent) {
                 Stage stage = (Stage) ClearWindow.ClearOKbutton.getScene().getWindow();
                 stage.close();
+            }
+        });
+    }
+    public static void SetFiltersOKbutton(Button button, ObservableList data,ObservableList UnSeeingData,TableView<FoodResidus> table, TextField textFieldName, TextField textFieldWeight){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Iterator<FoodResidus> iterator=data.iterator();
+                    while(iterator.hasNext()){
+                        FoodResidus CurentItrator = iterator.next();
+                        if((CompareMethods.nameCompare(CurentItrator.getName(),textFieldName.getText()))&&(CompareMethods.weightCompare(CurentItrator.getWeight(),textFieldWeight.getText()))){
+
+                        }else{
+                            UnSeeingData.add(CurentItrator);
+                            iterator.remove();
+                        }
+                    }
+                    table.setItems(data);
+                }
+                catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+                Stage stage = (Stage) SetFiltersWindow.SetFiltersOKbutton.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
+    public static void SetFiltersCancelButton(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage stage = (Stage) SetFiltersWindow.SetFiltersCancelButton.getScene().getWindow();
+                stage.close();
+                System.out.println("отмена");
             }
         });
     }

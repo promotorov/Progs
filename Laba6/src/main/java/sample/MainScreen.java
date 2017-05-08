@@ -23,6 +23,7 @@ import java.util.Iterator;
  */
 public class MainScreen{//TODO определить для всех окон максимальные и минимальные размеры
     private static ObservableList<FoodResidus> data;
+    private static ObservableList UnSeeingData;
 
     private static Stage primaryStage;
     private static Scene scene;
@@ -90,7 +91,7 @@ public class MainScreen{//TODO определить для всех окон м�
     private static void initTable(){
         try {
             data = FXCollections.observableArrayList();
-            HashSet<FoodResidus> set=XMLworker.getCollection("src\\main\\java\\sample.xml");
+            HashSet<FoodResidus> set=XMLworker.getCollection("src\\main\\resources\\sample.xml");
             Iterator<FoodResidus> iterator=set.iterator();
             while(iterator.hasNext()){
                 data.add(iterator.next());
@@ -151,8 +152,9 @@ public class MainScreen{//TODO определить для всех окон м�
     }
 
     public static void setControllers(){
-        MainScreenController.buttonFiltr(buttonFiler);
-        MainScreenController.buttonDelFiltr(buttonDelFiler);
+        UnSeeingData = FXCollections.observableArrayList();
+        MainScreenController.buttonFiltr(buttonFiler, data,UnSeeingData, table);
+        MainScreenController.buttonDelFiltr(buttonDelFiler, data, UnSeeingData, table);
         MainScreenController.buttonInfo(buttonInfo, data);
         MainScreenController.buttonClear(buttonClear, data);
         MainScreenController.buttonRemoveEl(buttonRemoveEl, data);

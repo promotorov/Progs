@@ -1,11 +1,14 @@
 package sample;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import laba2.FoodResidus;
 
 /**
  * Created by danil on 08.05.2017.
@@ -18,10 +21,10 @@ public class SetFiltersWindow {
     public static Button SetFiltersCancelButton;
     public static TextField textFieldName;
     public static TextField textFieldWeight;
-    public static void loadSetFiltersWindow(){
+    public static void loadSetFiltersWindow(ObservableList data,ObservableList UnSeeingData, TableView<FoodResidus> table){
         drawPanes();
         drawButton();
-        setControllers();
+        setControllers(data,UnSeeingData, table, textFieldName, textFieldWeight);
         setCSS();
         primaryStage=new Stage();
         primaryStage.setResizable(false);
@@ -63,8 +66,8 @@ public class SetFiltersWindow {
         SetFiltersOKbutton.setId("button");
         SetFiltersCancelButton.setId("button");
     }
-    private static void setControllers(){
-        //MainScreenController.SetFiltersOKbutton(SetFiltersOKbutton);
-        //MainScreenController.SetFiltersCancelButton(SetFiltersCancelButton);
+    private static void setControllers(ObservableList data,ObservableList UnSeeingData, TableView<FoodResidus> table, TextField textFieldName, TextField textFieldWeight){
+        MainScreenController.SetFiltersOKbutton(SetFiltersOKbutton, data, UnSeeingData, table, textFieldName, textFieldWeight);
+        MainScreenController.SetFiltersCancelButton(SetFiltersCancelButton);
     }
 }
