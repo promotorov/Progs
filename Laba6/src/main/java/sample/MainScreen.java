@@ -5,6 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -13,7 +16,6 @@ import javafx.stage.Stage;
 import laba2.FoodResidus;
 import laba2.XMLworker;
 
-import javax.swing.text.html.*;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -45,6 +47,9 @@ public class MainScreen{//TODO определить для всех окон м�
     private static Button buttonRemoveEl;
     private static Button buttonChoose;
     private static Button buttonSave;
+    private static HBox SettingsContainer;
+    private static Button buttonSettings;
+    private static Button buttonInfoApplication;
 
 
     private static void drawPanes(){
@@ -68,6 +73,8 @@ public class MainScreen{//TODO определить для всех окон м�
         buttonRemoveEl.setId("button");
         buttonChoose.setId("button");
         buttonSave.setId("button");
+        buttonInfoApplication.setId("buttonInfoApplication");
+        buttonSettings.setId("buttonSettings");
     }
 
     private static void drawTable(){
@@ -137,6 +144,22 @@ public class MainScreen{//TODO определить для всех окон м�
         AnchorPane.setTopAnchor(rightFilterButtonsContainer, 0.0);
         AnchorPane.setBottomAnchor(rightFilterButtonsContainer, 0.0);
         AnchorPane.setLeftAnchor(rightFilterButtonsContainer, 30.0);
+        AnchorPane.setRightAnchor(rightFilterButtonsContainer, 100.0);
+
+        buttonSettings=new Button();
+        Image imageSettings=new Image("/icons/settings.png", 32, 32, false ,false);
+        buttonSettings.setGraphic(new ImageView(imageSettings));
+        buttonInfoApplication=new Button();
+        Image imageInfo=new Image("/icons/info.png", 32, 32, false, false);
+        buttonInfoApplication.setGraphic(new ImageView(imageInfo));
+        SettingsContainer=new HBox();
+        SettingsContainer.setAlignment(Pos.CENTER_RIGHT);
+        SettingsContainer.setSpacing(8);
+        SettingsContainer.getChildren().addAll(buttonInfoApplication, buttonSettings);
+        rightPane.getChildren().add(SettingsContainer);
+        AnchorPane.setTopAnchor(SettingsContainer, 10.0);
+        AnchorPane.setRightAnchor(SettingsContainer, 10.0);
+        AnchorPane.setLeftAnchor(SettingsContainer, 0.0);
         AnchorPane.setRightAnchor(rightFilterButtonsContainer, 280.0);
 
         ListViewContainer=new HBox();
@@ -163,6 +186,8 @@ public class MainScreen{//TODO определить для всех окон м�
         MainScreenController.editName(columnName, data);
         MainScreenController.editWeight(columnWeight, data);
         MainScreenController.tableViewRightClick(table);
+        MainScreenController.buttonInfoApplication(buttonInfoApplication);
+        MainScreenController.buttonSettings(buttonSettings);
     }
 
     public static void loadMainScreen(){
@@ -181,7 +206,86 @@ public class MainScreen{//TODO определить для всех окон м�
         primaryStage.setScene(scene);
         splitPane.prefWidthProperty().bind(scene.widthProperty());
         splitPane.prefHeightProperty().bind(scene.heightProperty());
-        primaryStage.getScene().getStylesheets().add("css/Main.css");
+        primaryStage.getScene().getStylesheets().add("/css/Main.css");
         primaryStage.show();
+    }
+
+    public static Stage getStage(){
+        return primaryStage;
+    }
+    public static Button getButtonInfo(){
+        return buttonInfo;
+    }
+
+    public static Button getButtonFiler() {
+        return buttonFiler;
+    }
+
+    public static void setButtonFiler(Button buttonFiler) {
+        MainScreen.buttonFiler = buttonFiler;
+    }
+
+    public static Button getButtonDelFiler() {
+        return buttonDelFiler;
+    }
+
+    public static void setButtonDelFiler(Button buttonDelFiler) {
+        MainScreen.buttonDelFiler = buttonDelFiler;
+    }
+
+    public static void setButtonInfo(Button buttonInfo) {
+        MainScreen.buttonInfo = buttonInfo;
+    }
+
+    public static Button getButtonClear() {
+        return buttonClear;
+    }
+
+    public static void setButtonClear(Button buttonClear) {
+        MainScreen.buttonClear = buttonClear;
+    }
+
+    public static Button getButtonRemoveEl() {
+        return buttonRemoveEl;
+    }
+
+    public static void setButtonRemoveEl(Button buttonRemoveEl) {
+        MainScreen.buttonRemoveEl = buttonRemoveEl;
+    }
+
+    public static Button getButtonChoose() {
+        return buttonChoose;
+    }
+
+    public static void setButtonChoose(Button buttonChoose) {
+        MainScreen.buttonChoose = buttonChoose;
+    }
+
+    public static Button getButtonSave() {
+        return buttonSave;
+    }
+
+    public static void setButtonSave(Button buttonSave) {
+        MainScreen.buttonSave = buttonSave;
+    }
+
+    public static Button getButtonSettings() {
+        return buttonSettings;
+    }
+
+    public static void setButtonSettings(Button buttonSettings) {
+        MainScreen.buttonSettings = buttonSettings;
+    }
+
+    public static Button getButtonInfoApplication() {
+        return buttonInfoApplication;
+    }
+
+    public static void setButtonInfoApplication(Button buttonInfoApplication) {
+        MainScreen.buttonInfoApplication = buttonInfoApplication;
+    }
+
+    public static TableView<FoodResidus> getTable() {
+        return table;
     }
 }
