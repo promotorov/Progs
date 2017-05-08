@@ -6,20 +6,19 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import sample.MainScreenController;
 
 /**
- * Created by danil on 05.05.2017.
+ * Created by danil on 07.05.2017.
  */
-public class ClearWindow {
+public class SaveWindow {
     private static Stage primaryStage;
     private static Scene scene;
     private static AnchorPane mainPane;
-    public static Button ClearOKbutton;
-    public static Button ClearCancelButton;
+    public static Button SaveDefaultButton;
+    public static Button SaveChooseButton;
 
     private static Text text;
-    public static void loadClearWindow(ObservableList data){
+    public static void loadSaveWindow(ObservableList data){
         drawPanes();
         drawButton();
         setControllers(data);
@@ -27,37 +26,37 @@ public class ClearWindow {
         primaryStage=new Stage();
         primaryStage.setResizable(false);
         //primaryStage.getIcons().add(new Image("file:icon.png"));//TODO определить иконку
-        scene=new Scene(mainPane, 400, 150);
+        scene=new Scene(mainPane, 390, 150);
         primaryStage.setScene(scene);
         primaryStage.getScene().getStylesheets().add("css/Main.css");
         primaryStage.show();
     }
     public static void drawPanes(){
         mainPane=new AnchorPane();
-        text = new Text("Вы точено хотите удалить все элементы коллекции?");
+        text = new Text("Выберете файл или сохраните по умолчанию?");
         mainPane.getChildren().add(text);
         AnchorPane.setTopAnchor(text,20.0);
         AnchorPane.setLeftAnchor(text,20.0);
         AnchorPane.setRightAnchor(text,20.0);
     }
     public static void drawButton(){
-        ClearOKbutton =new Button("Ok");
-        mainPane.getChildren().add(ClearOKbutton);
-        AnchorPane.setRightAnchor(ClearOKbutton,80.0);
-        AnchorPane.setLeftAnchor(ClearOKbutton,220.0);
-        AnchorPane.setBottomAnchor(ClearOKbutton, 32.0);
-        ClearCancelButton =new Button("Cancel");
-        mainPane.getChildren().add(ClearCancelButton);
-        AnchorPane.setRightAnchor(ClearCancelButton,220.0);
-        AnchorPane.setLeftAnchor(ClearCancelButton,80.0);
-        AnchorPane.setBottomAnchor(ClearCancelButton, 32.0);
+        SaveDefaultButton =new Button("По умолчанию");
+        mainPane.getChildren().add(SaveDefaultButton);
+        AnchorPane.setRightAnchor(SaveDefaultButton,55.0);
+        AnchorPane.setLeftAnchor(SaveDefaultButton,210.0);
+        AnchorPane.setBottomAnchor(SaveDefaultButton, 32.0);
+        SaveChooseButton =new Button("Выбрать");
+        mainPane.getChildren().add(SaveChooseButton);
+        AnchorPane.setRightAnchor(SaveChooseButton,210.0);
+        AnchorPane.setLeftAnchor(SaveChooseButton,55.0);
+        AnchorPane.setBottomAnchor(SaveChooseButton, 32.0);
     }
     private static void setCSS(){
-        ClearOKbutton.setId("button");
-        ClearCancelButton.setId("button");
+        SaveDefaultButton.setId("button");
+        SaveChooseButton.setId("button");
     }
     private static void setControllers(ObservableList data){
-        MainScreenController.ClearOKbutton(ClearOKbutton,data);
-        MainScreenController.ClearCancelButton(ClearCancelButton);
+        MainScreenController.SaveDefaultButton(SaveDefaultButton,data);
+        MainScreenController.SaveChooseButton(SaveChooseButton,data);
     }
 }

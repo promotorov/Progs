@@ -1,32 +1,21 @@
 package sample;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import javafx.util.StringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import laba2.FoodResidus;
 import laba2.XMLworker;
 
-import javax.swing.text.*;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -35,7 +24,8 @@ import java.util.Iterator;
  * Created by vladp on 30.04.2017.
  */
 public class MainScreen{//TODO определить для всех окон максимальные и минимальные размеры
-    public static ObservableList<FoodResidus> data;
+    private static ObservableList<FoodResidus> data;
+    private static ObservableList UnSeeingData;
 
     private static Stage primaryStage;
     private static Scene scene;
@@ -48,6 +38,8 @@ public class MainScreen{//TODO определить для всех окон м�
     private static TableView<FoodResidus> table;
     private static TableColumn<FoodResidus, String> columnName;
     private static TableColumn<FoodResidus, Integer> columnWeight;
+    private static HBox ListViewContainer;
+    private static ListView listView;
     private static Button buttonFiler;
     private static Button buttonDelFiler;
     private static Button buttonInfo;
@@ -63,17 +55,8 @@ public class MainScreen{//TODO определить для всех окон м�
     private static void drawPanes(){
         mainPane=new AnchorPane();
         splitPane=new SplitPane();
-
         leftPane=new AnchorPane();
-        AnchorPane.setTopAnchor(leftPane, 0.0);
-        AnchorPane.setLeftAnchor(leftPane, 0.0);
-        AnchorPane.setBottomAnchor(leftPane, 0.0);
-        AnchorPane.setRightAnchor(leftPane, 375.0);
         rightPane=new AnchorPane();
-        AnchorPane.setTopAnchor(rightPane, 0.0);
-        AnchorPane.setLeftAnchor(rightPane, 375.0);
-        AnchorPane.setBottomAnchor(rightPane, 0.0);
-        AnchorPane.setRightAnchor(rightPane, 0.0);
         splitPane.getItems().add(leftPane);
         splitPane.getItems().add(rightPane);
         mainPane.getChildren().add(splitPane);
@@ -83,13 +66,13 @@ public class MainScreen{//TODO определить для всех окон м�
         mainPane.setId("mainPane");
         leftPane.setId("leftPane");
         rightPane.setId("rightPane");
-        buttonFiler.setId("buttonFilter");
-        buttonDelFiler.setId("buttonDelFilter");
-        buttonInfo.setId("buttonInfo");
-        buttonClear.setId("buttonClear");
-        buttonRemoveEl.setId("buttonRemoveEl");
-        buttonChoose.setId("buttonChoose");
-        buttonSave.setId("buttonSave");
+        buttonFiler.setId("button");
+        buttonDelFiler.setId("button");
+        buttonInfo.setId("button");
+        buttonClear.setId("button");
+        buttonRemoveEl.setId("button");
+        buttonChoose.setId("button");
+        buttonSave.setId("button");
         buttonInfoApplication.setId("buttonInfoApplication");
         buttonSettings.setId("buttonSettings");
     }
@@ -115,7 +98,7 @@ public class MainScreen{//TODO определить для всех окон м�
     private static void initTable(){
         try {
             data = FXCollections.observableArrayList();
-            HashSet<FoodResidus> set=XMLworker.getCollection("src\\main\\java\\sample.xml");
+            HashSet<FoodResidus> set=XMLworker.getCollection("src\\main\\resources\\sample.xml");
             Iterator<FoodResidus> iterator=set.iterator();
             while(iterator.hasNext()){
                 data.add(iterator.next());
@@ -128,7 +111,7 @@ public class MainScreen{//TODO определить для всех окон м�
         }
     }
 
-    public static void drawButton(){
+    public static void drawItems(){
         buttonFiler =new Button("Фильтровать");
         buttonDelFiler =new Button("Удалить фильтр");
 
@@ -146,7 +129,7 @@ public class MainScreen{//TODO определить для всех окон м�
         buttonInfo=new Button("Информация");
         buttonClear=new Button("Очистить");
         buttonRemoveEl=new Button("Удалить элементы");
-        buttonChoose=new Button("Выбрать файл");
+        buttonChoose=new Button("Выбрать файлы");
         buttonSave=new Button("Сохранить");
         rightFilterButtonsContainer=new VBox();
         rightFilterButtonsContainer.setAlignment(Pos.CENTER_LEFT);
@@ -177,16 +160,29 @@ public class MainScreen{//TODO определить для всех окон м�
         AnchorPane.setTopAnchor(SettingsContainer, 10.0);
         AnchorPane.setRightAnchor(SettingsContainer, 10.0);
         AnchorPane.setLeftAnchor(SettingsContainer, 0.0);
+        AnchorPane.setRightAnchor(rightFilterButtonsContainer, 280.0);
+
+        ListViewContainer=new HBox();
+        listView=new ListView();
+        ListViewContainer.getChildren().add(listView);
+        ListViewContainer.setAlignment(Pos.CENTER);
+        rightPane.getChildren().add(ListViewContainer);
+        AnchorPane.setTopAnchor(ListViewContainer, 100.0);
+        AnchorPane.setBottomAnchor(ListViewContainer, 100.0);
+        AnchorPane.setLeftAnchor(ListViewContainer, 170.0);
+        AnchorPane.setRightAnchor(ListViewContainer, 0.0);
+
     }
 
     public static void setControllers(){
-        MainScreenController.buttonFiltr(buttonFiler);
-        MainScreenController.buttonDelFiltr(buttonDelFiler);
-        MainScreenController.buttonInfo(buttonInfo);
-        MainScreenController.buttonClear(buttonClear);
-        MainScreenController.buttonRemoveEl(buttonRemoveEl);
-        MainScreenController.buttonChoose(buttonChoose);
-        MainScreenController.buttonSave(buttonSave);
+        UnSeeingData = FXCollections.observableArrayList();
+        MainScreenController.buttonFiltr(buttonFiler, data,UnSeeingData, table);
+        MainScreenController.buttonDelFiltr(buttonDelFiler, data, UnSeeingData, table);
+        MainScreenController.buttonInfo(buttonInfo, data);
+        MainScreenController.buttonClear(buttonClear, data);
+        MainScreenController.buttonRemoveEl(buttonRemoveEl, data);
+        MainScreenController.buttonChoose(buttonChoose,listView);
+        MainScreenController.buttonSave(buttonSave, data);
         MainScreenController.editName(columnName, data);
         MainScreenController.editWeight(columnWeight, data);
         MainScreenController.tableViewRightClick(table);
@@ -198,14 +194,15 @@ public class MainScreen{//TODO определить для всех окон м�
         drawPanes();
         drawTable();
         initTable();
-        drawButton();
+        drawItems();
         setControllers();
         setCSS();
         primaryStage=new Stage();
         primaryStage.setMinHeight(550.0);
-        primaryStage.setMinWidth(750.0);
+        primaryStage.setMinWidth(950.0);
         //primaryStage.getIcons().add(new Image("file:icon.png"));//TODO определить иконку
-        scene=new Scene(mainPane, 750, 550);
+        primaryStage.setTitle("Остатки еды");
+        scene=new Scene(mainPane, 950, 550);
         primaryStage.setScene(scene);
         splitPane.prefWidthProperty().bind(scene.widthProperty());
         splitPane.prefHeightProperty().bind(scene.heightProperty());
