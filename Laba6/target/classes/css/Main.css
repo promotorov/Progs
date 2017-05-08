@@ -76,6 +76,20 @@
     -fx-border-radius: 4;
     -fx-background-color: #ffffff;
 }
+#buttonInfoApplication{
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+    -fx-border-radius: 4;
+    -fx-background-color: transparent;
+}
+#buttonSettings{
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+    -fx-border-radius: 4;
+    -fx-background-color: transparent;
+}
 #buttonFilter:hover{
     -fx-background-color: #a8c6fa;
 }
@@ -118,6 +132,7 @@
 }
 .table-row-cell{
     -fx-background-color: -fx-table-cell-border-color, #ffffff;
+    -fx-font-size: 15;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em; /* 0 */
 }
@@ -149,6 +164,7 @@
 .table-view .filler{
     -fx-background-color: linear-gradient(#131313 0%, #424141 100%);
 }
+
 
 
 

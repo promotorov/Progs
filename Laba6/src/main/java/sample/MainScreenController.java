@@ -145,6 +145,32 @@ public class MainScreenController {
             }
         });
     }
+    public static void buttonInfoApplication(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Выводим инфу о приложении");
+                InfoApplicationWindow.loadInfoScreen();
+            }
+        });
+    }
+    public static void buttonSettings(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                SettingsWindow.loadMainScreen();
+            }
+        });
+    }
+    public static void buttonOkInfo(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage stage = (Stage) InfoApplicationWindow.buttonOkInfo.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
     public static void editName(TableColumn columnName, ObservableList<FoodResidus> data){
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnName.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -179,42 +205,42 @@ public class MainScreenController {
     }
     public static void tableViewRightClick(TableView tableView){
         tableView.setRowFactory(new Callback<TableView<FoodResidus>, TableRow<FoodResidus>>() {
-            @Override
-            public TableRow<FoodResidus> call(TableView<FoodResidus> table) {
-                System.out.println("ds");
-                TableRow<FoodResidus> row=new TableRow<FoodResidus>();
-                MenuItem itemRemove=new MenuItem("Remove");
-                MenuItem itemAdd=new MenuItem("Add");
-                MenuItem itemAdd2=new MenuItem("Add");
-                ContextMenu menuRemove=new ContextMenu();
-                ContextMenu menuAdd=new ContextMenu();
-                menuRemove.getItems().addAll(itemRemove, itemAdd2);
-                menuAdd.getItems().addAll(itemAdd);
-                itemRemove.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        table.getItems().remove(row.getItem());
-                    }
-                });
-                itemAdd.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        table.getItems().add(new Whine("NULL", 0));
-                    }
-                });
-                itemAdd2.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        table.getItems().add(new Whine("NULL", 0));
-                    }
-                });
-                row.contextMenuProperty().bind(
-                        Bindings.when(row.emptyProperty())
-                                .then(menuAdd)
-                                .otherwise(menuRemove)
-                );
-                return row;
-            }
+                @Override
+                public TableRow<FoodResidus> call(TableView<FoodResidus> table) {
+                    System.out.println("ds");
+                    TableRow<FoodResidus> row=new TableRow<FoodResidus>();
+                    MenuItem itemRemove=new MenuItem("Remove");
+                    MenuItem itemAdd=new MenuItem("Add");
+                    MenuItem itemAdd2=new MenuItem("Add");
+                    ContextMenu menuRemove=new ContextMenu();
+                    ContextMenu menuAdd=new ContextMenu();
+                    menuRemove.getItems().addAll(itemRemove, itemAdd2);
+                    menuAdd.getItems().addAll(itemAdd);
+                    itemRemove.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            table.getItems().remove(row.getItem());
+                        }
+                    });
+                    itemAdd.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            table.getItems().add(new Whine("NULL", 0));
+                        }
+                    });
+                    itemAdd2.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            table.getItems().add(new Whine("NULL", 0));
+                        }
+                    });
+                    row.contextMenuProperty().bind(
+                            Bindings.when(row.emptyProperty())
+                                    .then(menuAdd)
+                                    .otherwise(menuRemove)
+                    );
+                    return row;
+                }
         });
     }
 }
