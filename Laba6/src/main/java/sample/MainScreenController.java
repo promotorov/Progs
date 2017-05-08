@@ -31,13 +31,20 @@ import static laba2.XMLworker.saveCollection;
  */
 public class MainScreenController {
     public static void buttonFiltr(Button button){
-        button.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        /*button.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {//TODO Это какой-то экспериментальный кусок кода?
             @Override
             public void handle(MouseEvent m) {
                 if(m.getButton()==MouseButton.SECONDARY) System.out.println("R");
                 if(m.getButton()==MouseButton.PRIMARY) System.out.println("L");
                 if(m.getButton()==MouseButton.MIDDLE)System.out.println("M");
                 System.out.println("Устанавливаем фильтры");
+            }
+        });*/
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                SetFiltersWindow.loadSetFiltersWindow();
+                System.out.println("Удаляем фильтры");
             }
         });
     }

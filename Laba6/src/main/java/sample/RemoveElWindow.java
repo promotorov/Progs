@@ -30,7 +30,7 @@ public class RemoveElWindow {
         primaryStage=new Stage();
         primaryStage.setResizable(false);
         //primaryStage.getIcons().add(new Image("file:icon.png"));//TODO определить иконку
-        scene=new Scene(mainPane, 700, 140);
+        scene=new Scene(mainPane, 500, 140);
         primaryStage.setScene(scene);
         primaryStage.getScene().getStylesheets().add("css/Main.css");
         primaryStage.show();
@@ -46,18 +46,18 @@ public class RemoveElWindow {
     public static void drawButton(){
         RemoveElOKbutton =new Button("Ok");
         mainPane.getChildren().add(RemoveElOKbutton);
-        AnchorPane.setRightAnchor(RemoveElOKbutton,260.0);
-        AnchorPane.setLeftAnchor(RemoveElOKbutton,370.0);
+        AnchorPane.setRightAnchor(RemoveElOKbutton,160.0);
+        AnchorPane.setLeftAnchor(RemoveElOKbutton,270.0);
         AnchorPane.setBottomAnchor(RemoveElOKbutton, 32.0);
         RemoveElCancelButton =new Button("Cancel");
         mainPane.getChildren().add(RemoveElCancelButton);
-        AnchorPane.setRightAnchor(RemoveElCancelButton,370.0);
-        AnchorPane.setLeftAnchor(RemoveElCancelButton,260.0);
+        AnchorPane.setRightAnchor(RemoveElCancelButton,270.0);
+        AnchorPane.setLeftAnchor(RemoveElCancelButton,160.0);
         AnchorPane.setBottomAnchor(RemoveElCancelButton, 32.0);
     }
     private static void setCSS(){
-        RemoveElOKbutton.setId("RemoveElOKbutton");
-        RemoveElCancelButton.setId("RemoveElCancelButton");
+        RemoveElOKbutton.setId("button");
+        RemoveElCancelButton.setId("button");
     }
     private static void setControllers(ObservableList data){
         MainScreenController.RemoveElOKbutton(RemoveElOKbutton, data);
