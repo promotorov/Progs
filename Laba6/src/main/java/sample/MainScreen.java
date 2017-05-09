@@ -96,19 +96,10 @@ public class MainScreen{//TODO определить для всех окон м�
     }
 
     private static void initTable(){
-        try {
-            data = FXCollections.observableArrayList();
-            HashSet<FoodResidus> set=XMLworker.getCollection("src\\main\\resources\\sample.xml");
-            Iterator<FoodResidus> iterator=set.iterator();
-            while(iterator.hasNext()){
-                data.add(iterator.next());
-            }
-            table.setItems(data);
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("sd");
-        }
+        data=FXCollections.observableArrayList();
+        InitTable initTable=new InitTable("init", data, table);
+        initTable.start();
+        table.setItems(data);
     }
 
     public static void drawItems(){
