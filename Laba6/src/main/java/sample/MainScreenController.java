@@ -341,4 +341,18 @@ public class MainScreenController {
                 }
         });
     }
+
+    public static void openListItem(ListView list, ObservableList data){
+        list.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent click) {
+                if (click.getClickCount() == 2) {
+                    String filename = list.getSelectionModel().getSelectedItem().toString();
+                    Loadtable loadtable=new Loadtable("load", data, MainScreen.getTable(),filename);
+                    loadtable.start();
+                    MainScreen.getTable().setItems(data);
+                }
+            }
+        });
+    }
 }
