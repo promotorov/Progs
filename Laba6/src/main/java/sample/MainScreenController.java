@@ -153,6 +153,7 @@ public class MainScreenController {
             }
         });
     }
+
     public static void SaveChooseButton(Button button, ObservableList<FoodResidus> data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -160,17 +161,8 @@ public class MainScreenController {
                 FileChooser fileChooser=new FileChooser();
                 fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML файлы","*.xml"));
                 File selectedFile=fileChooser.showOpenDialog(null);
-                ObservableList<FoodResidus> ob=data;
-                HashSet<FoodResidus> set=new HashSet<>();
-                Iterator<FoodResidus> iterator=ob.iterator();
-                while(iterator.hasNext()){
-                    set.add(iterator.next());
-                }
-                try {
-                    saveCollection(selectedFile, set);
-                }catch (Exception e){
-                    System.out.println(e.getMessage());
-                }
+                SaveTable saveTable=new SaveTable("save", data, selectedFile);
+                saveTable.start();
                 Stage stage = (Stage) SaveWindow.SaveChooseButton.getScene().getWindow();
                 stage.close();
             }
@@ -180,22 +172,14 @@ public class MainScreenController {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ObservableList<FoodResidus> ob=data;
-                HashSet<FoodResidus> set=new HashSet<>();
-                Iterator<FoodResidus> iterator=ob.iterator();
-                while(iterator.hasNext()){
-                    set.add(iterator.next());
-                }
-                try {
-                    saveCollection(new File("src\\main\\java\\sample.xml"), set);
-                }catch (Exception e){
-                    System.out.println(e.getMessage());
-                }
+                SaveTable saveTable=new SaveTable("saveDefault", data);
+                saveTable.start();
                 Stage stage = (Stage) SaveWindow.SaveDefaultButton.getScene().getWindow();
                 stage.close();
             }
         });
     }
+
     public static void buttonClear(Button button, ObservableList data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
