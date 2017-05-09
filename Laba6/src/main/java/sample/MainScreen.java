@@ -3,6 +3,7 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import laba2.FoodResidus;
 import laba2.XMLworker;
 
@@ -207,6 +209,11 @@ public class MainScreen{//TODO определить для всех окон м�
         splitPane.prefHeightProperty().bind(scene.heightProperty());
         primaryStage.getScene().getStylesheets().add("/css/Main.css");
         primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                System.exit(0);
+            }
+        });
     }
 
     public static Stage getStage(){

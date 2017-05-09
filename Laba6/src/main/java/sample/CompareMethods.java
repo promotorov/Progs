@@ -24,7 +24,9 @@ public class CompareMethods {
     }
     public static boolean weightCompare(int weight,String textFieldWeight){
         weightCondition = textFieldWeight.substring(0,1);
-        weightPattern = Integer.parseInt(textFieldWeight.substring(1,textFieldWeight.length()));
+        try {
+            weightPattern = Integer.parseInt(textFieldWeight.substring(1,textFieldWeight.length()));
+        }catch (NumberFormatException nfe){return true;}
         if(weightCondition.equals(">")){
             return weight>weightPattern;
         }else if(weightCondition.equals("<")){
