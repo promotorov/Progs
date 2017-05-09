@@ -32,14 +32,14 @@ public class InfoApplicationWindow {
     }
 
     public static void drawItems(){
-        text=new Text("Правьте, корректируйте и переписывайте заново — для максимального эффекта.\nПроверьте, как описание будет выглядеть на экране iPhone или iPad.\nРаботайте до тех пор, пока оно не станет гладким, отточенным и привлекательным.");
+        text=new Text("Выполнили Промоторов Влад и Татаринов Данил, учащиеся группы P3111.");
         mainPane.getChildren().add(text);
         AnchorPane.setTopAnchor(text, 40.0);
         AnchorPane.setLeftAnchor(text, 20.0);
         buttonOkInfo=new Button("Ok");
         mainPane.getChildren().add(buttonOkInfo);
-        AnchorPane.setRightAnchor(buttonOkInfo,310.0);
-        AnchorPane.setLeftAnchor(buttonOkInfo,310.0);
+        AnchorPane.setRightAnchor(buttonOkInfo,270.0);
+        AnchorPane.setLeftAnchor(buttonOkInfo,270.0);
         AnchorPane.setBottomAnchor(buttonOkInfo, 32.0);
     }
 
@@ -53,7 +53,7 @@ public class InfoApplicationWindow {
         setControllers();
         primaryStage=new Stage();
         primaryStage.setResizable(false);
-        scene=new Scene(mainPane, 700, 170);
+        scene=new Scene(mainPane, 600, 130);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -2,6 +2,7 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -11,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import laba2.FoodResidus;
@@ -130,6 +132,11 @@ public class MainScreen{//TODO определить для всех окон м�
         rightFilterButtonsContainer.getChildren().add(buttonRemoveEl);
         rightFilterButtonsContainer.getChildren().add(buttonChoose);
         rightFilterButtonsContainer.getChildren().add(buttonSave);
+        buttonInfo.setPrefWidth(150.0);
+        buttonClear.setPrefWidth(150.0);
+        buttonRemoveEl.setPrefWidth(150.0);
+        buttonChoose.setPrefWidth(150.0);
+        buttonSave.setPrefWidth(150.0);
 
         rightPane.getChildren().add(rightFilterButtonsContainer);
         AnchorPane.setTopAnchor(rightFilterButtonsContainer, 0.0);
@@ -155,14 +162,14 @@ public class MainScreen{//TODO определить для всех окон м�
 
         ListViewContainer=new HBox();
         listView=new ListView();
+        HBox.setHgrow(listView, Priority.SOMETIMES);
         ListViewContainer.getChildren().add(listView);
-        ListViewContainer.setAlignment(Pos.CENTER);
         rightPane.getChildren().add(ListViewContainer);
         AnchorPane.setTopAnchor(ListViewContainer, 100.0);
         AnchorPane.setBottomAnchor(ListViewContainer, 100.0);
-        AnchorPane.setLeftAnchor(ListViewContainer, 170.0);
-        AnchorPane.setRightAnchor(ListViewContainer, 0.0);
-
+        AnchorPane.setLeftAnchor(ListViewContainer, 200.0);
+        AnchorPane.setRightAnchor(ListViewContainer, 20.0);
+        ListViewContainer.setPadding(new Insets(0,0,0,0));
     }
 
     public static void setControllers(){
@@ -173,6 +180,7 @@ public class MainScreen{//TODO определить для всех окон м�
         MainScreenController.buttonClear(buttonClear, data);
         MainScreenController.buttonRemoveEl(buttonRemoveEl, data);
         MainScreenController.buttonChoose(buttonChoose,listView);
+        MainScreenController.openListItem(listView, data);
         MainScreenController.buttonSave(buttonSave, data);
         MainScreenController.editName(columnName, data);
         MainScreenController.editWeight(columnWeight, data);
@@ -191,7 +199,7 @@ public class MainScreen{//TODO определить для всех окон м�
         primaryStage=new Stage();
         primaryStage.setMinHeight(550.0);
         primaryStage.setMinWidth(950.0);
-        //primaryStage.getIcons().add(new Image("file:icon.png"));//TODO определить иконку
+        primaryStage.getIcons().add(new Image("/icons/edit.png"));//TODO определить иконку
         primaryStage.setTitle("Остатки еды");
         scene=new Scene(mainPane, 950, 550);
         primaryStage.setScene(scene);
