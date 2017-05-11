@@ -42,7 +42,19 @@ public class XMLworker {
             System.out.println("Введён не верный путь файла");
         }
     }
-
+    public static void saveCollection(PrintWriter printWriter, HashSet hs)throws JAXBException{
+        try{
+            JAXBContext context = JAXBContext.newInstance(ClassWrapper.class);
+            ClassWrapper cw = new ClassWrapper();
+            cw.setTheCollection(hs);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            BufferedWriter bw = new BufferedWriter(printWriter);
+            marshaller.marshal(cw, bw);
+        }catch(Exception e){
+            System.out.println("Введён не верный путь файла");
+        }
+    }
     public static HashSet getCollection(String path)throws JAXBException{
         try{
             File fileRead = new File(path);
@@ -51,6 +63,16 @@ public class XMLworker {
             ClassWrapper returnedHS = JAXB.unmarshal(br, ClassWrapper.class);
             return returnedHS.getTheCollection();
         }catch(IOException e){
+            System.out.println("Введите корректный путь файл");
+            return null;
+        }
+    }
+    public static HashSet getCollection(InputStream path)throws JAXBException{
+        try{
+            BufferedReader br = new BufferedReader(new InputStreamReader(path));
+            ClassWrapper returnedHS = JAXB.unmarshal(br, ClassWrapper.class);
+            return returnedHS.getTheCollection();
+        }catch(Exception e){
             System.out.println("Введите корректный путь файл");
             return null;
         }

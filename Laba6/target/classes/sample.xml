@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <classWrapper>
     <theCollection>
-        <name>первый</name>
-        <weight>50</weight>
+        <name>fcgvhnjk</name>
+        <weight>245</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
-        <name>второй</name>
-        <weight>100</weight>
-        <fliesAttraction>false</fliesAttraction>
-    </theCollection>
-    <theCollection>
-        <name>третий</name>
+        <name>fghjk</name>
         <weight>150</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
-        <name>четвёртый</name>
-        <weight>200</weight>
+        <name>fgvhbjnk</name>
+        <weight>234</weight>
         <fliesAttraction>false</fliesAttraction>
-    </theCollection>    
+    </theCollection>
+    <theCollection>
+        <name>dsad</name>
+        <weight>23</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
 </classWrapper>

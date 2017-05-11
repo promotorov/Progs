@@ -162,7 +162,7 @@ public class MainScreenController {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                SaveTable saveTable=new SaveTable("saveDefault", data);
+                SaveTableDefault saveTable=new SaveTableDefault("saveDefault", data);
                 saveTable.start();
                 Stage stage = (Stage) SaveWindow.SaveDefaultButton.getScene().getWindow();
                 stage.close();
@@ -295,7 +295,6 @@ public class MainScreenController {
         tableView.setRowFactory(new Callback<TableView<FoodResidus>, TableRow<FoodResidus>>() {
                 @Override
                 public TableRow<FoodResidus> call(TableView<FoodResidus> table) {
-                    System.out.println("ds");
                     TableRow<FoodResidus> row=new TableRow<FoodResidus>();
                     MenuItem itemRemove=new MenuItem("Remove");
                     MenuItem itemAdd=new MenuItem("Add");
@@ -322,11 +321,7 @@ public class MainScreenController {
                             table.getItems().add(new Whine("NULL", 0));
                         }
                     });
-                    row.contextMenuProperty().bind(
-                            Bindings.when(row.emptyProperty())
-                                    .then(menuAdd)
-                                    .otherwise(menuRemove)
-                    );
+                    row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then(menuAdd).otherwise(menuRemove));
                     return row;
                 }
         });

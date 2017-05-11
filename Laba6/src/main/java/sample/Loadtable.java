@@ -28,7 +28,6 @@ public class Loadtable extends Thread{
             data.clear();
             while (iterator.hasNext()) {
                 data.add(iterator.next());
-                System.out.println("Dsdsd");
             }
         }
         catch (Exception e){

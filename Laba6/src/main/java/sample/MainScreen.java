@@ -95,7 +95,6 @@ public class MainScreen{//TODO определить для всех окон м�
         AnchorPane.setBottomAnchor(table, 100.0);
         AnchorPane.setRightAnchor(table, 25.0);
         AnchorPane.setLeftAnchor(table, 25.0);
-
         leftPane.getChildren().add(table);
     }
 
