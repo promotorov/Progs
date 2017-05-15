@@ -256,24 +256,20 @@ public class MainScreenController {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                try {
+                if(CompareMethods.isCorrect(textFieldName.getText(),textFieldWeight.getText())){
                     Iterator<FoodResidus> iterator=data.iterator();
                     while(iterator.hasNext()){
                         FoodResidus CurentItrator = iterator.next();
                         if((CompareMethods.nameCompare(CurentItrator.getName(),textFieldName.getText()))&&(CompareMethods.weightCompare(CurentItrator.getWeight(),textFieldWeight.getText()))){
-                                ErrorWindow.loadInfoScreen("Неверный формат фильтра1");
-                                CompareMethods.isCorrect=true;
-                                break;
-
-                        }else if(CompareMethods.isCorrect){
+                        }else{
                             UnSeeingData.add(CurentItrator);
                             iterator.remove();
                         }
                     }
-                    table.setItems(data);
-                } catch (Exception e){
-                    ErrorWindow.loadInfoScreen("Неверный формат фильтра2");
+                }else{
+                    ErrorWindow.loadInfoScreen("Неверный формат фильтра");
                 }
+                table.setItems(data);
                 Stage stage = (Stage) SetFiltersWindow.SetFiltersOKbutton.getScene().getWindow();
                 stage.close();
             }
@@ -387,7 +383,6 @@ public class MainScreenController {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("sddssd");
                 Stage stage = (Stage) ErrorWindow.getButtonOkInfo().getScene().getWindow();
                 stage.close();
             }

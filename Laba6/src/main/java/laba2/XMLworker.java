@@ -51,11 +51,8 @@ public class XMLworker {
             JAXBContext context = JAXBContext.newInstance(ClassWrapper.class);
             ClassWrapper cw = new ClassWrapper();
             cw.setTheCollection(hs);
-            System.out.println("1");
             Marshaller marshaller = context.createMarshaller();
-            System.out.println("12");
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            System.out.println("13");
             FileWriter fw = new FileWriter(fileWrite);
             BufferedWriter bw = new BufferedWriter(fw);
             marshaller.marshal(cw, bw);
