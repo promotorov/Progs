@@ -21,7 +21,7 @@ public class SaveTable extends Thread {
         this.data=data;
     }
     public SaveTable(String str, ObservableList data){
-        this.fileName=new File("src\\main\\java\\sample.xml");
+        this.fileName=new File("src\\main\\resources\\sample.xml");
         this.data=data;
     }
     public void run(){

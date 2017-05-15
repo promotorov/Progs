@@ -122,13 +122,18 @@ public class SettingsScreenController {
         textfield.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                MainScreen.getButtonInfo().setStyle("-fx-font-size: " +textfield.getText());
-                MainScreen.getButtonChoose().setStyle("-fx-font-size: " +textfield.getText());
-                MainScreen.getButtonClear().setStyle("-fx-font-size: " +textfield.getText());
-                MainScreen.getButtonDelFiler().setStyle("-fx-font-size: " +textfield.getText());
-                MainScreen.getButtonFiler().setStyle("-fx-font-size: " +textfield.getText());
-                MainScreen.getButtonRemoveEl().setStyle("-fx-font-size: " +textfield.getText());
-                MainScreen.getButtonSave().setStyle("-fx-font-size: " +textfield.getText());
+                if(!(Integer.parseInt(textfield.getText())>22)) {
+                    MainScreen.getButtonInfo().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonChoose().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonClear().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonDelFiler().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonFiler().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonRemoveEl().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonSave().setStyle("-fx-font-size: " + textfield.getText());
+                }
+                else {
+                    textfield.setText(String.valueOf(SettingsWindow.getFont_size()));
+                }
             }
         });
     }

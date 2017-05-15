@@ -192,28 +192,33 @@ public class MainScreen{//TODO определить для всех окон м�
     }
 
     public static void loadMainScreen(){
-        drawPanes();
-        drawTable();
-        initTable();
-        drawItems();
-        setControllers();
-        setCSS();
-        primaryStage=new Stage();
-        primaryStage.setMinHeight(550.0);
-        primaryStage.setMinWidth(950.0);
-        primaryStage.getIcons().add(new Image("/icons/edit.png"));//TODO определить иконку
-        primaryStage.setTitle("Остатки еды");
-        scene=new Scene(mainPane, 950, 550);
-        primaryStage.setScene(scene);
-        splitPane.prefWidthProperty().bind(scene.widthProperty());
-        splitPane.prefHeightProperty().bind(scene.heightProperty());
-        primaryStage.getScene().getStylesheets().add("/css/Main.css");
-        primaryStage.show();
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent we) {
-                System.exit(0);
-            }
-        });
+        try {
+            drawPanes();
+            drawTable();
+            initTable();
+            drawItems();
+            setControllers();
+            setCSS();
+            primaryStage = new Stage();
+            primaryStage.setMinHeight(550.0);
+            primaryStage.setMinWidth(950.0);
+            primaryStage.getIcons().add(new Image("/icons/edit.png"));//TODO определить иконку
+            primaryStage.setTitle("Остатки еды");
+            scene = new Scene(mainPane, 950, 550);
+            primaryStage.setScene(scene);
+            splitPane.prefWidthProperty().bind(scene.widthProperty());
+            splitPane.prefHeightProperty().bind(scene.heightProperty());
+            primaryStage.getScene().getStylesheets().add("/css/Main.css");
+            primaryStage.show();
+            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    System.exit(0);
+                }
+            });
+        }
+        catch (Exception e){
+
+        }
     }
 
     public static Stage getStage(){

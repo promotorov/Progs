@@ -26,7 +26,7 @@ public class Laba2 {
                             saveCollection(args[0],rubbishBin);
                             System.out.println("Мы закрылись");
                         }
-                    } catch (JAXBException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

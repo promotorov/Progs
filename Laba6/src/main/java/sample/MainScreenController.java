@@ -158,10 +158,10 @@ public class MainScreenController {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                FileChooser fileChooser=new FileChooser();
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML файлы","*.xml"));
-                File selectedFile=fileChooser.showOpenDialog(null);
-                SaveTable saveTable=new SaveTable("save", data, selectedFile);
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML файлы", "*.xml"));
+                File selectedFile = fileChooser.showOpenDialog(null);
+                SaveTable saveTable = new SaveTable("save", data, selectedFile);
                 saveTable.start();
                 Stage stage = (Stage) SaveWindow.SaveChooseButton.getScene().getWindow();
                 stage.close();
@@ -204,6 +204,15 @@ public class MainScreenController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Stage stage = (Stage) ClearWindow.ClearOKbutton.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
+    public static void buttonOkSucsessfull(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage stage = (Stage) SaveSucsessfullScreen.getButtonOkInfo().getScene().getWindow();
                 stage.close();
             }
         });
@@ -286,20 +295,27 @@ public class MainScreenController {
         );
     }
     public static void editWeight(TableColumn columnWeight, ObservableList<FoodResidus> data){
-        columnWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
-        columnWeight.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        columnWeight.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<FoodResidus, Integer>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<FoodResidus, Integer> t) {
-                        t.getTableView().getItems().get(
-                                t.getTablePosition().getRow()).setWeight(t.getNewValue());
-                        for (int i = 0; i < data.size(); i++) {
-                            System.out.println(data.get(i).getName() + data.get(i).getWeight());
+            columnWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
+            columnWeight.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            columnWeight.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<FoodResidus, Integer>>() {
+                        @Override
+                        public void handle(TableColumn.CellEditEvent<FoodResidus, Integer> t) {
+                            if(!(t.toString().length()==0)){
+                                t.getTableView().getItems().get(
+                                        t.getTablePosition().getRow()).setWeight(t.getNewValue());
+                                for (int i = 0; i < data.size(); i++) {
+                                    System.out.println(data.get(i).getName() + data.get(i).getWeight());
+                                }
+                            }
+                            else{
+                                t.getTableView().getItems().get(
+                                        t.getTablePosition().getRow()).setWeight(0);
+                            }
                         }
                     }
-                }
-        );
+            );
+
     }
     public static void tableViewRightClick(TableView tableView){
         tableView.setRowFactory(new Callback<TableView<FoodResidus>, TableRow<FoodResidus>>() {
@@ -352,6 +368,16 @@ public class MainScreenController {
                     loadtable.start();
                     MainScreen.getTable().setItems(data);
                 }
+            }
+        });
+    }
+
+    public static void buttonOkError(Button button) {
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage stage = (Stage) ErrorWindow.getButtonOkInfo().getScene().getWindow();
+                stage.close();
             }
         });
     }
