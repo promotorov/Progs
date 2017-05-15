@@ -243,6 +243,15 @@ public class MainScreenController {
             }
         });
     }
+    public static void buttonOkInfoError(Button button) {
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage stage = (Stage) ErrorWindow.buttonOkInfo.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
     public static void SetFiltersOKbutton(Button button, ObservableList data,ObservableList UnSeeingData,TableView<FoodResidus> table, TextField textFieldName, TextField textFieldWeight){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -252,16 +261,18 @@ public class MainScreenController {
                     while(iterator.hasNext()){
                         FoodResidus CurentItrator = iterator.next();
                         if((CompareMethods.nameCompare(CurentItrator.getName(),textFieldName.getText()))&&(CompareMethods.weightCompare(CurentItrator.getWeight(),textFieldWeight.getText()))){
+                                ErrorWindow.loadInfoScreen("Неверный формат фильтра1");
+                                CompareMethods.isCorrect=true;
+                                break;
 
-                        }else{
+                        }else if(CompareMethods.isCorrect){
                             UnSeeingData.add(CurentItrator);
                             iterator.remove();
                         }
                     }
                     table.setItems(data);
-                }
-                catch (Exception e){
-                    System.out.println(e.getMessage());
+                } catch (Exception e){
+                    ErrorWindow.loadInfoScreen("Неверный формат фильтра2");
                 }
                 Stage stage = (Stage) SetFiltersWindow.SetFiltersOKbutton.getScene().getWindow();
                 stage.close();
@@ -285,10 +296,13 @@ public class MainScreenController {
                 new EventHandler<TableColumn.CellEditEvent<FoodResidus, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<FoodResidus, String> t) {
-                        t.getTableView().getItems().get(
-                                t.getTablePosition().getRow()).setName(t.getNewValue());
-                        for(int i=0; i<data.size(); i++){
-                            System.out.println(data.get(i).getName()+data.get(i).getWeight());
+                        if(t.getNewValue().length()!=0) {
+                            t.getTableView().getItems().get(
+                                    t.getTablePosition().getRow()).setName(t.getNewValue());
+                        }else {
+                            t.getTableView().getItems().get(
+                                t.getTablePosition().getRow()).setName("Безыменный");
+                            columnName.setCellFactory(TextFieldTableCell.forTableColumn());
                         }
                     }
                 }
@@ -301,16 +315,13 @@ public class MainScreenController {
                     new EventHandler<TableColumn.CellEditEvent<FoodResidus, Integer>>() {
                         @Override
                         public void handle(TableColumn.CellEditEvent<FoodResidus, Integer> t) {
-                            if(!(t.toString().length()==0)){
+                            try {
                                 t.getTableView().getItems().get(
                                         t.getTablePosition().getRow()).setWeight(t.getNewValue());
-                                for (int i = 0; i < data.size(); i++) {
-                                    System.out.println(data.get(i).getName() + data.get(i).getWeight());
-                                }
                             }
-                            else{
-                                t.getTableView().getItems().get(
-                                        t.getTablePosition().getRow()).setWeight(0);
+                            catch (Exception e){
+                                t.getTableView().getItems().get(t.getTablePosition().getRow()).setWeight(0);
+                                columnWeight.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
                             }
                         }
                     }
@@ -376,6 +387,7 @@ public class MainScreenController {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                System.out.println("sddssd");
                 Stage stage = (Stage) ErrorWindow.getButtonOkInfo().getScene().getWindow();
                 stage.close();
             }

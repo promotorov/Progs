@@ -4,6 +4,7 @@ package sample;
  * Created by danil on 08.05.2017.
  */
 public class CompareMethods {
+    public static boolean isCorrect=true;
     public static String nameCondition;
     public static String namePattern;
     public static String weightCondition;
@@ -19,6 +20,7 @@ public class CompareMethods {
         }else if(nameCondition.equals("=")){
             return i==0;
         }else{
+            isCorrect=false;
             return true;
         }
     }
@@ -26,7 +28,10 @@ public class CompareMethods {
         weightCondition = textFieldWeight.substring(0,1);
         try {
             weightPattern = Integer.parseInt(textFieldWeight.substring(1,textFieldWeight.length()));
-        }catch (NumberFormatException nfe){return true;}
+        }catch (NumberFormatException nfe){
+            isCorrect=false;
+            return true;
+        }
         if(weightCondition.equals(">")){
             return weight>weightPattern;
         }else if(weightCondition.equals("<")){
@@ -34,6 +39,7 @@ public class CompareMethods {
         }else if(weightCondition.equals("=")){
             return weight==weightPattern;
         }else{
+            isCorrect=false;
             return true;
         }
     }

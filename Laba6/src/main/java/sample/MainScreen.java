@@ -206,6 +206,8 @@ public class MainScreen{//TODO определить для всех окон м�
             primaryStage.setTitle("Остатки еды");
             scene = new Scene(mainPane, 950, 550);
             primaryStage.setScene(scene);
+            leftPane.setMinWidth(300.0);
+            rightPane.setMinWidth(450.0);
             splitPane.prefWidthProperty().bind(scene.widthProperty());
             splitPane.prefHeightProperty().bind(scene.heightProperty());
             primaryStage.getScene().getStylesheets().add("/css/Main.css");
