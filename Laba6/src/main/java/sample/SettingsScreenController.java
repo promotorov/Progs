@@ -39,6 +39,8 @@ public class SettingsScreenController {
                     MainScreen.getTable().setEditable(true);
                     SettingsWindow.setEditable(true);
                 }
+                Stage stage = (Stage) SettingsWindow.getButtonSave().getScene().getWindow();
+                stage.close();
             }
         });
     }
@@ -122,7 +124,7 @@ public class SettingsScreenController {
         textfield.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(!(Integer.parseInt(textfield.getText())>22)) {
+                if(!(Integer.parseInt(textfield.getText())>18 || Integer.parseInt(textfield.getText())<11)) {
                     MainScreen.getButtonInfo().setStyle("-fx-font-size: " + textfield.getText());
                     MainScreen.getButtonChoose().setStyle("-fx-font-size: " + textfield.getText());
                     MainScreen.getButtonClear().setStyle("-fx-font-size: " + textfield.getText());
