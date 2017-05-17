@@ -32,16 +32,6 @@ import static laba2.XMLworker.saveCollection;
  */
 public class MainScreenController {
     public static void buttonFiltr(Button button, ObservableList data,ObservableList UnSeeingData, TableView<FoodResidus> table){
-        /*button.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent m) {
-                if(m.getButton()==MouseButton.SECONDARY) System.out.println("R");
-                if(m.getButton()==MouseButton.PRIMARY) System.out.println("L");
-                if(m.getButton()==MouseButton.MIDDLE)System.out.println("M");
-                if(m.getClickCount()==2) System.out.println("Double");
-                System.out.println("Устанавливаем фильтры");
-            }
-        });*/
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

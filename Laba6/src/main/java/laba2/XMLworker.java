@@ -35,8 +35,7 @@ public class XMLworker {
                     ErrorWindow.loadInfoScreen("Не удалось записать данные в xml-file");
                 }
             });
-        }
-        catch (IOException e){
+        }catch(IOException e){
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -98,8 +97,7 @@ public class XMLworker {
                 }
             });
             return null;
-        }
-        catch (FileNotFoundException e){
+        }catch (FileNotFoundException e){
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -107,8 +105,7 @@ public class XMLworker {
                 }
             });
             return null;
-        }
-        catch (Exception e){
+        }catch (Exception e){
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
