@@ -35,8 +35,7 @@ public class XMLworker {
                     ErrorWindow.loadInfoScreen("Не удалось записать данные в xml-file");
                 }
             });
-        }
-        catch (IOException e){
+        }catch(IOException e){
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -51,11 +50,8 @@ public class XMLworker {
             JAXBContext context = JAXBContext.newInstance(ClassWrapper.class);
             ClassWrapper cw = new ClassWrapper();
             cw.setTheCollection(hs);
-            System.out.println("1");
             Marshaller marshaller = context.createMarshaller();
-            System.out.println("12");
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            System.out.println("13");
             FileWriter fw = new FileWriter(fileWrite);
             BufferedWriter bw = new BufferedWriter(fw);
             marshaller.marshal(cw, bw);
@@ -101,8 +97,7 @@ public class XMLworker {
                 }
             });
             return null;
-        }
-        catch (FileNotFoundException e){
+        }catch (FileNotFoundException e){
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -110,8 +105,7 @@ public class XMLworker {
                 }
             });
             return null;
-        }
-        catch (Exception e){
+        }catch (Exception e){
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {

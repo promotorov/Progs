@@ -189,6 +189,7 @@ public class MainScreen{//TODO определить для всех окон м�
         MainScreenController.tableViewRightClick(table);
         MainScreenController.buttonInfoApplication(buttonInfoApplication);
         MainScreenController.buttonSettings(buttonSettings);
+        MainScreenController.addIntoEmptyTable(leftPane,data);
     }
 
     public static void loadMainScreen(){
@@ -300,5 +301,13 @@ public class MainScreen{//TODO определить для всех окон м�
 
     public static TableView<FoodResidus> getTable() {
         return table;
+    }
+
+    public static TableColumn<FoodResidus, String> getColumnName() {
+        return columnName;
+    }
+
+    public static TableColumn<FoodResidus, Integer> getColumnWeight() {
+        return columnWeight;
     }
 }
