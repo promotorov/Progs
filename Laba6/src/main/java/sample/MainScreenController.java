@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javafx.stage.Stage;
@@ -24,6 +25,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import static laba2.JSONworker.toJavaObject;
 import static laba2.XMLworker.saveCollection;
 
@@ -126,7 +128,11 @@ public class MainScreenController {
                 List<File> selectedFiles = fileChooser.showOpenMultipleDialog(null);
                 if(selectedFiles!=null) {
                     for (int i = 0; i < selectedFiles.size(); i++) {
-                        listView.getItems().add(selectedFiles.get(i).getAbsolutePath());
+                        boolean add=true;
+                        for(int b=0; b<listView.getItems().size(); b++){
+                            if(listView.getItems().get(b).equals(selectedFiles.get(i).getAbsolutePath())) add=false;
+                        }
+                        if(add)listView.getItems().add(selectedFiles.get(i).getAbsolutePath());
                     }
                 }else{
                     System.out.println("Файл не выбрали");
@@ -364,6 +370,17 @@ public class MainScreenController {
                     Loadtable loadtable=new Loadtable("load", data, MainScreen.getTable(),filename);
                     loadtable.start();
                     MainScreen.getTable().setItems(data);
+                }
+            }
+        });
+    }
+
+    public static void addIntoEmptyTable(Pane pane, ObservableList data){
+        pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent click) {
+                if (click.getButton() == MouseButton.SECONDARY && data.isEmpty()) {
+                    data.add(new Whine("Безыменный", 0));
                 }
             }
         });
