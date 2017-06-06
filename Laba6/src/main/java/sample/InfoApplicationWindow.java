@@ -24,7 +24,7 @@ public class InfoApplicationWindow {
     private static Stage primaryStage;
     private static Scene scene;
     private static AnchorPane mainPane;
-    private static Text text;
+    private static TextArea text;
     public static Button buttonOkInfo;
 
     private static void drawPanes(){
@@ -32,10 +32,12 @@ public class InfoApplicationWindow {
     }
 
     public static void drawItems(){
-        text=new Text("Выполнили Промоторов Влад и Татаринов Данил, учащиеся группы P3111.");
+        text=new TextArea();
         mainPane.getChildren().add(text);
-        AnchorPane.setTopAnchor(text, 40.0);
+        AnchorPane.setTopAnchor(text, 20.0);
         AnchorPane.setLeftAnchor(text, 20.0);
+        AnchorPane.setRightAnchor(text, 20.0);
+        AnchorPane.setBottomAnchor(text, 80.0);
         buttonOkInfo=new Button("Ok");
         mainPane.getChildren().add(buttonOkInfo);
         AnchorPane.setRightAnchor(buttonOkInfo,270.0);
@@ -53,7 +55,7 @@ public class InfoApplicationWindow {
         setControllers();
         primaryStage=new Stage();
         primaryStage.setResizable(false);
-        scene=new Scene(mainPane, 600, 130);
+        scene=new Scene(mainPane, 600, 330);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

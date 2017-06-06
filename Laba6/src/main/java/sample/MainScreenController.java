@@ -8,6 +8,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -17,13 +20,12 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import laba2.FoodResidus;
 import laba2.Whine;
+import org.controlsfx.control.textfield.TextFields;
 import laba2.XMLworker;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import static laba2.JSONworker.toJavaObject;
@@ -42,7 +44,7 @@ public class MainScreenController {
             }
         });
     }
-    public static void buttonDelFiltr(Button button, ObservableList data, ObservableList UnSeeingData,TableView<FoodResidus> table){
+    /*public static void buttonDelFiltr(Button button, ObservableList data, ObservableList UnSeeingData,TableView<FoodResidus> table){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -60,7 +62,7 @@ public class MainScreenController {
                 System.out.println("Удаляем фильтры");
             }
         });
-    }
+    }*/
     public static void buttonInfo(Button button,ObservableList data){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -93,6 +95,7 @@ public class MainScreenController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
+                    ObservableList<FoodResidus> oldTemp=FXCollections.observableArrayList(data);
                     FoodResidus jsonCompared = toJavaObject(RemoveElWindow.textField.getText());
                     Iterator<FoodResidus> iterator = data.iterator();
                     while(iterator.hasNext()){
@@ -101,6 +104,9 @@ public class MainScreenController {
                             iterator.remove();
                         }
                     }
+                    ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
+                    RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
+                    TableStatements.addChange(r);
                     System.out.println("Все элементы превышающие данный удалены");
                 } catch (IOException e) {
                     System.out.println("Не верный аргумент");
@@ -189,6 +195,9 @@ public class MainScreenController {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                ObservableList<FoodResidus> temp=FXCollections.observableArrayList(data);
+                ClearChange clearChange=new ClearChange(temp);
+                TableStatements.addChange(clearChange);
                 data.clear();
                 Stage stage = (Stage) ClearWindow.ClearOKbutton.getScene().getWindow();
                 stage.close();
@@ -253,6 +262,7 @@ public class MainScreenController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(CompareMethods.isCorrect(textFieldName.getText(),textFieldWeight.getText())){
+                    ObservableList<FoodResidus> oldTemp=FXCollections.observableArrayList(data);
                     Iterator<FoodResidus> iterator=data.iterator();
                     while(iterator.hasNext()){
                         FoodResidus CurentItrator = iterator.next();
@@ -262,6 +272,9 @@ public class MainScreenController {
                             iterator.remove();
                         }
                     }
+                    ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
+                    RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
+                    TableStatements.addChange(r);
                 }else{
                     ErrorWindow.loadInfoScreen("Неверный формат фильтра");
                 }
@@ -289,13 +302,37 @@ public class MainScreenController {
                     @Override
                     public void handle(TableColumn.CellEditEvent<FoodResidus, String> t) {
                         if(t.getNewValue().length()!=0) {
-                            t.getTableView().getItems().get(
-                                    t.getTablePosition().getRow()).setName(t.getNewValue());
+                            if(!t.getOldValue().equals(t.getNewValue())) {
+                                Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
+                                        t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
+                                t.getTableView().getItems().get(
+                                        t.getTablePosition().getRow()).setName(t.getNewValue().trim());
+                                Whine newTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
+                                        t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
+                                EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
+                                TableStatements.addChange(editChange);
+                            }
+                            columnName.setCellFactory(TextFieldTableCell.forTableColumn());
                         }else {
+                            Whine oldTemp=new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
+                                    t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                             t.getTableView().getItems().get(
                                 t.getTablePosition().getRow()).setName("Безыменный");
+                            Whine newTemp=new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
+                                    t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
+                            EditChange editChange=new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
+                            TableStatements.addChange(editChange);
                             columnName.setCellFactory(TextFieldTableCell.forTableColumn());
                         }
+                    }
+                }
+        );
+        columnName.setOnEditStart(
+                new EventHandler<TableColumn.CellEditEvent<FoodResidus, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<FoodResidus, String> t) {
+                        TextField tt=new TextField();
+                        tt.setText("dddddd");
                     }
                 }
         );
@@ -308,11 +345,27 @@ public class MainScreenController {
                         @Override
                         public void handle(TableColumn.CellEditEvent<FoodResidus, Integer> t) {
                             try {
-                                t.getTableView().getItems().get(
-                                        t.getTablePosition().getRow()).setWeight(t.getNewValue());
+                                if(!t.getOldValue().equals(t.getNewValue())) {
+                                    Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
+                                            t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
+                                    t.getTableView().getItems().get(
+                                            t.getTablePosition().getRow()).setWeight(t.getNewValue());
+                                    Whine newTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
+                                            t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
+                                    EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
+                                    TableStatements.addChange(editChange);
+                                }
                             }
                             catch (Exception e){
-                                t.getTableView().getItems().get(t.getTablePosition().getRow()).setWeight(0);
+                                if(t.getOldValue()!=0) {
+                                    Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
+                                            t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
+                                    t.getTableView().getItems().get(t.getTablePosition().getRow()).setWeight(0);
+                                    Whine newTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
+                                            t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
+                                    EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
+                                    TableStatements.addChange(editChange);
+                                }
                                 columnWeight.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
                             }
                         }
@@ -321,6 +374,11 @@ public class MainScreenController {
 
     }
     public static void tableViewRightClick(TableView tableView){
+        tableView.setOnInputMethodTextChanged(new EventHandler<InputMethodEvent>() {
+            @Override
+            public void handle(InputMethodEvent event) {
+            }
+        });
         tableView.setRowFactory(new Callback<TableView<FoodResidus>, TableRow<FoodResidus>>() {
                 @Override
                 public TableRow<FoodResidus> call(TableView<FoodResidus> table) {
@@ -336,6 +394,9 @@ public class MainScreenController {
                     itemRemove.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
+                            Whine temp=new Whine(row.getItem().getName(), row.getItem().getWeight());
+                            RemoveChange removeChange=new RemoveChange(temp, row.getIndex());
+                            TableStatements.addChange(removeChange);
                             table.getItems().remove(row.getItem());
                         }
                     });
@@ -343,12 +404,16 @@ public class MainScreenController {
                         @Override
                         public void handle(ActionEvent event) {
                             table.getItems().add(new Whine("NULL", 0));
+                            AddChange addChange=new AddChange(new Whine("NULL", 0));
+                            TableStatements.addChange(addChange);
                         }
                     });
                     itemAdd2.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             table.getItems().add(new Whine("NULL", 0));
+                            AddChange addChange=new AddChange(new Whine("NULL", 0));
+                            TableStatements.addChange(addChange);
                         }
                     });
                     row.contextMenuProperty().bind(
@@ -380,6 +445,8 @@ public class MainScreenController {
             @Override
             public void handle(MouseEvent click) {
                 if (click.getButton() == MouseButton.SECONDARY && data.isEmpty()) {
+                    AddChange addChange=new AddChange(new Whine("NULL", 0));
+                    TableStatements.addChange(addChange);
                     data.add(new Whine("Безыменный", 0));
                 }
             }
@@ -394,5 +461,85 @@ public class MainScreenController {
                 stage.close();
             }
         });
+    }
+
+    public static void buttonUndo(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Undo");
+                TableStatements.undo();
+            }
+        });
+    }
+
+    public static void buttonRedo(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Redo");
+                TableStatements.redo();
+            }
+        });
+    }
+
+    public static void buttonWeightUp(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            ObservableList<FoodResidus> data=MainScreen.getData();
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("nameUp");
+                Collections.sort(data);
+                TableStatements.getChanges().clear();
+                TableStatements.setCurrentStatement(-1);
+            }
+        });
+    }
+
+    public static void buttonWeightDown(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            ObservableList<FoodResidus> data=MainScreen.getData();
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("namedown");
+                TableStatements.redo();
+                Collections.sort(data, Collections.reverseOrder());
+                TableStatements.getChanges().clear();
+                TableStatements.setCurrentStatement(-1);
+            }
+        });
+    }
+
+    public static void buttonNameUp(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            ObservableList<FoodResidus> data=MainScreen.getData();
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("weigthup");
+                TableStatements.redo();
+                Collections.sort(data, new SortedByName());
+                TableStatements.getChanges().clear();
+                TableStatements.setCurrentStatement(-1);
+            }
+        });
+    }
+
+    public static void buttonNameDown(Button button){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            ObservableList<FoodResidus> data=MainScreen.getData();
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("weigthdown");
+                TableStatements.redo();
+                Collections.sort(data, Collections.reverseOrder(new SortedByName()));
+                TableStatements.getChanges().clear();
+                TableStatements.setCurrentStatement(-1);
+            }
+        });
+    }
+
+    public static void autoFill(TextField textField){
+        TextFields.bindAutoCompletion(textField, Dictionarz.getWords());
+
     }
 }
