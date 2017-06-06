@@ -1,6 +1,9 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -239,11 +242,12 @@ public class MainScreenController {
             }
         });
     }
-    public static void buttonOkInfo(Button button) {
+    public static void buttonOkInfo(Button button, TextArea textArea) {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Stage stage = (Stage) InfoApplicationWindow.buttonOkInfo.getScene().getWindow();
+                InfoApplicationWindow.setTeext(textArea.getText());
                 stage.close();
             }
         });
@@ -541,5 +545,49 @@ public class MainScreenController {
     public static void autoFill(TextField textField){
         TextFields.bindAutoCompletion(textField, Dictionarz.getWords());
 
+    }
+
+    public static void autoComplet(TextArea textArea){;
+        textArea.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue ov, String t, String t1) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        String word;
+                        String subWord;
+                        boolean contains;
+                        word = "";
+                        subWord = "";
+                        contains = false;
+                        int newSize = textArea.getText().length();
+                        if (newSize >= InfoApplicationWindow.getOldsize()) {
+                            //System.out.println(textArea.getText());
+                            char prob = ' ';
+                            int last = textArea.getText().lastIndexOf(prob);
+                            String temp = textArea.getText().substring(last + 1);
+                            HashSet set = new Dictionary().getDictionary();
+                            Iterator<String> iterator = set.iterator();
+                            while (iterator.hasNext()) {
+                                word = iterator.next();
+                                if (word.length() <= temp.length() || temp.length() == 0) continue;
+                                subWord = word.substring(0, temp.length());
+                                if (subWord.equals(temp)) {
+                                    contains = true;
+                                    break;
+                                }
+                            }
+                            if (contains == true) {
+                                textArea.appendText(word.substring(temp.length()));
+                                int sub=0;
+                                sub=textArea.getText().length()-word.substring(temp.length()).length();
+                                textArea.selectRange(sub,textArea.getText().length());
+                            }
+                        }
+                        InfoApplicationWindow.setOldsize(textArea.getText().length());
+                    }
+                });
+            }
+        });
     }
 }
