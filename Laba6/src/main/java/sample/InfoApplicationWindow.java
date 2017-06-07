@@ -23,19 +23,24 @@ import java.util.Iterator;
 public class InfoApplicationWindow {
     private static Stage primaryStage;
     private static Scene scene;
+    private static int oldsize;
     private static AnchorPane mainPane;
-    private static Text text;
+    private static TextArea text;
     public static Button buttonOkInfo;
+    private static String teext="Auto Complet";
 
     private static void drawPanes(){
         mainPane=new AnchorPane();
     }
 
     public static void drawItems(){
-        text=new Text("Выполнили Промоторов Влад и Татаринов Данил, учащиеся группы P3111.");
+        text=new TextArea();
+        text.setText(teext);
         mainPane.getChildren().add(text);
-        AnchorPane.setTopAnchor(text, 40.0);
+        AnchorPane.setTopAnchor(text, 20.0);
         AnchorPane.setLeftAnchor(text, 20.0);
+        AnchorPane.setRightAnchor(text, 20.0);
+        AnchorPane.setBottomAnchor(text, 80.0);
         buttonOkInfo=new Button("Ok");
         mainPane.getChildren().add(buttonOkInfo);
         AnchorPane.setRightAnchor(buttonOkInfo,270.0);
@@ -44,7 +49,8 @@ public class InfoApplicationWindow {
     }
 
     public static void setControllers(){
-        MainScreenController.buttonOkInfo(buttonOkInfo);
+        MainScreenController.buttonOkInfo(buttonOkInfo, text);
+        MainScreenController.autoComplet(text);
     }
 
     public static void loadInfoScreen(){
@@ -53,8 +59,24 @@ public class InfoApplicationWindow {
         setControllers();
         primaryStage=new Stage();
         primaryStage.setResizable(false);
-        scene=new Scene(mainPane, 600, 130);
+        scene=new Scene(mainPane, 600, 330);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public static int getOldsize() {
+        return oldsize;
+    }
+
+    public static void setOldsize(int oldsize) {
+        InfoApplicationWindow.oldsize = oldsize;
+    }
+
+    public static String getTeext() {
+        return teext;
+    }
+
+    public static void setTeext(String teext) {
+        InfoApplicationWindow.teext = teext;
     }
 }

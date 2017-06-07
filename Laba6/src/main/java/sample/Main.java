@@ -1,5 +1,6 @@
 package sample;
 
+import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

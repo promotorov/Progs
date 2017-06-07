@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import laba2.FoodResidus;
 import laba2.XMLworker;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -54,7 +55,14 @@ public class MainScreen{//TODO определить для всех окон м�
     private static HBox SettingsContainer;
     private static Button buttonSettings;
     private static Button buttonInfoApplication;
-
+    private static Button buttonUndo;
+    private static Button buttonRedo;
+    private static HBox tableStatements;
+    private static Button buttonWeigthUp;
+    private static Button buttonWeigthDown;
+    private static Button buttonNameUp;
+    private static Button buttonNameDown;
+    private static TextField test;
 
     private static void drawPanes(){
         mainPane=new AnchorPane();
@@ -79,16 +87,24 @@ public class MainScreen{//TODO определить для всех окон м�
         buttonSave.setId("button");
         buttonInfoApplication.setId("buttonInfoApplication");
         buttonSettings.setId("buttonSettings");
+        buttonUndo.setId("buttonUndo");
+        buttonRedo.setId("buttonRedo");
+        buttonNameDown.setId("buttonRedo");
+        buttonNameUp.setId("buttonRedo");
+        buttonWeigthDown.setId("buttonRedo");
+        buttonWeigthUp.setId("buttonRedo");
     }
 
     private static void drawTable(){
         table=new TableView<>();
         table.setEditable(true);
         columnName=new TableColumn<>("Name");
+        columnName.setSortable(false);
         columnName.setPrefWidth(162.5);
         columnName.prefWidthProperty().bind(table.widthProperty().multiply(0.5));
         columnWeight=new TableColumn<>("Weight");
         columnWeight.prefWidthProperty().bind(table.widthProperty().multiply(0.5));
+        columnWeight.setSortable(false);
         table.getColumns().addAll(columnName,columnWeight);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         AnchorPane.setTopAnchor(table, 20.0);
@@ -114,7 +130,7 @@ public class MainScreen{//TODO определить для всех окон м�
         leftFilterButtonsContainer.setSpacing(40);
         leftFilterButtonsContainer.setAlignment(Pos.CENTER);
         leftFilterButtonsContainer.getChildren().add(buttonFiler);
-        leftFilterButtonsContainer.getChildren().add(buttonDelFiler);
+       // leftFilterButtonsContainer.getChildren().add(buttonDelFiler);
 
         leftPane.getChildren().add(leftFilterButtonsContainer);
         AnchorPane.setBottomAnchor(leftFilterButtonsContainer, 32.0);
@@ -146,6 +162,7 @@ public class MainScreen{//TODO определить для всех окон м�
         AnchorPane.setLeftAnchor(rightFilterButtonsContainer, 30.0);
         AnchorPane.setRightAnchor(rightFilterButtonsContainer, 100.0);
 
+        buttonUndo=new Button();
         buttonSettings=new Button();
         Image imageSettings=new Image("/icons/settings.png", 32, 32, false ,false);
         buttonSettings.setGraphic(new ImageView(imageSettings));
@@ -159,7 +176,7 @@ public class MainScreen{//TODO определить для всех окон м�
         rightPane.getChildren().add(SettingsContainer);
         AnchorPane.setTopAnchor(SettingsContainer, 10.0);
         AnchorPane.setRightAnchor(SettingsContainer, 10.0);
-        AnchorPane.setLeftAnchor(SettingsContainer, 0.0);
+        AnchorPane.setLeftAnchor(SettingsContainer, 200.0);
         AnchorPane.setRightAnchor(rightFilterButtonsContainer, 280.0);
 
         ListViewContainer=new HBox();
@@ -172,12 +189,52 @@ public class MainScreen{//TODO определить для всех окон м�
         AnchorPane.setLeftAnchor(ListViewContainer, 200.0);
         AnchorPane.setRightAnchor(ListViewContainer, 20.0);
         ListViewContainer.setPadding(new Insets(0,0,0,0));
+        tableStatements=new HBox();
+        tableStatements.setAlignment(Pos.CENTER_LEFT);
+        tableStatements.setSpacing(8);
+        Image imageUndo=new Image("/icons/undoNew.png", 32, 32, false, false);
+        Image imageRedo=new Image("/icons/redoNew.png", 32, 32, false, false);
+        buttonUndo=new Button();
+        buttonRedo=new Button();
+        buttonUndo.setGraphic(new ImageView(imageUndo));
+        buttonRedo.setGraphic(new ImageView(imageRedo));
+        tableStatements.getChildren().addAll(buttonUndo, buttonRedo);
+        rightPane.getChildren().addAll(tableStatements);
+        AnchorPane.setLeftAnchor(tableStatements, 10.0);
+        AnchorPane.setTopAnchor(tableStatements, 10.0);
+        AnchorPane.setRightAnchor(tableStatements, 200.0);
+        buttonNameDown=new Button();
+        buttonNameDown.setGraphic(new ImageView(new Image("/icons/down.png", 16, 16, false, false)));
+        leftPane.getChildren().add(buttonNameDown);
+        AnchorPane.setTopAnchor(buttonNameDown, 35.0);
+        AnchorPane.setLeftAnchor(buttonNameDown, 4.0);
+        buttonNameUp=new Button();
+        buttonNameUp.setGraphic(new ImageView(new Image("/icons/up.png", 16, 16, false, false)));
+        leftPane.getChildren().add(buttonNameUp);
+        AnchorPane.setTopAnchor(buttonNameUp, 15.0);
+        AnchorPane.setLeftAnchor(buttonNameUp, 4.0);
+
+        buttonWeigthDown=new Button();
+        buttonWeigthDown.setGraphic(new ImageView(new Image("/icons/down.png", 16, 16, false, false)));
+        leftPane.getChildren().add(buttonWeigthDown);
+        AnchorPane.setTopAnchor(buttonWeigthDown, 35.0);
+        AnchorPane.setRightAnchor(buttonWeigthDown, 4.0);
+        buttonWeigthUp=new Button();
+        buttonWeigthUp.setGraphic(new ImageView(new Image("/icons/up.png", 16, 16, false, false)));
+        leftPane.getChildren().add(buttonWeigthUp);
+        AnchorPane.setTopAnchor(buttonWeigthUp, 15.0);
+        AnchorPane.setRightAnchor(buttonWeigthUp, 4.0);
+
+        test=new TextField();
+        //rightPane.getChildren().add(test);
+        AnchorPane.setTopAnchor(buttonNameUp, 15.0);
+        AnchorPane.setLeftAnchor(buttonNameUp, 4.0);
     }
 
     public static void setControllers(){
         UnSeeingData = FXCollections.observableArrayList();
         MainScreenController.buttonFiltr(buttonFiler, data,UnSeeingData, table);
-        MainScreenController.buttonDelFiltr(buttonDelFiler, data, UnSeeingData, table);
+        //MainScreenController.buttonDelFiltr(buttonDelFiler, data, UnSeeingData, table);
         MainScreenController.buttonInfo(buttonInfo, data);
         MainScreenController.buttonClear(buttonClear, data);
         MainScreenController.buttonRemoveEl(buttonRemoveEl, data);
@@ -190,6 +247,13 @@ public class MainScreen{//TODO определить для всех окон м�
         MainScreenController.buttonInfoApplication(buttonInfoApplication);
         MainScreenController.buttonSettings(buttonSettings);
         MainScreenController.addIntoEmptyTable(leftPane,data);
+        MainScreenController.buttonUndo(buttonUndo);
+        MainScreenController.buttonRedo(buttonRedo);
+        MainScreenController.buttonNameUp(buttonNameUp);
+        MainScreenController.buttonNameDown(buttonNameDown);
+        MainScreenController.buttonWeightUp(buttonWeigthDown);
+        MainScreenController.buttonWeightDown(buttonWeigthUp);
+        MainScreenController.autoFill(test);
     }
 
     public static void loadMainScreen(){
@@ -309,5 +373,17 @@ public class MainScreen{//TODO определить для всех окон м�
 
     public static TableColumn<FoodResidus, Integer> getColumnWeight() {
         return columnWeight;
+    }
+
+    public static ObservableList getData(){
+        return data;
+    }
+
+    public static Button getButtonUndo() {
+        return buttonUndo;
+    }
+
+    public static Button getButtonRedo() {
+        return buttonRedo;
     }
 }
