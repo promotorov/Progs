@@ -15,6 +15,7 @@ public  class FoodResidus implements Comparable {
     public int wheight = 0;
 
     public boolean fliesAttraction=false;
+    private boolean highlightProperty=false;
 
     @Override
     public boolean equals(Object o) {
@@ -72,6 +73,14 @@ public  class FoodResidus implements Comparable {
 
     public int getWeight(){
         return this.wheight;
+    }
+
+    public boolean isHighlightProperty() {
+        return highlightProperty;
+    }
+
+    public void setHighlightProperty(boolean highlightProperty) {
+        this.highlightProperty = highlightProperty;
     }
 
     public void setWeight(int weight){

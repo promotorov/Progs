@@ -1,23 +1,111 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <classWrapper>
     <theCollection>
-        <name>Безыменный</name>
-        <weight>231</weight>
+        <name>четвёртый</name>
+        <weight>213123</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>первый</name>
+        <weight>50</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>третий</name>
+        <weight>150</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
         <name>второй</name>
-        <weight>0</weight>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+
+    <theCollection>
+        <name>второй1</name>
+        <weight>100</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
-        <name>Безыменный</name>
-        <weight>0</weight>
+        <name>второй2</name>
+        <weight>100</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
     <theCollection>
-        <name>sd</name>
-        <weight>23</weight>
+        <name>второй3</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>второй4</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>второй5</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>второй6</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>второй8</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>втор</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>второй</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>второй</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+
+
+    <theCollection>
+        <name>вт213</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>втор32ой</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>вторfdsой</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>второ43й</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>вторsdsdой</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>втор2332ой</name>
+        <weight>100</weight>
+        <fliesAttraction>false</fliesAttraction>
+    </theCollection>
+    <theCollection>
+        <name>вторsdsdой</name>
+        <weight>100</weight>
         <fliesAttraction>false</fliesAttraction>
     </theCollection>
 </classWrapper>
