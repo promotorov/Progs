@@ -29,14 +29,15 @@ import laba2.XMLworker;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.text.Normalizer;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 
 /**
  * Created by vladp on 30.04.2017.
  */
 public class MainScreen{//TODO определить для всех окон максимальные и минимальные размеры
+    private static ArrayList<Integer> searched=new ArrayList<>();
+    private static int currentSearch=0;
     private static ObservableList<FoodResidus> data;
     private static ObservableList UnSeeingData;
     private static Stage primaryStage;
@@ -74,6 +75,8 @@ public class MainScreen{//TODO определить для всех окон м�
     private static Button buttonNameUp;
     private static Button buttonNameDown;
     private static TextField test;
+    private static Button previousSearch;
+    private static Button nextSearch;
     private static HBox search;
 
     private static void drawPanes(){
@@ -210,7 +213,7 @@ public class MainScreen{//TODO определить для всех окон м�
         search.setSpacing(8);
         AnchorPane.setLeftAnchor(search, 10.0);
         AnchorPane.setBottomAnchor(search, 10.0);
-        AnchorPane.setRightAnchor(search, 100.0);
+        AnchorPane.setRightAnchor(search, 50.0);
         Image imageUndo=new Image("/icons/undoNew.png", 32, 32, false, false);
         Image imageRedo=new Image("/icons/redoNew.png", 32, 32, false, false);
         buttonUndo=new Button();
@@ -232,7 +235,8 @@ public class MainScreen{//TODO определить для всех окон м�
         leftPane.getChildren().add(buttonNameUp);
         AnchorPane.setTopAnchor(buttonNameUp, 15.0);
         AnchorPane.setLeftAnchor(buttonNameUp, 4.0);
-
+        previousSearch=new Button("Prev");
+        nextSearch=new Button("Next");
         buttonWeigthDown=new Button();
         buttonWeigthDown.setGraphic(new ImageView(new Image("/icons/down.png", 16, 16, false, false)));
         leftPane.getChildren().add(buttonWeigthDown);
@@ -271,6 +275,7 @@ public class MainScreen{//TODO определить для всех окон м�
                     search.getChildren().remove(nameSearch);
                     search.getChildren().remove(weightSearch);
                     search.getChildren().remove(count);
+                    search.getChildren().removeAll(previousSearch, nextSearch);
                     for (int i=0; i<data.size(); i++){
                         data.get(i).setHighlightProperty(false);
                     }
@@ -282,107 +287,44 @@ public class MainScreen{//TODO определить для всех окон м�
                 }
             }
         });
+        previousSearch.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
+        nextSearch.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(currentSearch!=(searched.size()-1)){
+                    data.get(searched.get(currentSearch)).setActivehighlightProperty(false);
+                    currentSearch++;
+                    System.out.println(currentSearch);
+                    table.scrollTo(searched.get(currentSearch));
+                    data.get(searched.get(currentSearch)).setActivehighlightProperty(true);
+                    count.setText((currentSearch+1)+" из "+searched.size());
+                }
+                else {
+                    data.get(searched.get(currentSearch)).setActivehighlightProperty(false);
+                    currentSearch=0;
+                    table.scrollTo(currentSearch);
+                    count.setText((currentSearch+1) + " из " + searched.size());
+                    data.get(searched.get(currentSearch)).setActivehighlightProperty(true);
+                }
+                columnName.setVisible(false);
+                columnName.setVisible(true);
+            }
+        });
         weightSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                int index=-1;
-                System.out.println("changedWeight");
-                for (int i=0; i<data.size(); i++){
-                    data.get(i).setHighlightProperty(false);
-                }
-                int co=0;
-                count.setText("");
-                if(nameSearch.getText().trim().length()==0) {
-                    for (int i = 0; i < data.size(); i++) {
-                        try {
-                            if (data.get(i).getWeight() == Integer.parseInt(newValue)) {
-                                data.get(i).setHighlightProperty(true);
-                                co++;
-                                if (index == -1) index = i;
-                            }
-                        } catch (Exception e) {
-
-                        }
-                    }
-                }
-                else{
-                    for (int i = 0; i < data.size(); i++) {
-                        try {
-                            int length=nameSearch.getText().trim().length();
-                            if(length==0) break;
-                            if (length > data.get(i).getName().length()) continue;
-                            if (data.get(i).getWeight() == Integer.parseInt(newValue) &&
-                                    data.get(i).getName().substring(0, length).equals(nameSearch.getText().trim())) {
-                                data.get(i).setHighlightProperty(true);
-                                co++;
-                                if (index == -1) index = i;
-                            }
-                        } catch (Exception e) {
-
-                        }
-                    }
-                }
-                count.setText("Совпадений: "+co);
-                columnName.setVisible(false);
-                columnName.setVisible(true);
+                checkHighlight();
             }
         });
         nameSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                int index=-1;
-                System.out.println("changedName");
-                for (int i=0; i<data.size(); i++){
-                    data.get(i).setHighlightProperty(false);
-                }
-                int co=0;
-                count.setText("");
-                if(weightSearch.getText().trim().length()==0) {
-                    for (int i = 0; i < data.size(); i++) {
-                        try {
-                            int length = newValue.trim().length();
-                            if (length == 0) break;
-                            if (length > data.get(i).getName().length()) continue;
-                            if (data.get(i).getName().substring(0, length).equals(newValue.trim())) {
-                                data.get(i).setHighlightProperty(true);
-                                co++;
-                                if (index == -1) index = i;
-                            }
-                        } catch (Exception e) {
-
-                        }
-                        //table.scrollTo(0);
-                    }
-                }
-                else{
-                    for (int i = 0; i < data.size(); i++) {
-                        try {
-                            int length=newValue.trim().length();
-                            if( length==0 && weightSearch.getText().trim().length()==0) break;
-                            if (length > data.get(i).getName().length()) continue;
-                            if(length!=0) {
-                                if (data.get(i).getWeight() == Integer.parseInt(weightSearch.getText()) &&
-                                        data.get(i).getName().substring(0, length).equals(newValue.trim())) {
-                                    data.get(i).setHighlightProperty(true);
-                                    co++;
-                                    if (index == -1) index = i;
-                                }
-                            }
-                            else{
-                                if (data.get(i).getWeight() == Integer.parseInt(weightSearch.getText())) {
-                                    data.get(i).setHighlightProperty(true);
-                                    co++;
-                                    if (index == -1) index = i;
-                                }
-                            }
-                        } catch (Exception e) {
-
-                        }
-                    }
-                }
-                count.setText("Совпадений: "+co);
-                columnName.setVisible(false);
-                columnName.setVisible(true);
+                checkHighlight();
             }
         });
         nameSearch.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -764,6 +706,30 @@ public class MainScreen{//TODO определить для всех окон м�
         MainScreen.test = test;
     }
 
+    public static ArrayList<Integer> getSearched() {
+        return searched;
+    }
+
+    public static void setSearched(ArrayList<Integer> searched) {
+        MainScreen.searched = searched;
+    }
+
+    public static Button getPreviousSearch() {
+        return previousSearch;
+    }
+
+    public static void setPreviousSearch(Button previousSearch) {
+        MainScreen.previousSearch = previousSearch;
+    }
+
+    public static Button getNextSearch() {
+        return nextSearch;
+    }
+
+    public static void setNextSearch(Button nextSearch) {
+        MainScreen.nextSearch = nextSearch;
+    }
+
     public static HBox getSearch() {
         return search;
     }
@@ -773,7 +739,14 @@ public class MainScreen{//TODO определить для всех окон м�
     }
 
     public static void checkHighlight(){
+        searched.clear();
+        int index=-1;
+        for (int i=0; i<data.size(); i++){
+            data.get(i).setHighlightProperty(false);
+            data.get(i).setActivehighlightProperty(false);
+        }
         int co=0;
+        count.setText("");
         if(nameSearch.getText().trim().length()!=0 && weightSearch.getText().trim().length()!=0) {
             for (int i = 0; i < data.size(); i++) {
                 try {
@@ -783,12 +756,16 @@ public class MainScreen{//TODO определить для всех окон м�
                         if (data.get(i).getWeight() == Integer.parseInt(weightSearch.getText()) &&
                                 data.get(i).getName().substring(0, length).equals(nameSearch.getText().trim())) {
                             data.get(i).setHighlightProperty(true);
+                            searched.add(i);
+                            if(index==-1) index=i;
                             co++;
                         }
                     } else {
                         if (data.get(i).getWeight() == Integer.parseInt(weightSearch.getText())) {
                             data.get(i).setHighlightProperty(true);
                             co++;
+                            searched.add(i);
+                            if(index==-1) index=i;
                         }
                     }
                 } catch (Exception e) {
@@ -805,6 +782,8 @@ public class MainScreen{//TODO определить для всех окон м�
                     if (data.get(i).getName().substring(0, length).equals(nameSearch.getText().trim())) {
                         data.get(i).setHighlightProperty(true);
                         co++;
+                        searched.add(i);
+                        if(index==-1) index=i;
                     }
                 } catch (Exception e) {
 
@@ -816,7 +795,9 @@ public class MainScreen{//TODO определить для всех окон м�
                 try {
                     if (data.get(i).getWeight() == Integer.parseInt(weightSearch.getText())) {
                         data.get(i).setHighlightProperty(true);
+                        if(index==-1) index=i;
                         co++;
+                        searched.add(i);
                     }
                 } catch (Exception e) {
 
@@ -828,7 +809,23 @@ public class MainScreen{//TODO определить для всех окон м�
                 data.get(i).setHighlightProperty(false);
             }
         }
-        count.setText("Совпадений: "+co);
+        if(index!=-1) table.scrollTo(index);
+        if(co!=0) {
+            count.setText("1 из "+co);
+            data.get(index).setActivehighlightProperty(true);
+            if(!search.getChildren().contains(previousSearch)){
+                search.getChildren().addAll(previousSearch, nextSearch);
+            }
+        }
+        else if (co==0){
+            count.setText("Нет совпадений");
+            if(search.getChildren().contains(previousSearch)){
+                search.getChildren().removeAll(previousSearch, nextSearch);
+            }
+            for(int i=0; i<data.size(); i++){
+                data.get(i).setActivehighlightProperty(false);
+            }
+        }
         columnName.setVisible(false);
         columnName.setVisible(true);
     }

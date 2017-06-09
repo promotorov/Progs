@@ -38,10 +38,15 @@ import static laba2.XMLworker.saveCollection;
  * Created by vladp on 30.04.2017.
  */
 public class MainScreenController {
-    public static void buttonFiltr(Button button, ObservableList data,ObservableList UnSeeingData, TableView<FoodResidus> table){
+    public static void buttonFiltr(Button button, ObservableList<FoodResidus> data,ObservableList UnSeeingData, TableView<FoodResidus> table){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                for(int i=0; i<data.size(); i++){
+                    data.get(i).setHighlightProperty(false);
+                }
+                MainScreen.getColumnName().setVisible(false);
+                MainScreen.getColumnName().setVisible(true);
                 SetFiltersWindow.loadSetFiltersWindow(data, UnSeeingData, table);
                 System.out.println("Удаляем фильтры");
             }
@@ -261,30 +266,42 @@ public class MainScreenController {
             }
         });
     }
-    public static void SetFiltersOKbutton(Button button, ObservableList data,ObservableList UnSeeingData,TableView<FoodResidus> table, TextField textFieldName, TextField textFieldWeight){
+    public static void SetFiltersOKbutton(Button button, ObservableList<FoodResidus> data,ObservableList UnSeeingData,TableView<FoodResidus> table, TextField textFieldName, TextField textFieldWeight){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(CompareMethods.isCorrect(textFieldName.getText(),textFieldWeight.getText())){
-                    ObservableList<FoodResidus> oldTemp=FXCollections.observableArrayList(data);
-                    Iterator<FoodResidus> iterator=data.iterator();
-                    while(iterator.hasNext()){
-                        FoodResidus CurentItrator = iterator.next();
-                        if((CompareMethods.nameCompare(CurentItrator.getName(),textFieldName.getText()))&&(CompareMethods.weightCompare(CurentItrator.getWeight(),textFieldWeight.getText()))){
-                        }else{
-                            UnSeeingData.add(CurentItrator);
-                            iterator.remove();
-                        }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(CompareMethods.isCorrect(textFieldName.getText(),textFieldWeight.getText())){
+                                    ObservableList<FoodResidus> oldTemp=FXCollections.observableArrayList(data);
+                                    for(int i=0; i<data.size(); i++){
+                                        if((CompareMethods.nameCompare(data.get(i).getName(), textFieldName.getText()))&&(CompareMethods.weightCompare(data.get(i).getWeight(),textFieldWeight.getText()))){
+                                        }
+                                        else{
+                                            UnSeeingData.add(data.get(i));
+                                            data.remove(i);
+                                            i--;
+                                        }
+                                    }
+                                    ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
+                                    table.setItems(data);
+                                    System.out.println(data.size());
+                                    MainScreen.checkHighlight();
+                                    RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
+                                    TableStatements.addChange(r);
+                                }else{
+                                    ErrorWindow.loadInfoScreen("Неверный формат фильтра");
+                                }
+                            }
+                        });
+                        Stage stage = (Stage) SetFiltersWindow.SetFiltersOKbutton.getScene().getWindow();
+                        stage.close();
                     }
-                    ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
-                    RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
-                    TableStatements.addChange(r);
-                }else{
-                    ErrorWindow.loadInfoScreen("Неверный формат фильтра");
-                }
-                table.setItems(data);
-                Stage stage = (Stage) SetFiltersWindow.SetFiltersOKbutton.getScene().getWindow();
-                stage.close();
+                });
             }
         });
     }
@@ -335,6 +352,11 @@ public class MainScreenController {
                             Whine newTemp=new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                     t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                             EditChange editChange=new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
+
+                            if(MainScreen.getNameSearch().getText().trim().equals("Безыменный")) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                                else data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                            columnName.setVisible(false);
+                            columnName.setVisible(true);
                             TableStatements.addChange(editChange);
                             columnName.setCellFactory(TextFieldTableCell.forTableColumn());
                         }
@@ -391,6 +413,8 @@ public class MainScreenController {
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                     EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
                                     TableStatements.addChange(editChange);
+                                    if(Integer.parseInt(MainScreen.getWeightSearch().getText().trim())==0) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                                    else data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
                                 }
                                 columnWeight.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
                             }
@@ -419,6 +443,9 @@ public class MainScreenController {
                                 setStyle( "-fx-background-color: #EDFB23;" );
                             } else {
                                 setStyle( null );
+                            }
+                            if( person.isActivehighlightProperty()){
+                                setStyle("-fx-background-color: gray;");
                             }
                         }
 
