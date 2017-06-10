@@ -40,6 +40,8 @@ public class SettingsScreenController {
                     MainScreen.getTable().setEditable(true);
                     SettingsWindow.setEditable(true);
                 }
+                Stage stage = (Stage) SettingsWindow.getButtonSave().getScene().getWindow();
+                stage.close();
             }
         });
     }
@@ -123,15 +125,16 @@ public class SettingsScreenController {
         textfield.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(Integer.parseInt(textfield.getText())<21){
-                    MainScreen.getButtonInfo().setStyle("-fx-font-size: " +textfield.getText());
-                    MainScreen.getButtonChoose().setStyle("-fx-font-size: " +textfield.getText());
-                    MainScreen.getButtonClear().setStyle("-fx-font-size: " +textfield.getText());
-                    MainScreen.getButtonDelFiler().setStyle("-fx-font-size: " +textfield.getText());
-                    MainScreen.getButtonFiler().setStyle("-fx-font-size: " +textfield.getText());
-                    MainScreen.getButtonRemoveEl().setStyle("-fx-font-size: " +textfield.getText());
-                    MainScreen.getButtonSave().setStyle("-fx-font-size: " +textfield.getText());
-                }else{
+                if(!(Integer.parseInt(textfield.getText())>18 || Integer.parseInt(textfield.getText())<11)) {
+                    MainScreen.getButtonInfo().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonChoose().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonClear().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonDelFiler().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonFiler().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonRemoveEl().setStyle("-fx-font-size: " + textfield.getText());
+                    MainScreen.getButtonSave().setStyle("-fx-font-size: " + textfield.getText());
+                }
+                else {
                     textfield.setText(String.valueOf(SettingsWindow.getFont_size()));
                 }
             }

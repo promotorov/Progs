@@ -193,4 +193,5 @@ public class SettingsWindow {
     public static int getFONT_SIZE(){
         return FONT_SIZE;
     }
+    public static Button getButtonSave(){return buttonSave;}
 }

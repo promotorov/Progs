@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <classWrapper>
     <theCollection>
-        <name>fcgvhnjk</name>
-        <weight>245</weight>
+        <name>АбраKadaBra</name>
+        <weight>1</weight>
         <fliesAttraction>false</fliesAttraction>
+        <highlightProperty>false</highlightProperty>
+        <activehighlightProperty>false</activehighlightProperty>
+        <showContextMenu>true</showContextMenu>
     </theCollection>
     <theCollection>
-        <name>fghjk</name>
-        <weight>150</weight>
+        <name>undo</name>
+        <weight>7536</weight>
         <fliesAttraction>false</fliesAttraction>
+        <highlightProperty>false</highlightProperty>
+        <activehighlightProperty>false</activehighlightProperty>
+        <showContextMenu>true</showContextMenu>
     </theCollection>
     <theCollection>
-        <name>fgvhbjnk</name>
-        <weight>234</weight>
+        <name>jjsff</name>
+        <weight>45677654</weight>
         <fliesAttraction>false</fliesAttraction>
+        <highlightProperty>false</highlightProperty>
+        <activehighlightProperty>false</activehighlightProperty>
+        <showContextMenu>true</showContextMenu>
     </theCollection>
     <theCollection>
-        <name>dsad</name>
-        <weight>23</weight>
+        <name>новенький</name>
+        <weight>68</weight>
         <fliesAttraction>false</fliesAttraction>
+        <highlightProperty>false</highlightProperty>
+        <activehighlightProperty>false</activehighlightProperty>
+        <showContextMenu>true</showContextMenu>
     </theCollection>
 </classWrapper>

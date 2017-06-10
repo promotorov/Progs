@@ -23,6 +23,14 @@
 }
 
 #buttonSettings{
+     -fx-border-color: #000000;
+     -fx-border-width: 0;
+     -fx-padding: 0 0 0 0;
+     -fx-border-radius: 4;
+     -fx-background-color: transparent;
+}
+
+#buttonUndo{
     -fx-border-color: #000000;
     -fx-border-width: 0;
     -fx-padding: 0 0 0 0;
@@ -30,6 +38,37 @@
     -fx-background-color: transparent;
 }
 
+#buttonRedo{
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+    -fx-border-radius: 4;
+    -fx-background-color: transparent;
+}
+
+#buttonSearch{
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+    -fx-border-radius: 4;
+    -fx-background-color: transparent;
+}
+
+#buttonNext{
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+    -fx-border-radius: 4;
+    -fx-background-color: transparent;
+}
+
+#buttonBack{
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+    -fx-border-radius: 4;
+    -fx-background-color: transparent;
+}
 
 .table-view .table-cell{
     -fx-text-fill: #000000;

@@ -22,7 +22,8 @@ public class InitTable extends Thread{
     }
     public void run() {
         try {
-            HashSet<FoodResidus> set = XMLworker.getCollection(getClass().getResourceAsStream("/sample.xml"));
+            //HashSet<FoodResidus> set = XMLworker.getCollection(getClass().getResourceAsStream("/sample.xml"));
+            HashSet<FoodResidus> set = XMLworker.getCollection("src\\main\\resources\\sample.xml");
             Iterator<FoodResidus> iterator = set.iterator();
             while (iterator.hasNext()) {
                 data.add(iterator.next());

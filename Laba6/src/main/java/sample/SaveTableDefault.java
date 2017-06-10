@@ -24,14 +24,14 @@ public class SaveTableDefault extends Thread {
     }
     public void run(){
         try {
-            PrintWriter wr=new PrintWriter(fileName);
+            this.fileName=new File("src\\main\\resources\\sample.xml");
             ObservableList<FoodResidus> ob=data;
             HashSet<FoodResidus> set=new HashSet<>();
             Iterator<FoodResidus> iterator=ob.iterator();
             while(iterator.hasNext()){
                 set.add(iterator.next());
             }
-            saveCollection(wr, set);
+            saveCollection(fileName, set);
         }
         catch (Exception e){
             System.out.println(e);
