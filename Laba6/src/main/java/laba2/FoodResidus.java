@@ -17,6 +17,16 @@ public  class FoodResidus implements Comparable {
     public boolean fliesAttraction=false;
     private boolean highlightProperty=false;
     private boolean activehighlightProperty=false;
+    private boolean showContextMenu=true;
+
+    public boolean isShowContextMenu() {
+        return showContextMenu;
+    }
+
+    public void setShowContextMenu(boolean showContextMenu) {
+        this.showContextMenu = showContextMenu;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

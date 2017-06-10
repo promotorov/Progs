@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -25,6 +27,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import laba2.FoodResidus;
+import laba2.Whine;
 import laba2.XMLworker;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -36,6 +39,7 @@ import java.util.*;
  * Created by vladp on 30.04.2017.
  */
 public class MainScreen{//TODO определить для всех окон максимальные и минимальные размеры
+    private static BooleanProperty visiable=new SimpleBooleanProperty();
     private static ArrayList<Integer> searched=new ArrayList<>();
     private static int currentSearch=0;
     private static ObservableList<FoodResidus> data;
@@ -270,15 +274,23 @@ public class MainScreen{//TODO определить для всех окон м�
                     search.getChildren().add(nameSearch);
                     search.getChildren().add(weightSearch);
                     search.getChildren().add(count);
+                    for(int i=0; i<data.size(); i++){
+                        data.get(i).setShowContextMenu(false);
+                    }
+                    visiable.setValue(true);
                 }
                 else {
                     search.getChildren().remove(nameSearch);
                     search.getChildren().remove(weightSearch);
                     search.getChildren().remove(count);
                     search.getChildren().removeAll(previousSearch, nextSearch);
+                    for(int i=0; i<data.size(); i++){
+                        data.get(i).setShowContextMenu(true);
+                    }
                     for (int i=0; i<data.size(); i++){
                         data.get(i).setHighlightProperty(false);
                     }
+                    visiable.setValue(false);
                     nameSearch.clear();
                     weightSearch.clear();
                     count.setText("");
@@ -290,7 +302,23 @@ public class MainScreen{//TODO определить для всех окон м�
         previousSearch.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                if(currentSearch!=0){
+                    data.get(searched.get(currentSearch)).setActivehighlightProperty(false);
+                    currentSearch--;
+                    System.out.println(currentSearch);
+                    table.scrollTo(searched.get(currentSearch));
+                    data.get(searched.get(currentSearch)).setActivehighlightProperty(true);
+                    count.setText((currentSearch+1)+" из "+searched.size());
+                }
+                else {
+                    data.get(searched.get(currentSearch)).setActivehighlightProperty(false);
+                    currentSearch=searched.size()-1;
+                    table.scrollTo(searched.get(searched.size()-1));
+                    count.setText((currentSearch+1) + " из " + searched.size());
+                    data.get(searched.get(currentSearch)).setActivehighlightProperty(true);
+                }
+                columnName.setVisible(false);
+                columnName.setVisible(true);
             }
         });
         nextSearch.setOnAction(new EventHandler<ActionEvent>() {
@@ -307,7 +335,7 @@ public class MainScreen{//TODO определить для всех окон м�
                 else {
                     data.get(searched.get(currentSearch)).setActivehighlightProperty(false);
                     currentSearch=0;
-                    table.scrollTo(currentSearch);
+                    table.scrollTo(searched.get(0));
                     count.setText((currentSearch+1) + " из " + searched.size());
                     data.get(searched.get(currentSearch)).setActivehighlightProperty(true);
                 }
@@ -828,5 +856,13 @@ public class MainScreen{//TODO определить для всех окон м�
         }
         columnName.setVisible(false);
         columnName.setVisible(true);
+    }
+
+    public static BooleanProperty isVisiable() {
+        return visiable;
+    }
+
+    public static void setVisiable(boolean visiable) {
+        MainScreen.visiable.setValue(visiable);
     }
 }

@@ -44,6 +44,7 @@ public class MainScreenController {
             public void handle(ActionEvent actionEvent) {
                 for(int i=0; i<data.size(); i++){
                     data.get(i).setHighlightProperty(false);
+                    data.get(i).setActivehighlightProperty(false);
                 }
                 MainScreen.getColumnName().setVisible(false);
                 MainScreen.getColumnName().setVisible(true);
@@ -209,6 +210,7 @@ public class MainScreenController {
                 data.clear();
                 Stage stage = (Stage) ClearWindow.ClearOKbutton.getScene().getWindow();
                 stage.close();
+                MainScreen.checkHighlight();
             }
         });
     }
@@ -326,12 +328,19 @@ public class MainScreenController {
                             if(!t.getOldValue().equals(t.getNewValue())) {
                                 String temp=MainScreen.getNameSearch().getText().trim();
                                 int len=temp.length();
-                                if(len>t.getNewValue().trim().length()) data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
-                                else if(!t.getNewValue().trim().substring(0,len).equals(temp)) {
+                                if(len>t.getNewValue().trim().length()) {
+                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
                                     data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
                                 }
+                                else if(!t.getNewValue().trim().substring(0,len).equals(temp)) {
+                                    data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                }
                                 else if(len!=0) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
-                                else  data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                else  {
+                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                    data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                }
                                 Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                         t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                 t.getTableView().getItems().get(
@@ -354,7 +363,10 @@ public class MainScreenController {
                             EditChange editChange=new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
 
                             if(MainScreen.getNameSearch().getText().trim().equals("Безыменный")) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
-                                else data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                            else {
+                                data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                }
                             columnName.setVisible(false);
                             columnName.setVisible(true);
                             TableStatements.addChange(editChange);
@@ -424,11 +436,6 @@ public class MainScreenController {
 
     }
     public static void tableViewRightClick(TableView tableView){
-        tableView.setOnInputMethodTextChanged(new EventHandler<InputMethodEvent>() {
-            @Override
-            public void handle(InputMethodEvent event) {
-            }
-        });
         tableView.setRowFactory(new Callback<TableView<FoodResidus>, TableRow<FoodResidus>>() {
                 @Override
                 public TableRow<FoodResidus> call(TableView<FoodResidus> table) {
@@ -445,7 +452,7 @@ public class MainScreenController {
                                 setStyle( null );
                             }
                             if( person.isActivehighlightProperty()){
-                                setStyle("-fx-background-color: gray;");
+                                setStyle("-fx-background-color: #33D217;");
                             }
                         }
 
@@ -456,14 +463,16 @@ public class MainScreenController {
                     ContextMenu menuRemove=new ContextMenu();
                     ContextMenu menuAdd=new ContextMenu();
                     menuRemove.getItems().addAll(itemRemove, itemAdd2);
-                    menuAdd.getItems().addAll(itemAdd);
+                    menuAdd.getItems().addAll(itemAdd);;
                     itemRemove.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
+                            System.out.println(MainScreen.isVisiable());
                             Whine temp=new Whine(row.getItem().getName(), row.getItem().getWeight());
                             RemoveChange removeChange=new RemoveChange(temp, row.getIndex());
                             TableStatements.addChange(removeChange);
                             table.getItems().remove(row.getItem());
+                            MainScreen.checkHighlight();
                         }
                     });
                     itemAdd.setOnAction(new EventHandler<ActionEvent>() {
@@ -472,6 +481,7 @@ public class MainScreenController {
                             table.getItems().add(new Whine("NULL", 0));
                             AddChange addChange=new AddChange(new Whine("NULL", 0));
                             TableStatements.addChange(addChange);
+                            MainScreen.checkHighlight();
                         }
                     });
                     itemAdd2.setOnAction(new EventHandler<ActionEvent>() {
@@ -480,12 +490,17 @@ public class MainScreenController {
                             table.getItems().add(new Whine("NULL", 0));
                             AddChange addChange=new AddChange(new Whine("NULL", 0));
                             TableStatements.addChange(addChange);
+                            MainScreen.checkHighlight();
                         }
                     });
                     row.contextMenuProperty().bind(
+
                             Bindings.when(row.emptyProperty())
+
                                     .then(menuAdd)
+
                                     .otherwise(menuRemove)
+
                     );
                     return  row;
                 }
