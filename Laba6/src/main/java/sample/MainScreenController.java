@@ -38,10 +38,16 @@ import static laba2.XMLworker.saveCollection;
  * Created by vladp on 30.04.2017.
  */
 public class MainScreenController {
-    public static void buttonFiltr(Button button, ObservableList data,ObservableList UnSeeingData, TableView<FoodResidus> table){
+    public static void buttonFiltr(Button button, ObservableList<FoodResidus> data,ObservableList UnSeeingData, TableView<FoodResidus> table){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                for(int i=0; i<data.size(); i++){
+                    data.get(i).setHighlightProperty(false);
+                    data.get(i).setActivehighlightProperty(false);
+                }
+                MainScreen.getColumnName().setVisible(false);
+                MainScreen.getColumnName().setVisible(true);
                 SetFiltersWindow.loadSetFiltersWindow(data, UnSeeingData, table);
                 System.out.println("Удаляем фильтры");
             }
@@ -204,6 +210,7 @@ public class MainScreenController {
                 data.clear();
                 Stage stage = (Stage) ClearWindow.ClearOKbutton.getScene().getWindow();
                 stage.close();
+                MainScreen.checkHighlight();
             }
         });
     }
@@ -261,30 +268,42 @@ public class MainScreenController {
             }
         });
     }
-    public static void SetFiltersOKbutton(Button button, ObservableList data,ObservableList UnSeeingData,TableView<FoodResidus> table, TextField textFieldName, TextField textFieldWeight){
+    public static void SetFiltersOKbutton(Button button, ObservableList<FoodResidus> data,ObservableList UnSeeingData,TableView<FoodResidus> table, TextField textFieldName, TextField textFieldWeight){
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(CompareMethods.isCorrect(textFieldName.getText(),textFieldWeight.getText())){
-                    ObservableList<FoodResidus> oldTemp=FXCollections.observableArrayList(data);
-                    Iterator<FoodResidus> iterator=data.iterator();
-                    while(iterator.hasNext()){
-                        FoodResidus CurentItrator = iterator.next();
-                        if((CompareMethods.nameCompare(CurentItrator.getName(),textFieldName.getText()))&&(CompareMethods.weightCompare(CurentItrator.getWeight(),textFieldWeight.getText()))){
-                        }else{
-                            UnSeeingData.add(CurentItrator);
-                            iterator.remove();
-                        }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(CompareMethods.isCorrect(textFieldName.getText(),textFieldWeight.getText())){
+                                    ObservableList<FoodResidus> oldTemp=FXCollections.observableArrayList(data);
+                                    for(int i=0; i<data.size(); i++){
+                                        if((CompareMethods.nameCompare(data.get(i).getName(), textFieldName.getText()))&&(CompareMethods.weightCompare(data.get(i).getWeight(),textFieldWeight.getText()))){
+                                        }
+                                        else{
+                                            UnSeeingData.add(data.get(i));
+                                            data.remove(i);
+                                            i--;
+                                        }
+                                    }
+                                    ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
+                                    table.setItems(data);
+                                    System.out.println(data.size());
+                                    MainScreen.checkHighlight();
+                                    RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
+                                    TableStatements.addChange(r);
+                                }else{
+                                    ErrorWindow.loadInfoScreen("Неверный формат фильтра");
+                                }
+                            }
+                        });
+                        Stage stage = (Stage) SetFiltersWindow.SetFiltersOKbutton.getScene().getWindow();
+                        stage.close();
                     }
-                    ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
-                    RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
-                    TableStatements.addChange(r);
-                }else{
-                    ErrorWindow.loadInfoScreen("Неверный формат фильтра");
-                }
-                table.setItems(data);
-                Stage stage = (Stage) SetFiltersWindow.SetFiltersOKbutton.getScene().getWindow();
-                stage.close();
+                });
             }
         });
     }
@@ -307,6 +326,21 @@ public class MainScreenController {
                     public void handle(TableColumn.CellEditEvent<FoodResidus, String> t) {
                         if(t.getNewValue().length()!=0) {
                             if(!t.getOldValue().equals(t.getNewValue())) {
+                                String temp=MainScreen.getNameSearch().getText().trim();
+                                int len=temp.length();
+                                if(len>t.getNewValue().trim().length()) {
+                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                    data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                }
+                                else if(!t.getNewValue().trim().substring(0,len).equals(temp)) {
+                                    data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                }
+                                else if(len!=0) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                                else  {
+                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                    data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                }
                                 Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                         t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                 t.getTableView().getItems().get(
@@ -315,6 +349,8 @@ public class MainScreenController {
                                         t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                 EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
                                 TableStatements.addChange(editChange);
+                                columnName.setVisible(false);
+                                columnName.setVisible(true);
                             }
                             columnName.setCellFactory(TextFieldTableCell.forTableColumn());
                         }else {
@@ -325,6 +361,14 @@ public class MainScreenController {
                             Whine newTemp=new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                     t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                             EditChange editChange=new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
+
+                            if(MainScreen.getNameSearch().getText().trim().equals("Безыменный")) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                            else {
+                                data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                }
+                            columnName.setVisible(false);
+                            columnName.setVisible(true);
                             TableStatements.addChange(editChange);
                             columnName.setCellFactory(TextFieldTableCell.forTableColumn());
                         }
@@ -350,14 +394,26 @@ public class MainScreenController {
                         public void handle(TableColumn.CellEditEvent<FoodResidus, Integer> t) {
                             try {
                                 if(!t.getOldValue().equals(t.getNewValue())) {
+                                    System.out.println("BRRRRRRRRRRRRRRRR");
+                                    System.out.println("new Value:" + t.getNewValue());
                                     Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                     t.getTableView().getItems().get(
                                             t.getTablePosition().getRow()).setWeight(t.getNewValue());
+                                    System.out.println("SUCSESSS");
                                     Whine newTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                     EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
                                     TableStatements.addChange(editChange);
+                                    if(MainScreen.getWeightSearch().getText().trim().length()!=0) {
+                                        if (Integer.parseInt(MainScreen.getWeightSearch().getText()) != t.getNewValue()) {
+                                            data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                        }
+                                        else data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                                    }
+                                    else data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                    columnWeight.setVisible(false);
+                                    columnWeight.setVisible(true);
                                 }
                             }
                             catch (Exception e){
@@ -369,6 +425,8 @@ public class MainScreenController {
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                     EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
                                     TableStatements.addChange(editChange);
+                                    if(Integer.parseInt(MainScreen.getWeightSearch().getText().trim())==0) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                                    else data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
                                 }
                                 columnWeight.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
                             }
@@ -378,30 +436,43 @@ public class MainScreenController {
 
     }
     public static void tableViewRightClick(TableView tableView){
-        tableView.setOnInputMethodTextChanged(new EventHandler<InputMethodEvent>() {
-            @Override
-            public void handle(InputMethodEvent event) {
-            }
-        });
         tableView.setRowFactory(new Callback<TableView<FoodResidus>, TableRow<FoodResidus>>() {
                 @Override
                 public TableRow<FoodResidus> call(TableView<FoodResidus> table) {
                     System.out.println("ds");
-                    TableRow<FoodResidus> row=new TableRow<FoodResidus>();
+                    TableRow<FoodResidus> row = new TableRow<FoodResidus>() {
+                        @Override
+                        protected void updateItem( FoodResidus person, boolean b ) {
+                            super.updateItem( person, b );
+                            if ( person == null )
+                                return;
+                            if ( person.isHighlightProperty() ) {
+                                setStyle( "-fx-background-color: #EDFB23;" );
+                            } else {
+                                setStyle( null );
+                            }
+                            if( person.isActivehighlightProperty()){
+                                setStyle("-fx-background-color: #33D217;");
+                            }
+                        }
+
+                    };
                     MenuItem itemRemove=new MenuItem("Remove");
                     MenuItem itemAdd=new MenuItem("Add");
                     MenuItem itemAdd2=new MenuItem("Add");
                     ContextMenu menuRemove=new ContextMenu();
                     ContextMenu menuAdd=new ContextMenu();
                     menuRemove.getItems().addAll(itemRemove, itemAdd2);
-                    menuAdd.getItems().addAll(itemAdd);
+                    menuAdd.getItems().addAll(itemAdd);;
                     itemRemove.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
+                            System.out.println(MainScreen.isVisiable());
                             Whine temp=new Whine(row.getItem().getName(), row.getItem().getWeight());
                             RemoveChange removeChange=new RemoveChange(temp, row.getIndex());
                             TableStatements.addChange(removeChange);
                             table.getItems().remove(row.getItem());
+                            MainScreen.checkHighlight();
                         }
                     });
                     itemAdd.setOnAction(new EventHandler<ActionEvent>() {
@@ -410,6 +481,7 @@ public class MainScreenController {
                             table.getItems().add(new Whine("NULL", 0));
                             AddChange addChange=new AddChange(new Whine("NULL", 0));
                             TableStatements.addChange(addChange);
+                            MainScreen.checkHighlight();
                         }
                     });
                     itemAdd2.setOnAction(new EventHandler<ActionEvent>() {
@@ -418,14 +490,19 @@ public class MainScreenController {
                             table.getItems().add(new Whine("NULL", 0));
                             AddChange addChange=new AddChange(new Whine("NULL", 0));
                             TableStatements.addChange(addChange);
+                            MainScreen.checkHighlight();
                         }
                     });
                     row.contextMenuProperty().bind(
+
                             Bindings.when(row.emptyProperty())
+
                                     .then(menuAdd)
+
                                     .otherwise(menuRemove)
+
                     );
-                    return row;
+                    return  row;
                 }
         });
     }

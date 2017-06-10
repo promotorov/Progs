@@ -45,23 +45,28 @@ public class TableStatements {
             TypesChanges t=changes.get(currentStatement);
             if(t.getType().equals(TypesChanges.ADD)){
                 MainScreen.getTable().getItems().remove(MainScreen.getTable().getItems().size()-1);
+                MainScreen.checkHighlight();
             }
             else if(t.getType().equals(TypesChanges.REMOVE)){
                 RemoveChange temp=(RemoveChange)t;
                 MainScreen.getTable().getItems().add(temp.getIndex(),temp.getItem());
+                MainScreen.checkHighlight();
             }
             else if(t.getType().equals(TypesChanges.CLEAR_ALL)){
                 ClearChange temp=(ClearChange) t;
                 MainScreen.getTable().getItems().addAll(temp.getItems());
+                MainScreen.checkHighlight();
             }
             else if(t.getType().equals(TypesChanges.EDIT)){
                 EditChange temp=(EditChange) t;
                 MainScreen.getTable().getItems().set(temp.getIndex(), temp.getOldItem());
+                MainScreen.checkHighlight();
             }
             else if(t.getType().equals(TypesChanges.REMOVEGR)){
                 RemoveGreatestChange temp=(RemoveGreatestChange) t;
                 MainScreen.getTable().getItems().clear();
                 MainScreen.getTable().getItems().addAll(temp.getOldData());
+                MainScreen.checkHighlight();
             }
             currentStatement--;
             if(currentStatement==-1){
@@ -82,6 +87,7 @@ public class TableStatements {
             if(currentStatement==(changes.size()-1)){
                 Image image2=new Image("/icons/redoNew.png", 32, 32, false, false);
                 MainScreen.getButtonRedo().setGraphic(new ImageView(image2));
+                MainScreen.checkHighlight();
             }
             Image image2=new Image("/icons/undo.png", 32, 32, false, false);
             MainScreen.getButtonUndo().setGraphic(new ImageView(image2));
@@ -89,23 +95,28 @@ public class TableStatements {
             if(t.getType().equals(TypesChanges.ADD)){
                 AddChange temp=(AddChange)t;
                 MainScreen.getTable().getItems().add(((AddChange) t).getItem());
+                MainScreen.checkHighlight();
             }
             else if(t.getType().equals(TypesChanges.REMOVE)){
                 RemoveChange temp=(RemoveChange)t;
                 MainScreen.getTable().getItems().remove(temp.getIndex());
+                MainScreen.checkHighlight();
             }
             else if(t.getType().equals(TypesChanges.CLEAR_ALL)){
                 ClearChange temp=(ClearChange) t;
                 MainScreen.getTable().getItems().clear();
+                MainScreen.checkHighlight();
             }
             else if(t.getType().equals(TypesChanges.EDIT)){
                 EditChange temp=(EditChange) t;
                 MainScreen.getTable().getItems().set(temp.getIndex(), temp.getNewItem());
+                MainScreen.checkHighlight();
             }
             else if(t.getType().equals(TypesChanges.REMOVEGR)){
                 RemoveGreatestChange temp=(RemoveGreatestChange) t;
                 MainScreen.getTable().getItems().clear();
                 MainScreen.getTable().getItems().addAll(temp.getNewData());
+                MainScreen.checkHighlight();
             }
             System.out.println(currentStatement);
         }
