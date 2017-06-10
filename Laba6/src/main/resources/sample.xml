@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <classWrapper>
     <theCollection>
-        <name>АбраKadaBra</name>
-        <weight>1</weight>
-        <fliesAttraction>false</fliesAttraction>
-        <highlightProperty>false</highlightProperty>
-        <activehighlightProperty>false</activehighlightProperty>
-        <showContextMenu>true</showContextMenu>
-    </theCollection>
-    <theCollection>
-        <name>undo</name>
-        <weight>7536</weight>
-        <fliesAttraction>false</fliesAttraction>
+        <name>новенький</name>
+        <weight>68</weight>
         <highlightProperty>false</highlightProperty>
         <activehighlightProperty>false</activehighlightProperty>
         <showContextMenu>true</showContextMenu>
@@ -19,15 +10,20 @@
     <theCollection>
         <name>jjsff</name>
         <weight>45677654</weight>
-        <fliesAttraction>false</fliesAttraction>
         <highlightProperty>false</highlightProperty>
         <activehighlightProperty>false</activehighlightProperty>
         <showContextMenu>true</showContextMenu>
     </theCollection>
     <theCollection>
-        <name>новенький</name>
-        <weight>68</weight>
-        <fliesAttraction>false</fliesAttraction>
+        <name>АбраKadaBra</name>
+        <weight>1</weight>
+        <highlightProperty>false</highlightProperty>
+        <activehighlightProperty>false</activehighlightProperty>
+        <showContextMenu>true</showContextMenu>
+    </theCollection>
+    <theCollection>
+        <name>undo</name>
+        <weight>7536</weight>
         <highlightProperty>false</highlightProperty>
         <activehighlightProperty>false</activehighlightProperty>
         <showContextMenu>true</showContextMenu>
