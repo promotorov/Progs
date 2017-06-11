@@ -181,7 +181,7 @@ public class MainScreen{//TODO написать синглтон
         buttonSettings=new Button();
         buttonSettings.setGraphic(new ImageView(new Image("/icons/settings.png", 32, 32, false ,false)));
         buttonInfoApplication=new Button();
-        buttonInfoApplication.setGraphic(new ImageView(new Image("/icons/info.png", 32, 32, false, false)));
+        buttonInfoApplication.setGraphic(new ImageView(new Image("/icons/information.png", 32, 32, false, false)));
         topRightCornerContainer =new HBox();
         topRightCornerContainer.setAlignment(Pos.CENTER_RIGHT);
         topRightCornerContainer.setSpacing(8);
