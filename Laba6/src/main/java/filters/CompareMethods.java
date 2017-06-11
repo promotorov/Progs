@@ -4,10 +4,10 @@ package filters;
  * Created by danil on 08.05.2017.
  */
 public class CompareMethods {
-    public static String nameCondition="";
-    public static String namePattern;
-    public static String weightCondition="";
-    public static int weightPattern;
+    private static String nameCondition="";
+    private static String namePattern;
+    private static String weightCondition="";
+    private static int weightPattern;
     public static boolean nameCompare(String name,String textFieldName){
         if(textFieldName.length()==0){return true;}
         nameCondition = textFieldName.substring(0,1);

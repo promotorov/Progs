@@ -27,7 +27,6 @@ public class Dictionary {
         dictionary.add("android");
         dictionary.add("hunny");
     }
-
     public HashSet<String> getDictionary() {
         return dictionary;
     }

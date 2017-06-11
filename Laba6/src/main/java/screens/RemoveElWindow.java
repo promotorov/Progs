@@ -43,7 +43,7 @@ public class RemoveElWindow {
         primaryStage.getScene().getStylesheets().add("css/Main.css");
         primaryStage.show();
     }
-    public void drawPanes(){
+    private void drawPanes(){
         mainPane=new AnchorPane();
         textField=new TextField("Введите строку в формате json");
         mainPane.getChildren().add(textField);
@@ -51,7 +51,7 @@ public class RemoveElWindow {
         AnchorPane.setLeftAnchor(textField,20.0);
         AnchorPane.setRightAnchor(textField,20.0);
     }
-    public void drawButton(){
+    private void drawButton(){
         RemoveElOKbutton =new Button("Ok");
         mainPane.getChildren().add(RemoveElOKbutton);
         AnchorPane.setRightAnchor(RemoveElOKbutton,160.0);

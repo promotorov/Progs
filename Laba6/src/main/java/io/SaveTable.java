@@ -13,8 +13,8 @@ import static serealize.XMLworker.saveCollection;
  * Created by vladp on 09.05.2017.
  */
 public class SaveTable extends Thread {
-    File fileName;
-    ObservableList data;
+    private File fileName;
+    private ObservableList data;
     public SaveTable(String str, ObservableList data, File fileName){
         super(str);
         this.fileName=fileName;

@@ -12,10 +12,10 @@ import java.util.Iterator;
  * Created by vladp on 09.05.2017.
  */
 public class Loadtable extends Thread{
-    ObservableList<FoodResidus> data;
-    TableView table;
-    String path;
-    public Loadtable(String str, ObservableList<FoodResidus> data, TableView table, String path) {
+    private ObservableList<FoodResidus> data;
+    private TableView table;
+    private String path;
+    public Loadtable(String str, ObservableList<FoodResidus> data, TableView table, String path){
         super(str);
         this.data=data;
         this.table=table;

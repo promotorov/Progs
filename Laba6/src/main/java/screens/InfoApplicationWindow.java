@@ -32,7 +32,7 @@ public class InfoApplicationWindow {
         mainPane=new AnchorPane();
     }
 
-    public void drawItems(){
+    private void drawItems(){
         text=new TextArea();
         text.setText(teext);
         mainPane.getChildren().add(text);
@@ -47,7 +47,7 @@ public class InfoApplicationWindow {
         AnchorPane.setBottomAnchor(buttonOkInfo, 32.0);
     }
 
-    public void setControllers(){
+    private void setControllers(){
         InfoApplicationController.buttonOkInfo(buttonOkInfo, text);
         InfoApplicationController.autoComplet(text);
     }

@@ -19,7 +19,7 @@ public class ErrorWindow {
     private Scene scene;
     private AnchorPane mainPane;
     private Text text;
-    public Button buttonOkInfo;
+    private Button buttonOkInfo;
     private HBox hBox;
     private static ErrorWindow errorWindow;
 
@@ -35,7 +35,7 @@ public class ErrorWindow {
         mainPane=new AnchorPane();
     }
 
-    public void drawItems(String s){
+    private void drawItems(String s){
         text=new Text(s);
         hBox=new HBox();
         hBox.getChildren().add(text);
@@ -51,7 +51,7 @@ public class ErrorWindow {
         AnchorPane.setBottomAnchor(buttonOkInfo, 32.0);
     }
 
-    public void setControllers(){
+    private void setControllers(){
         ErrorController.buttonOkError(buttonOkInfo);
     }
 

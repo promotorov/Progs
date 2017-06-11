@@ -39,7 +39,7 @@ public class InfoWindow {
         primaryStage.getScene().getStylesheets().add("css/Main.css");
         primaryStage.show();
     }
-    public void drawPanes(ObservableList data){
+    private void drawPanes(ObservableList data){
         mainPane=new AnchorPane();
         text = new Text("Тип коллекции: "+data.getClass()+"\nКоличество элементов: "+data.size());
         mainPane.getChildren().add(text);
@@ -47,7 +47,7 @@ public class InfoWindow {
         AnchorPane.setLeftAnchor(text,20.0);
 
     }
-    public void drawButton(){
+    private void drawButton(){
         InfoOKbutton =new Button("Ok");
         mainPane.getChildren().add(InfoOKbutton);
         AnchorPane.setRightAnchor(InfoOKbutton,220.0);

@@ -42,7 +42,7 @@ public class SaveWindow {
         primaryStage.getScene().getStylesheets().add("css/Main.css");
         primaryStage.show();
     }
-    public void drawPanes(){
+    private void drawPanes(){
         mainPane=new AnchorPane();
         text = new Text("Выберете файл или сохраните по умолчанию?");
         mainPane.getChildren().add(text);
@@ -50,7 +50,7 @@ public class SaveWindow {
         AnchorPane.setLeftAnchor(text,20.0);
         AnchorPane.setRightAnchor(text,20.0);
     }
-    public void drawButton(){
+    private void drawButton(){
         SaveDefaultButton =new Button("По умолчанию");
         mainPane.getChildren().add(SaveDefaultButton);
         AnchorPane.setRightAnchor(SaveDefaultButton,55.0);

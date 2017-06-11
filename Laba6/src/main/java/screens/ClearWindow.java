@@ -41,7 +41,7 @@ public class ClearWindow {
         primaryStage.getScene().getStylesheets().add("css/Main.css");
         primaryStage.show();
     }
-    public void drawPanes(){
+    private void drawPanes(){
         mainPane=new AnchorPane();
         text = new Text("Вы точено хотите удалить все элементы коллекции?");
         mainPane.getChildren().add(text);
@@ -49,7 +49,7 @@ public class ClearWindow {
         AnchorPane.setLeftAnchor(text,20.0);
         AnchorPane.setRightAnchor(text,20.0);
     }
-    public void drawButton(){
+    private void drawButton(){
         ClearOKbutton =new Button("Ok");
         mainPane.getChildren().add(ClearOKbutton);
         AnchorPane.setRightAnchor(ClearOKbutton,80.0);

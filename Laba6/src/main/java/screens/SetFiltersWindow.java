@@ -43,7 +43,7 @@ public class SetFiltersWindow {
         primaryStage.getScene().getStylesheets().add("css/Main.css");
         primaryStage.show();
     }
-    public void drawPanes(){
+    private void drawPanes(){
         mainPane=new AnchorPane();
         textFieldName=new TextField("Фильтр имени");
         mainPane.getChildren().add(textFieldName);
@@ -58,7 +58,7 @@ public class SetFiltersWindow {
         AnchorPane.setRightAnchor(textFieldWeight,20.0);
     }
 
-    public void drawButton(){
+    private void drawButton(){
         SetFiltersOKbutton =new Button("Ok");
         mainPane.getChildren().add(SetFiltersOKbutton);
         AnchorPane.setRightAnchor(SetFiltersOKbutton,110.0);

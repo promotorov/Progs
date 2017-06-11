@@ -35,7 +35,7 @@ public class SaveSucsessfullWindow {
         mainPane=new AnchorPane();
     }
 
-    public void drawItems(){
+    private void drawItems(){
         text=new Text("Сохранено.");
         hBox=new HBox();
         hBox.getChildren().add(text);
@@ -51,7 +51,7 @@ public class SaveSucsessfullWindow {
         AnchorPane.setBottomAnchor(buttonOkInfo, 32.0);
     }
 
-    public void setControllers(){
+    private void setControllers(){
         SaveSucsessfullController.buttonOkSucsessfull(buttonOkInfo);
     }
 

@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public  class FoodResidus implements Comparable {
     @XmlElement(name="name")
-    public String name = "";
+    String name = "";
     @XmlElement(name="weight")
-    public int wheight = 0;
+    int wheight = 0;
 
     private boolean highlightProperty=false;
     private boolean activehighlightProperty=false;

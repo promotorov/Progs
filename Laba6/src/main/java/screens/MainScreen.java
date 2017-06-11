@@ -141,7 +141,7 @@ public class MainScreen{//TODO написать синглтон
         table.setItems(data);
     }
 
-    public void drawLeftButtonsContainer(){
+    private void drawLeftButtonsContainer(){
         leftButtonsContainer = new HBox();
         buttonFilter = new Button("Фильтровать");
         leftButtonsContainer.setSpacing(40);
@@ -152,7 +152,7 @@ public class MainScreen{//TODO написать синглтон
         AnchorPane.setLeftAnchor(leftButtonsContainer, 0.0);
         AnchorPane.setRightAnchor(leftButtonsContainer, 0.0);
     }
-    public void drawRightButtonsContainer(){
+    private void drawRightButtonsContainer(){
         rightButtonsContainer =new VBox();
         buttonInfo=new Button("Информация");
         buttonClear=new Button("Очистить");
@@ -177,7 +177,7 @@ public class MainScreen{//TODO написать синглтон
         AnchorPane.setLeftAnchor(rightButtonsContainer, 30.0);
         AnchorPane.setRightAnchor(rightButtonsContainer, 100.0);
     }
-    public void drawTopRightCornerContainer(){
+    private void drawTopRightCornerContainer(){
         buttonSettings=new Button();
         buttonSettings.setGraphic(new ImageView(new Image("/icons/settings.png", 32, 32, false ,false)));
         buttonInfoApplication=new Button();
@@ -192,7 +192,7 @@ public class MainScreen{//TODO написать синглтон
         AnchorPane.setLeftAnchor(topRightCornerContainer, 200.0);
         AnchorPane.setRightAnchor(rightButtonsContainer, 280.0);
     }
-    public void drawListViewContainer(){
+    private void drawListViewContainer(){
         ListViewContainer=new HBox();
         listView=new ListView();
         HBox.setHgrow(listView, Priority.SOMETIMES);
@@ -204,7 +204,7 @@ public class MainScreen{//TODO написать синглтон
         AnchorPane.setRightAnchor(ListViewContainer, 20.0);
         ListViewContainer.setPadding(new Insets(0,0,0,0));
     }
-    public void drawSearchContainer(){
+    private void drawSearchContainer(){
         searchContainer =new HBox();
         searchContainer.setAlignment(Pos.CENTER_LEFT);
         searchContainer.setSpacing(8);
@@ -224,7 +224,7 @@ public class MainScreen{//TODO написать синглтон
         topLeftCornerContainer.getChildren().addAll(buttonSearch);
         rightPane.getChildren().add(searchContainer);
     }
-    public void drawTopLeftCornerContainer(){
+    private void drawTopLeftCornerContainer(){
         topLeftCornerContainer =new HBox();
         topLeftCornerContainer.setAlignment(Pos.CENTER_LEFT);
         topLeftCornerContainer.setSpacing(8);
@@ -240,7 +240,7 @@ public class MainScreen{//TODO написать синглтон
         AnchorPane.setTopAnchor(topLeftCornerContainer, 10.0);
         AnchorPane.setRightAnchor(topLeftCornerContainer, 100.0);
     }
-    public void drawSortButtons(){//TODO сменить публик на прайват
+    private void drawSortButtons(){//TODO сменить публик на прайват
         buttonNameDown=new Button();
         buttonNameDown.setGraphic(new ImageView(new Image("/icons/down.png", 16, 16, false, false)));
         leftPane.getChildren().add(buttonNameDown);
@@ -264,7 +264,7 @@ public class MainScreen{//TODO написать синглтон
         AnchorPane.setTopAnchor(buttonNameUp, 15.0);
         AnchorPane.setLeftAnchor(buttonNameUp, 4.0);
     }
-    public void drawItems(){
+    private void drawItems(){
         drawLeftButtonsContainer();
         drawRightButtonsContainer();
         drawTopRightCornerContainer();
@@ -274,7 +274,7 @@ public class MainScreen{//TODO написать синглтон
         drawSearchContainer();
     }
 
-    public void setControllers(){
+    private void setControllers(){
         UnSeeingData = FXCollections.observableArrayList();
         MainScreenController.buttonFiltr(buttonFilter, data,UnSeeingData, table);
         MainScreenController.buttonInfo(buttonInfo, data);
