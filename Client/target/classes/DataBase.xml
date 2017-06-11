@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<classWrapper>
+    <theCollection>
+        <name>Cheez</name>
+        <weight>11</weight>
+        <highlightProperty>false</highlightProperty>
+        <activehighlightProperty>false</activehighlightProperty>
+        <showContextMenu>true</showContextMenu>
+    </theCollection>
+    <theCollection>
+        <name>Meet</name>
+        <weight>9</weight>
+        <highlightProperty>false</highlightProperty>
+        <activehighlightProperty>false</activehighlightProperty>
+        <showContextMenu>true</showContextMenu>
+    </theCollection>
+</classWrapper>
