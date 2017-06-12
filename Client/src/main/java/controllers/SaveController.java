@@ -1,6 +1,7 @@
 package controllers;
 
 import io.SaveTable;
+import io.SaveToDataBase;
 import items.FoodResidus;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,10 @@ import javafx.stage.Stage;
 import screens.SaveWindow;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Iterator;
+
+import static serealize.XMLworker.saveCollection;
 
 /**
  * Created by danil on 10.06.2017.
@@ -20,8 +25,8 @@ public class SaveController {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                SaveTable saveTable=new SaveTable("saveDefault", data);
-                saveTable.start();
+                SaveToDataBase saveToDataBase=new SaveToDataBase("saveTodatabase",data);
+                saveToDataBase.start();
                 Stage stage = (Stage) SaveWindow.getInstace().getSaveDefaultButton().getScene().getWindow();
                 stage.close();
             }

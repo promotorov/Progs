@@ -5,6 +5,9 @@ import javafx.scene.control.TableView;
 import items.FoodResidus;
 import serealize.XMLworker;
 
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -21,7 +24,21 @@ public class InitTable extends Thread{
     }
     public void run() {
         try {
-            HashSet<FoodResidus> set = XMLworker.getCollection("src\\main\\resources\\sample.xml");
+            DatagramSocket clientSocket = new DatagramSocket();
+            byte[] ipAddr = new byte[]{(byte) 192, (byte)168, 1, (byte)129};
+            InetAddress IPAddress = InetAddress.getByAddress(ipAddr);
+            byte[] sendData = new byte[1];
+            byte[] receiveData = new byte[100000];
+            sendData[0]=1;
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
+            clientSocket.send(sendPacket);
+            DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+            clientSocket.receive(receivePacket);
+            String str = new String(receiveData);
+
+            System.out.println(str.lastIndexOf(">"));
+            HashSet<FoodResidus> set = XMLworker.xmlToObject(str);
+
             Iterator<FoodResidus> iterator = set.iterator();
             while (iterator.hasNext()) {
                 data.add(iterator.next());

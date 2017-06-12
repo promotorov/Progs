@@ -22,6 +22,7 @@ public class SaveTable extends Thread {
     }
 
     public SaveTable(String str, ObservableList data){
+        super(str);
         this.fileName=new File("src\\main\\resources\\any.xml");
         this.data=data;
     }

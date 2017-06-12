@@ -449,7 +449,6 @@ public class MainScreenController {
         tableView.setRowFactory(new Callback<TableView<FoodResidus>, TableRow<FoodResidus>>() {
             @Override
             public TableRow<FoodResidus> call(TableView<FoodResidus> table) {
-                System.out.println("ds");
                 TableRow<FoodResidus> row = new TableRow<FoodResidus>() {
                     @Override
                     protected void updateItem( FoodResidus person, boolean b ) {

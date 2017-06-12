@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <classWrapper>
     <theCollection>
+        <name>LLOLOLOL</name>
+        <weight>25</weight>
+        <highlightProperty>false</highlightProperty>
+        <activehighlightProperty>false</activehighlightProperty>
+        <showContextMenu>true</showContextMenu>
+    </theCollection>
+    <theCollection>
         <name>Cheez</name>
         <weight>11</weight>
         <highlightProperty>false</highlightProperty>

@@ -5,9 +5,12 @@ import java.net.*;
 
 class UDPClient{
     public static void main(String args[]) throws Exception{
+        System.out.println("Client is ready");
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
         DatagramSocket clientSocket = new DatagramSocket();
-        InetAddress IPAddress = InetAddress.getLocalHost();//getByName("localhost");
+        byte[] ipAddr = new byte[]{(byte) 192, (byte)168, 1, (byte)129};
+        InetAddress IPAddress = InetAddress.getByAddress(ipAddr);
+        System.out.println(InetAddress.getLocalHost());
         byte[] sendData = new byte[1024];
         byte[] receiveData = new byte[1024];
         String sentence = inFromUser.readLine();

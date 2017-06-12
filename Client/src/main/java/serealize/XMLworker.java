@@ -1,5 +1,6 @@
 package serealize;
 
+import items.FoodResidus;
 import javafx.application.Platform;
 import screens.ErrorWindow;
 import screens.SaveSucsessfullWindow;
@@ -41,7 +42,6 @@ public class XMLworker {
             });
         }
     }
-
     public static void saveCollection(File fileWrite, HashSet hs){
         try{
             JAXBContext context = JAXBContext.newInstance(ClassWrapper.class);
@@ -76,7 +76,6 @@ public class XMLworker {
             });
         }
     }
-
     public static HashSet getCollection(String path){
         try{
             File fileRead = new File(path);
@@ -122,4 +121,45 @@ public class XMLworker {
             return null;
         }
     }
+    public static HashSet xmlToObject(String xml){
+        try{
+            xml=xml.replace("<?xmlversion=\"1.0\"encoding=\"UTF-8\"standalone=\"yes\"?>","<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+            xml=xml.substring(0,xml.lastIndexOf(">")+1);
+            StringReader sr = new StringReader(xml);
+            System.out.println(xml.lastIndexOf(">"));
+            ClassWrapper returnedHS = JAXB.unmarshal(sr, ClassWrapper.class);
+            return returnedHS.getTheCollection();
+        }catch(DataBindingException e){
+            return null;
+        }catch (Exception e){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    ErrorWindow.getInstace().loadInfoScreen("Произошла неизвестная ошибка.");
+                }
+            });
+            return null;
+        }
+    }
+    public static String objectToXML(HashSet<FoodResidus> hs){
+        try{
+            JAXBContext context = JAXBContext.newInstance(ClassWrapper.class);
+            ClassWrapper cw = new ClassWrapper();
+            cw.setTheCollection(hs);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            StringWriter sw = new StringWriter();
+            marshaller.marshal(cw, sw);
+            return sw.toString();
+        }catch(JAXBException e){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    ErrorWindow.getInstace().loadInfoScreen("Не удалось записать данные в xml-file");
+                }
+            });
+            return null;
+        }
+    }
+
 }

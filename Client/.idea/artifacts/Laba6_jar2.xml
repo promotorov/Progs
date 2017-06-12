@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Laba6:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/Laba6_jar2</output-path>
+    <root id="archive" name="Laba6.jar">
+      <element id="module-output" name="Laba6" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.7.0/jackson-databind-2.7.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.7.0/jackson-core-2.7.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.7.0/jackson-annotations-2.7.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/IdeaProjects/UDPServer/src/postgresql-42.1.1.jar" path-in-jar="/" />
+      <element id="library" level="project" name="controlsfx-8.0.1" />
+      <element id="library" level="project" name="controlsfx-8.40.12" />
+    </root>
+  </artifact>
+</component>
