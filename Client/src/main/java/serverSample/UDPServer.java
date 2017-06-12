@@ -4,8 +4,11 @@ import items.FoodResidus;
 import serealize.XMLworker;
 
 import javax.sql.rowset.JdbcRowSet;
+import javax.sql.rowset.RowSetFactory;
+import javax.sql.rowset.RowSetProvider;
 import java.io.File;
 import java.net.*;
+import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -17,8 +20,8 @@ class UDPServer{
     private static final String NAME = "public.\"FoodResidus\"";
     public static void main(String args[]) throws Exception{
         DataBaseCommunication dbc = new DataBaseCommunication(URL, USER, PASSSWORD, DRIVER);
+        Statement statement = dbc.getStatement();
         Queries queries = new Queries();
-        JdbcRowSet jdbcRowSet = queries.getJDBCRowset(USER,PASSSWORD,URL);
         DatagramSocket serverSocket = new DatagramSocket(9876);
         byte[] receiveData = new byte[1024];
         byte[] sendData;
@@ -29,7 +32,9 @@ class UDPServer{
             InetAddress IPAddress = receivePacket.getAddress();
             int port = receivePacket.getPort();
             if(receiveData[0]==1){
-                HashSet<FoodResidus> data = queries.loadAllRows(jdbcRowSet, NAME);
+                RowSetFactory rsFactory = RowSetProvider.newFactory();
+                JdbcRowSet jdbcRowSet = rsFactory.createJdbcRowSet();
+                HashSet<FoodResidus> data = queries.loadAllRows(jdbcRowSet, NAME, statement);
                 String str = XMLworker.objectToXML(data);
                 sendData=str.getBytes();
                 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
@@ -38,8 +43,8 @@ class UDPServer{
                 System.out.println(receiveData.length);
                 String resievedCollection = new String(receiveData);
                 HashSet<FoodResidus> colectionToInsert= XMLworker.xmlToObject(resievedCollection);
-                queries.removeAllRows(jdbcRowSet, NAME);
-                queries.insertAllRows(jdbcRowSet, NAME, colectionToInsert);
+                /*queries.removeAllRows(jdbcRowSet, NAME);
+                queries.insertAllRows(jdbcRowSet, NAME, colectionToInsert);***/
                 System.out.println("Successful insert into table");
             }
         }

@@ -20,9 +20,9 @@ public class MainServer {
         try {
             DataBaseCommunication dbc = new DataBaseCommunication(URL, USER, PASSSWORD, DRIVER);
             Queries queries = new Queries();
-            JdbcRowSet jdbcRowSet = queries.getJDBCRowset(USER,PASSSWORD,URL);
-            HashSet<FoodResidus> data = queries.loadAllRows(jdbcRowSet, NAME);
-            XMLworker.saveCollection("src\\main\\resources\\DataBase.xml",data);
+            //JdbcRowSet jdbcRowSet = queries.getJDBCRowset(USER,PASSSWORD,URL);
+            //HashSet<FoodResidus> data = queries.loadAllRows(jdbcRowSet, NAME);
+            //XMLworker.saveCollection("src\\main\\resources\\DataBase.xml",data);
         }catch (Exception e){
             System.out.println("e");
         }

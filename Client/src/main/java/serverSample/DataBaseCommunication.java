@@ -3,6 +3,7 @@ package serverSample;
 import org.postgresql.ds.PGConnectionPoolDataSource;
 import javax.sql.PooledConnection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DataBaseCommunication {
     private final PGConnectionPoolDataSource pooledDataSource = new PGConnectionPoolDataSource();
@@ -15,6 +16,15 @@ public class DataBaseCommunication {
         this.password=password;
         pooledDataSource.setUrl(url);
         pooledConnection = pooledDataSource.getPooledConnection(username, password);
+        Statement statement = pooledConnection.getConnection().createStatement();
         System.out.println("Success");
+    }
+    public Statement getStatement(){
+        try {
+            return pooledConnection.getConnection().createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

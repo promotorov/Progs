@@ -6,6 +6,8 @@ import items.Whine;
 import javax.sql.rowset.JdbcRowSet;
 import javax.sql.rowset.RowSetFactory;
 import javax.sql.rowset.RowSetProvider;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -14,29 +16,14 @@ import java.util.Iterator;
  */
 public class Queries {
     public Queries(){}
-    public JdbcRowSet getJDBCRowset(String usr, String pas, String url){
-        try{
-            RowSetFactory rsFactory = RowSetProvider.newFactory();
-            JdbcRowSet jRowset = rsFactory.createJdbcRowSet();
-            jRowset.setUsername(usr);
-            jRowset.setPassword(pas);
-            jRowset.setUrl(url);
-            jRowset.setReadOnly(false);
-            return jRowset;
-        }catch(Exception e){
-            System.out.println(e);
-            return null;
-        }
-    }
-    public HashSet<FoodResidus> loadAllRows(JdbcRowSet jrs, String tableName){
+    public HashSet<FoodResidus> loadAllRows(JdbcRowSet jrs, String tableName, Statement statement){
         try{
             System.out.println("- Load (initial) all rows from database table: " + tableName);
             String sql = "SELECT * FROM " + tableName;
-            jrs.setCommand(sql);
-            jrs.execute();
+            ResultSet resultSet = statement.executeQuery(sql);
             HashSet<FoodResidus> data= new HashSet<FoodResidus>();
-            while(jrs.next()){
-                data.add(new Whine(jrs.getString("Name"),jrs.getInt("Weight")));
+            while(resultSet.next()){
+                data.add(new Whine(resultSet.getString("Name"),resultSet.getInt("Weight")));
             }
             return data;
         }catch(Exception e){
