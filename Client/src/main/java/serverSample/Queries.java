@@ -10,8 +10,7 @@ import javax.sql.rowset.RowSetProvider;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Iterator;
-//TODO исправить баг сос стрелочками
-//TODO инсерт на добавление щелчком по розовой области
+
 /**
  * Created by danil on 11.06.2017.
  */
@@ -89,7 +88,7 @@ public class Queries {
             e.printStackTrace();
         }
     }
-    public void replaceRow(JdbcRowSet jrs, String tableName,Statement statement, HashSet<FoodResidus> oldObject,  HashSet<FoodResidus> newObject){
+    public void replaceRow(JdbcRowSet jrs, String tableName,Connection connection, HashSet<FoodResidus> oldObject,  HashSet<FoodResidus> newObject){
         try{
             System.out.println("- Replce row in database table: " + tableName);
             Iterator<FoodResidus> iteratorOld=oldObject.iterator();
@@ -98,38 +97,49 @@ public class Queries {
             FoodResidus newOb;
             oldOb=iteratorOld.next();
             newOb=iteratorNew.next();
-            String sql = "";
-            sql= "UPDATE "+tableName+"  SET \"Name\"='"+newOb.getName()+"', \"Weight\"="+newOb.getWeight()+"   WHERE \"Name\"='"+oldOb.getName()+"' AND \"Weight\"="+oldOb.getWeight()+";";
-            statement.executeUpdate(sql);
+            PreparedStatement statement=null;
+            String sql= "UPDATE "+tableName+"  SET \"Name\"=?, \"Weight\"= ? WHERE \"Name\"=? AND \"Weight\"=?;";
+            statement=connection.prepareStatement(sql);
+            statement.setString(1, newOb.getName());
+            statement.setInt(2, newOb.getWeight());
+            statement.setString(3, oldOb.getName());
+            statement.setInt(4, oldOb.getWeight());
+            statement.executeUpdate();
             System.out.println("Replace was commited");
         }catch(Exception e){
             System.out.println(e);
         }
     }
-    public void insertRow(JdbcRowSet jrs, String tableName,Statement statement, HashSet<FoodResidus> newObject){
+    public void insertRow(JdbcRowSet jrs, String tableName,Connection connection, HashSet<FoodResidus> newObject){
         try{
             System.out.println("- Insert row in database table: " + tableName);
             Iterator<FoodResidus> iteratorNew=newObject.iterator();
             FoodResidus newOb;
             newOb=iteratorNew.next();
-            String sql = "";
-            sql= "INSERT INTO "+tableName+"(\"Name\", \"Weight\") VALUES ('"+newOb.getName()+"',"+ newOb.getWeight()+");";
-            statement.executeUpdate(sql);
+            PreparedStatement statement=null;
+            //String sqt= "INSERT INTO "+tableName+"(\"Name\", \"Weight\") VALUES ('?',?);";
+            String sql = "INSERT INTO "+tableName+"(\"Name\", \"Weight\") VALUES (?,?);";
+            statement=connection.prepareStatement(sql);
+            statement.setString(1, newOb.getName());
+            statement.setInt(2, newOb.getWeight());
+            statement.executeUpdate();
             System.out.println("Insert was commited");
         }catch(Exception e){
             System.out.println(e);
         }
     }
-    public void deleteRow(JdbcRowSet jrs, String tableName,Statement statement, HashSet<FoodResidus> oldObject){
+    public void deleteRow(JdbcRowSet jrs, String tableName,Connection connection, HashSet<FoodResidus> oldObject){
         try{
             System.out.println("- Delete row in database table: " + tableName);
             Iterator<FoodResidus> iteratorOld=oldObject.iterator();
             FoodResidus oldOb;
             oldOb=iteratorOld.next();
-            String sql = "";
-            sql= "DELETE FROM "+tableName+" WHERE \"Name\"='"+oldOb.getName()+"' AND \"Weight\"="+oldOb.getWeight()+";";
-            System.out.println(sql);
-            statement.executeUpdate(sql);
+            PreparedStatement statement=null;
+            String sql= "DELETE FROM "+tableName+" WHERE \"Name\"=? AND \"Weight\"=?;";
+            statement=connection.prepareStatement(sql);
+            statement.setString(1, oldOb.getName());
+            statement.setInt(2, oldOb.getWeight());
+            statement.executeUpdate();
             System.out.println("Delete was commited");
         }catch(Exception e){
             System.out.println(e);

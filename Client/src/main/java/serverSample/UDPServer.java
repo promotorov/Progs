@@ -56,7 +56,7 @@ class UDPServer{
                 serverSocket.receive(receiveNew);
                 String newXml=new String(receiveNewByte);
                 HashSet newObject=XMLworker.xmlToObject(newXml);
-                queries.replaceRow(jdbcRowSet, NAME, statement, oldObject, newObject);
+                queries.replaceRow(jdbcRowSet, NAME, dbc.getPooledConnection().getConnection(), oldObject, newObject);
             }else if(receiveData[0]== DataBaseInteraction.ADD_ELEMENT){
                 byte[] receiveNewByte = new byte[4096];
                 RowSetFactory rsFactory = RowSetProvider.newFactory();
@@ -65,7 +65,7 @@ class UDPServer{
                 serverSocket.receive(receiveNew);
                 String newXml=new String(receiveNewByte);
                 HashSet newObject=XMLworker.xmlToObject(newXml);
-                queries.insertRow(jdbcRowSet, NAME, statement, newObject);
+                queries.insertRow(jdbcRowSet, NAME, dbc.getPooledConnection().getConnection(), newObject);
             }else if(receiveData[0]== DataBaseInteraction.REMOVE_ELEMENT){
                 byte[] receiveOldByte = new byte[4096];
                 RowSetFactory rsFactory = RowSetProvider.newFactory();
@@ -74,7 +74,7 @@ class UDPServer{
                 serverSocket.receive(receiveOld);
                 String newXml=new String(receiveOldByte);
                 HashSet oldObject=XMLworker.xmlToObject(newXml);
-                queries.deleteRow(jdbcRowSet, NAME, statement, oldObject);
+                queries.deleteRow(jdbcRowSet, NAME, dbc.getPooledConnection().getConnection(), oldObject);
             }else if(receiveData[0]== DataBaseInteraction.REFRESH_TABLE){
                 byte[] receiveNewByte = new byte[4096];
                 RowSetFactory rsFactory = RowSetProvider.newFactory();
