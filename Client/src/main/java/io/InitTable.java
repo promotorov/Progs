@@ -29,7 +29,7 @@ public class InitTable extends Thread{
             InetAddress IPAddress = InetAddress.getByAddress(ipAddr);
             byte[] sendData = new byte[1];
             byte[] receiveData = new byte[100000];
-            sendData[0]=1;
+            sendData[0]=0;
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
             clientSocket.send(sendPacket);
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);

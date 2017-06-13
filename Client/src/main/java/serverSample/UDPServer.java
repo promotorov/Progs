@@ -26,12 +26,13 @@ class UDPServer{
         byte[] receiveData = new byte[4096];
         byte[] sendData;
         System.out.println("Server is ready");
+        System.out.println(InetAddress.getLocalHost());
         while(true){
-            DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-            serverSocket.receive(receivePacket);
-            InetAddress IPAddress = receivePacket.getAddress();
-            int port = receivePacket.getPort();
-            if(receiveData[0]==1){
+            DatagramPacket receiveCommand = new DatagramPacket(receiveData, receiveData.length);
+            serverSocket.receive(receiveCommand);
+            InetAddress IPAddress = receiveCommand.getAddress();
+            int port = receiveCommand.getPort();
+            if(receiveData[0]==0){
                 RowSetFactory rsFactory = RowSetProvider.newFactory();
                 JdbcRowSet jdbcRowSet = rsFactory.createJdbcRowSet();
                 HashSet<FoodResidus> data = queries.loadAllRows(jdbcRowSet, NAME, statement);
@@ -39,8 +40,9 @@ class UDPServer{
                 sendData=str.getBytes();
                 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
                 serverSocket.send(sendPacket);
-            }else{
-                System.out.println(receiveData.length);
+            }else if(receiveData[0]==1){
+                DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);//TODO в отдельный метод
+                serverSocket.receive(receivePacket);
                 String resievedCollection = new String(receiveData);
                 HashSet<FoodResidus> colectionToInsert= XMLworker.xmlToObject(resievedCollection);
                 RowSetFactory rsFactory = RowSetProvider.newFactory();

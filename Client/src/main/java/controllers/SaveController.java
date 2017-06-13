@@ -26,7 +26,7 @@ public class SaveController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 SaveToDataBase saveToDataBase=new SaveToDataBase("saveTodatabase",data);
-                saveToDataBase.start();
+                saveToDataBase.start();//TODO вернуть прежний функционал кнопки "сохранить по умолчанию"
                 Stage stage = (Stage) SaveWindow.getInstace().getSaveDefaultButton().getScene().getWindow();
                 stage.close();
             }

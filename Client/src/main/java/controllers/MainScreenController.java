@@ -3,6 +3,7 @@ package controllers;
 import changes.*;
 import filters.SortedByName;
 import io.Loadtable;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -339,29 +340,39 @@ public class MainScreenController {
                     public void handle(TableColumn.CellEditEvent<FoodResidus, String> t) {
                         if(t.getNewValue().length()!=0) {
                             if(!t.getOldValue().equals(t.getNewValue())) {
-                                String temp=MainScreen.getInstace().getNameSearch().getText().trim();
-                                int len=temp.length();
-                                if(len>t.getNewValue().trim().length()) {
-                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
-                                    data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
-                                }
-                                else if(!t.getNewValue().trim().substring(0,len).equals(temp)) {
-                                    data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
-                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
-                                }
-                                else if(len!=0) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
-                                else  {
-                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
-                                    data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
-                                }
                                 Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                         t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
-                                t.getTableView().getItems().get(
-                                        t.getTablePosition().getRow()).setName(t.getNewValue().trim());
+                                if(!data.contains(new Whine(t.getNewValue().trim(),t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight()))){
+                                    t.getTableView().getItems().get(
+                                            t.getTablePosition().getRow()).setName(t.getNewValue().trim());
+                                    String temp=MainScreen.getInstace().getNameSearch().getText().trim();
+                                    int len=temp.length();
+                                    if(len>t.getNewValue().trim().length()) {
+                                        data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                        data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                    }
+                                    else if(!t.getNewValue().trim().substring(0,len).equals(temp)) {
+                                        data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                        data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                    }
+                                    else if(len!=0) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                                    else  {
+                                        data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                        data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                    }
+                                }else{
+                                    Platform.runLater(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ErrorWindow.getInstace().loadInfoScreen("Элемент уже существует");
+                                            }
+                                        });
+                                }
                                 Whine newTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                         t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                 EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
                                 TableStatements.addChange(editChange);
+                                checkHighlight();
                                 columnName.setVisible(false);
                                 columnName.setVisible(true);
                             }
@@ -369,17 +380,26 @@ public class MainScreenController {
                         }else {
                             Whine oldTemp=new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                     t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
-                            t.getTableView().getItems().get(
-                                t.getTablePosition().getRow()).setName("Безыменный");
+                            if(!data.contains(new Whine("Безыменный",t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight()))){
+                                t.getTableView().getItems().get(
+                                        t.getTablePosition().getRow()).setName("Безыменный");
+                                if(MainScreen.getInstace().getNameSearch().getText().trim().equals("Безыменный")) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                                else {
+                                    data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                    data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
+                                }
+                            }else{
+                                Platform.runLater(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ErrorWindow.getInstace().loadInfoScreen("Элемент уже существует");
+                                            }
+                                        });
+                            }
                             Whine newTemp=new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                     t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                             EditChange editChange=new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
-
-                            if(MainScreen.getInstace().getNameSearch().getText().trim().equals("Безыменный")) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
-                            else {
-                                data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
-                                data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
-                                }
+                            checkHighlight();
                             columnName.setVisible(false);
                             columnName.setVisible(true);
                             TableStatements.addChange(editChange);
@@ -409,19 +429,29 @@ public class MainScreenController {
                                 if(!t.getOldValue().equals(t.getNewValue())) {
                                     Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
-                                    t.getTableView().getItems().get(
-                                            t.getTablePosition().getRow()).setWeight(t.getNewValue());
+                                    if(!data.contains(new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName().trim(), t.getNewValue()))){
+                                        t.getTableView().getItems().get(
+                                                t.getTablePosition().getRow()).setWeight(t.getNewValue());
+                                        if(MainScreen.getInstace().getWeightSearch().getText().trim().length()!=0) {
+                                            if (Integer.parseInt(MainScreen.getInstace().getWeightSearch().getText()) != t.getNewValue()) {
+                                                data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                            }
+                                            else data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                                        }
+                                        else data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                    }else{
+                                        Platform.runLater(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ErrorWindow.getInstace().loadInfoScreen("Элемент уже существует");
+                                            }
+                                        });
+                                    }
                                     Whine newTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                     EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
                                     TableStatements.addChange(editChange);
-                                    if(MainScreen.getInstace().getWeightSearch().getText().trim().length()!=0) {
-                                        if (Integer.parseInt(MainScreen.getInstace().getWeightSearch().getText()) != t.getNewValue()) {
-                                            data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
-                                        }
-                                        else data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
-                                    }
-                                    else data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                    checkHighlight();
                                     columnWeight.setVisible(false);
                                     columnWeight.setVisible(true);
                                 }
@@ -430,15 +460,31 @@ public class MainScreenController {
                                 if(t.getOldValue()!=0) {
                                     Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
-                                    t.getTableView().getItems().get(t.getTablePosition().getRow()).setWeight(0);
+                                    if(!data.contains(new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName().trim(), 0))){
+                                        t.getTableView().getItems().get(
+                                                t.getTablePosition().getRow()).setWeight(0);
+                                        if(MainScreen.getInstace().getWeightSearch().getText().length()!=0) {
+                                            if (Integer.parseInt(MainScreen.getInstace().getWeightSearch().getText().trim()) == 0)
+                                                data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
+                                            else data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
+                                        }
+                                    }else{
+                                        Platform.runLater(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ErrorWindow.getInstace().loadInfoScreen("Элемент уже существует");
+                                            }
+                                        });
+                                    };
                                     Whine newTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                     EditChange editChange = new EditChange(newTemp, oldTemp, t.getTablePosition().getRow());
                                     TableStatements.addChange(editChange);
-                                    if(Integer.parseInt(MainScreen.getInstace().getWeightSearch().getText().trim())==0) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
-                                    else data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
                                 }
                                 columnWeight.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+                                checkHighlight();
+                                columnWeight.setVisible(false);
+                                columnWeight.setVisible(true);
                             }
                         }
                     }
@@ -463,9 +509,18 @@ public class MainScreenController {
                         itemAdd.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                table.getItems().add(new Whine("NULL", 0));
-                                AddChange addChange=new AddChange(new Whine("NULL", 0));
-                                TableStatements.addChange(addChange);
+                                if(!table.getItems().contains(new Whine("NULL", 0))){
+                                    table.getItems().add(new Whine("NULL", 0));
+                                    AddChange addChange=new AddChange(new Whine("NULL", 0));
+                                    TableStatements.addChange(addChange);
+                                }else{
+                                    Platform.runLater(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            ErrorWindow.getInstace().loadInfoScreen("Элемент уже существует");
+                                        }
+                                    });
+                                }
                                 checkHighlight();
                             }
                         });

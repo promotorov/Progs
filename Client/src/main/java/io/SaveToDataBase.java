@@ -36,6 +36,9 @@ public class SaveToDataBase extends Thread {
             while(iterator.hasNext()){
                 set.add(iterator.next());
             }
+            sendData[0]=1;
+            DatagramPacket sendCommand = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
+            clientSocket.send(sendCommand);
             stringXML=objectToXML(set);
             sendData=stringXML.getBytes();
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
