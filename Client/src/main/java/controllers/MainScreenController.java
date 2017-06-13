@@ -3,7 +3,9 @@ package controllers;
 import changes.*;
 import filters.SortedByName;
 import io.Loadtable;
+import io.dataBaseInteraction.DBIAdd;
 import io.dataBaseInteraction.DBIChange;
+import io.dataBaseInteraction.DBIRemove;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -386,10 +388,12 @@ public class MainScreenController {
                         }else {
                             Whine oldTemp=new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                     t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
+                            System.out.println(t.getOldValue());
+                            System.out.println(t.getNewValue());
                             if(!data.contains(new Whine("Безыменный",t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight()))){
                                 DBIChange dbiChange=new DBIChange("change", new Whine(t.getOldValue(), t.getTableView().getItems().get(
                                         t.getTablePosition().getRow()).getWeight()),
-                                        new Whine(t.getNewValue(), t.getTableView().getItems().get(
+                                        new Whine("Безыменный", t.getTableView().getItems().get(
                                                 t.getTablePosition().getRow()).getWeight()));
                                 dbiChange.start();
                                 t.getTableView().getItems().get(
@@ -532,6 +536,8 @@ public class MainScreenController {
                             public void handle(ActionEvent event) {
                                 if(!table.getItems().contains(new Whine("NULL", 0))){
                                     table.getItems().add(new Whine("NULL", 0));
+                                    DBIAdd dbiAdd=new DBIAdd("add",new Whine("NULL", 0));
+                                    dbiAdd.start();
                                     AddChange addChange=new AddChange(new Whine("NULL", 0));
                                     TableStatements.addChange(addChange);
                                 }else{
@@ -568,6 +574,8 @@ public class MainScreenController {
                             public void handle(ActionEvent event) {
                                 System.out.println(MainScreen.getInstace().isVisiable());
                                 Whine temp=new Whine(getItem().getName(), getItem().getWeight());
+                                DBIRemove dbiRemove=new DBIRemove("remove", new Whine(getItem().getName(), getItem().getWeight()));
+                                dbiRemove.start();
                                 RemoveChange removeChange=new RemoveChange(temp, getIndex());
                                 TableStatements.addChange(removeChange);
                                 table.getItems().remove(getItem());
@@ -578,10 +586,22 @@ public class MainScreenController {
                         itemAdd2.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                table.getItems().add(new Whine("NULL", 0));
-                                AddChange addChange=new AddChange(new Whine("NULL", 0));
-                                TableStatements.addChange(addChange);
-                                checkHighlight();
+                                if(!table.getItems().contains(new Whine("NULL", 0))){
+                                    table.getItems().add(new Whine("NULL", 0));
+                                    DBIAdd dbiAdd=new DBIAdd("add",new Whine("NULL", 0));
+                                    dbiAdd.start();
+                                    AddChange addChange=new AddChange(new Whine("NULL", 0));
+                                    TableStatements.addChange(addChange);
+                                    TableStatements.addChange(addChange);
+                                    checkHighlight();
+                                }else{
+                                    Platform.runLater(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            ErrorWindow.getInstace().loadInfoScreen("Элемент уже существует");
+                                        }
+                                    });
+                                }
                             }
                         });
                     }

@@ -75,6 +75,35 @@ public class Queries {
             System.out.println(e);
         }
     }
+    public void insertRow(JdbcRowSet jrs, String tableName,Statement statement, HashSet<FoodResidus> newObject){
+        try{
+            System.out.println("- Insert row in database table: " + tableName);
+            Iterator<FoodResidus> iteratorNew=newObject.iterator();
+            FoodResidus newOb;
+            newOb=iteratorNew.next();
+            String sql = "";
+            sql= "INSERT INTO "+tableName+"(\"Name\", \"Weight\") VALUES ('"+newOb.getName()+"',"+ newOb.getWeight()+");";
+            statement.executeUpdate(sql);
+            System.out.println("Insert was commited");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public void deleteRow(JdbcRowSet jrs, String tableName,Statement statement, HashSet<FoodResidus> oldObject){
+        try{
+            System.out.println("- Delete row in database table: " + tableName);
+            Iterator<FoodResidus> iteratorOld=oldObject.iterator();
+            FoodResidus oldOb;
+            oldOb=iteratorOld.next();
+            String sql = "";
+            sql= "DELETE FROM "+tableName+" WHERE \"Name\"='"+oldOb.getName()+"' AND \"Weight\"="+oldOb.getWeight()+";";
+            System.out.println(sql);
+            statement.executeUpdate(sql);
+            System.out.println("Delete was commited");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
     private int getRowCount(JdbcRowSet jrs){
         try {
             jrs.last();

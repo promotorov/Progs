@@ -3,6 +3,7 @@ package controllers;
 import changes.RemoveGreatestChange;
 import changes.TableStatements;
 import filters.CompareMethods;
+import io.dataBaseInteraction.DBIRefresh;
 import items.FoodResidus;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -43,7 +44,8 @@ public class SaveFiltersController {
                                     }
                                     ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
                                     table.setItems(data);
-                                    System.out.println(data.size());
+                                    DBIRefresh dbiRefresh=new DBIRefresh("refresh", data);
+                                    dbiRefresh.start();
                                     MainScreenController.checkHighlight();
                                     RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
                                     TableStatements.addChange(r);

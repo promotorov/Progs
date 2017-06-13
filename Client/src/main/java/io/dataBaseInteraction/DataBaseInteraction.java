@@ -9,5 +9,6 @@ public interface DataBaseInteraction {
     public final int CHANGE_ELEMENT=2;
     public final int ADD_ELEMENT=3;
     public final int REMOVE_ELEMENT=4;
+    public final int REFRESH_TABLE=5;
     //TODO Команды для фильтра и RG
 }

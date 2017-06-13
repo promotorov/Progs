@@ -2,6 +2,7 @@ package controllers;
 
 import changes.RemoveGreatestChange;
 import changes.TableStatements;
+import io.dataBaseInteraction.DBIRefresh;
 import items.FoodResidus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +37,8 @@ public class RemoveElController {
                     }
                     ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
                     RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
+                    DBIRefresh dbiRefresh=new DBIRefresh("refresh", data);
+                    dbiRefresh.start();
                     TableStatements.addChange(r);
                     System.out.println("Все элементы превышающие данный удалены");
                 } catch (IOException e) {

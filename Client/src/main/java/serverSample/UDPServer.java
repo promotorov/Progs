@@ -62,7 +62,34 @@ class UDPServer{
                 String newXml=new String(receiveNewByte);
                 HashSet newObject=XMLworker.xmlToObject(newXml);
                 queries.replaceRow(jdbcRowSet, NAME, statement, oldObject, newObject);
-
+            }else if(receiveData[0]== DataBaseInteraction.ADD_ELEMENT){
+                byte[] receiveNewByte = new byte[4096];
+                RowSetFactory rsFactory = RowSetProvider.newFactory();
+                JdbcRowSet jdbcRowSet = rsFactory.createJdbcRowSet();
+                DatagramPacket receiveNew = new DatagramPacket(receiveNewByte, receiveData.length);
+                serverSocket.receive(receiveNew);
+                String newXml=new String(receiveNewByte);
+                HashSet newObject=XMLworker.xmlToObject(newXml);
+                queries.insertRow(jdbcRowSet, NAME, statement, newObject);
+            }else if(receiveData[0]== DataBaseInteraction.REMOVE_ELEMENT){
+                byte[] receiveOldByte = new byte[4096];
+                RowSetFactory rsFactory = RowSetProvider.newFactory();
+                JdbcRowSet jdbcRowSet = rsFactory.createJdbcRowSet();
+                DatagramPacket receiveOld = new DatagramPacket(receiveOldByte, receiveData.length);
+                serverSocket.receive(receiveOld);
+                String newXml=new String(receiveOldByte);
+                HashSet oldObject=XMLworker.xmlToObject(newXml);
+                queries.deleteRow(jdbcRowSet, NAME, statement, oldObject);
+            }else if(receiveData[0]== DataBaseInteraction.REFRESH_TABLE){
+                byte[] receiveNewByte = new byte[4096];
+                RowSetFactory rsFactory = RowSetProvider.newFactory();
+                JdbcRowSet jdbcRowSet = rsFactory.createJdbcRowSet();
+                DatagramPacket receiveNew = new DatagramPacket(receiveNewByte, receiveData.length);
+                serverSocket.receive(receiveNew);
+                String newXml=new String(receiveNewByte);
+                HashSet newObject=XMLworker.xmlToObject(newXml);
+                queries.removeAllRows(jdbcRowSet, NAME, statement);
+                queries.insertAllRows(jdbcRowSet, NAME, newObject, statement);
             }
         }
     }
