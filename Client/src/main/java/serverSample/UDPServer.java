@@ -23,7 +23,7 @@ class UDPServer{
         Statement statement = dbc.getStatement();
         Queries queries = new Queries();
         DatagramSocket serverSocket = new DatagramSocket(9876);
-        byte[] receiveData = new byte[1024];
+        byte[] receiveData = new byte[4096];
         byte[] sendData;
         System.out.println("Server is ready");
         while(true){
@@ -43,9 +43,10 @@ class UDPServer{
                 System.out.println(receiveData.length);
                 String resievedCollection = new String(receiveData);
                 HashSet<FoodResidus> colectionToInsert= XMLworker.xmlToObject(resievedCollection);
-                /*queries.removeAllRows(jdbcRowSet, NAME);
-                queries.insertAllRows(jdbcRowSet, NAME, colectionToInsert);***/
-                System.out.println("Successful insert into table");
+                RowSetFactory rsFactory = RowSetProvider.newFactory();
+                JdbcRowSet jdbcRowSet = rsFactory.createJdbcRowSet();
+                queries.removeAllRows(jdbcRowSet, NAME, statement);
+                queries.insertAllRows(jdbcRowSet, NAME, colectionToInsert, statement);
             }
         }
     }

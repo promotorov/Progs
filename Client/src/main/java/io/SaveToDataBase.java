@@ -28,7 +28,7 @@ public class SaveToDataBase extends Thread {
             DatagramSocket clientSocket = new DatagramSocket();
             byte[] ipAddr = new byte[]{(byte) 192, (byte)168, 1, (byte)129};
             InetAddress IPAddress = InetAddress.getByAddress(ipAddr);
-            byte[] sendData = new byte[2048];
+            byte[] sendData = new byte[4096];
             byte[] receiveData = new byte[1];//TODO удостовериться в получении сервером данных
             ObservableList<FoodResidus> ob=data;
             HashSet<FoodResidus> set=new HashSet<>();

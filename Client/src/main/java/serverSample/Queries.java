@@ -31,30 +31,30 @@ public class Queries {
             return null;
         }
     }
-    public void removeAllRows(JdbcRowSet jrs, String tableName){
+    public void removeAllRows(JdbcRowSet jrs, String tableName, Statement statement){
         try{
             System.out.println("- Remove all rows from database table: " + tableName);
-            String sql = "SELECT * FROM " + tableName;
-            jrs.beforeFirst();
-            while (jrs.next()){
-                jrs.deleteRow();
-            }
-            System.out.println("Remove successfull");
+            String sql = "DELETE FROM " + tableName;
+            int count=statement.executeUpdate(sql);
+            System.out.println("Remove successfull: "+count);
         }catch(Exception e){
             System.out.println(e);
         }
     }
-    public void insertAllRows(JdbcRowSet jrs, String tableName, HashSet<FoodResidus> hs){
+    public void insertAllRows(JdbcRowSet jrs, String tableName, HashSet<FoodResidus> hs, Statement statement){
         try{
             System.out.println("- Insert rows into database table: " + tableName);
             Iterator<FoodResidus> iterator = hs.iterator();
+            String sql = "";
+            int count=0;
+            System.out.println(hs.size()+"Размер коллекции");
             while (iterator.hasNext()) {
                 FoodResidus fr = iterator.next();
-                jrs.moveToInsertRow();
-                jrs.updateString("Name", fr.getName());
-                jrs.updateInt("Weight", fr.getWeight());
-                jrs.insertRow();
+                sql="INSERT INTO "+tableName+"(\"Name\", \"Weight\") VALUES ('"+fr.getName()+"',"+ fr.getWeight()+");";
+                statement.executeUpdate(sql);
+                count++;
             }
+            System.out.println("Inset was commited: "+count);
         }catch(Exception e){
             System.out.println(e);
         }
