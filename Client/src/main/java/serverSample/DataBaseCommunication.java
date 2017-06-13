@@ -16,6 +16,7 @@ public class DataBaseCommunication {
         this.password=password;
         pooledDataSource.setUrl(url);
         pooledConnection = pooledDataSource.getPooledConnection(username, password);
+        pooledConnection.getConnection().setAutoCommit(false);
         Statement statement = pooledConnection.getConnection().createStatement();
         System.out.println("Success");
     }
@@ -26,5 +27,9 @@ public class DataBaseCommunication {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public PooledConnection getPooledConnection() {
+        return pooledConnection;
     }
 }

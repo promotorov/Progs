@@ -34,20 +34,15 @@ class UDPServer{
             if(receiveData[0]== DataBaseInteraction.INIT_TABLE){
                 RowSetFactory rsFactory = RowSetProvider.newFactory();
                 JdbcRowSet jdbcRowSet = rsFactory.createJdbcRowSet();
-                HashSet<FoodResidus> data = queries.loadAllRows(jdbcRowSet, NAME, statement);
+                HashSet<FoodResidus> data = queries.loadAllRows(jdbcRowSet, NAME, dbc.getPooledConnection().getConnection());
                 String str = XMLworker.objectToXML(data);
                 sendData=str.getBytes();
                 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
                 serverSocket.send(sendPacket);
             }else if(receiveData[0]== DataBaseInteraction.CLEAR_TABLE){
-                /*DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);//TODO в отдельный метод
-                serverSocket.receive(receivePacket);
-                String resievedCollection = new String(receiveData);
-                HashSet<FoodResidus> colectionToInsert= XMLworker.xmlToObject(resievedCollection);*/
                 RowSetFactory rsFactory = RowSetProvider.newFactory();
                 JdbcRowSet jdbcRowSet = rsFactory.createJdbcRowSet();
-                queries.removeAllRows(jdbcRowSet, NAME, statement);
-                //queries.insertAllRows(jdbcRowSet, NAME, colectionToInsert, statement);
+                queries.removeAllRows(jdbcRowSet, NAME,  dbc.getPooledConnection().getConnection());
             }else if(receiveData[0]== DataBaseInteraction.CHANGE_ELEMENT) {
                 byte[] receiveOldByte = new byte[4096];
                 byte[] receiveNewByte = new byte[4096];
@@ -88,8 +83,7 @@ class UDPServer{
                 serverSocket.receive(receiveNew);
                 String newXml=new String(receiveNewByte);
                 HashSet newObject=XMLworker.xmlToObject(newXml);
-                queries.removeAllRows(jdbcRowSet, NAME, statement);
-                queries.insertAllRows(jdbcRowSet, NAME, newObject, statement);
+                queries.refreshTable(jdbcRowSet, NAME, newObject, dbc.getPooledConnection().getConnection());
             }
         }
     }
