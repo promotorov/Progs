@@ -123,10 +123,8 @@ public class XMLworker {
     }
     public static HashSet xmlToObject(String xml){
         try{
-            System.out.println(xml);
             xml=xml.replace("<?xmlversion=\"1.0\"encoding=\"UTF-8\"standalone=\"yes\"?>","<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             xml=xml.substring(0,xml.lastIndexOf(">")+1);
-            System.out.println(xml);
             StringReader sr = new StringReader(xml);
             System.out.println(xml.lastIndexOf(">"));
             ClassWrapper returnedHS = JAXB.unmarshal(sr, ClassWrapper.class);

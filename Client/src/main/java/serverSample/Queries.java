@@ -47,7 +47,6 @@ public class Queries {
             Iterator<FoodResidus> iterator = hs.iterator();
             String sql = "";
             int count=0;
-            System.out.println(hs.size()+"Размер коллекции");
             while (iterator.hasNext()) {
                 FoodResidus fr = iterator.next();
                 sql="INSERT INTO "+tableName+"(\"Name\", \"Weight\") VALUES ('"+fr.getName()+"',"+ fr.getWeight()+");";
@@ -55,6 +54,23 @@ public class Queries {
                 count++;
             }
             System.out.println("Inset was commited: "+count);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public void replaceRow(JdbcRowSet jrs, String tableName,Statement statement, HashSet<FoodResidus> oldObject,  HashSet<FoodResidus> newObject){
+        try{
+            System.out.println("- Replce row in database table: " + tableName);
+            Iterator<FoodResidus> iteratorOld=oldObject.iterator();
+            Iterator<FoodResidus> iteratorNew=newObject.iterator();
+            FoodResidus oldOb;
+            FoodResidus newOb;
+            oldOb=iteratorOld.next();
+            newOb=iteratorNew.next();
+            String sql = "";
+            sql= "UPDATE "+tableName+"  SET \"Name\"='"+newOb.getName()+"', \"Weight\"="+newOb.getWeight()+"   WHERE \"Name\"='"+oldOb.getName()+"' AND \"Weight\"="+oldOb.getWeight()+";";
+            statement.executeUpdate(sql);
+            System.out.println("Replace was commited");
         }catch(Exception e){
             System.out.println(e);
         }
@@ -68,4 +84,5 @@ public class Queries {
             return  -1;
         }
     }
+
 }

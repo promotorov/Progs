@@ -2,6 +2,8 @@ package controllers;
 
 import changes.ClearChange;
 import changes.TableStatements;
+import io.dataBaseInteraction.DBIClear;
+import io.dataBaseInteraction.DataBaseInteraction;
 import items.FoodResidus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +28,9 @@ public class ClearController {
                 Stage stage = (Stage) ClearWindow.getInstace().getClearOKbutton().getScene().getWindow();
                 stage.close();
                 MainScreenController.checkHighlight();
+                DBIClear db=new DBIClear("clear", data);
+
+                db.start();
             }
         });
     }

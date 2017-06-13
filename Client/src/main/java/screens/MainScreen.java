@@ -1,7 +1,8 @@
 package screens;
 
 import controllers.MainScreenController;
-import io.InitTable;
+import io.dataBaseInteraction.DBIInit;
+import io.dataBaseInteraction.DataBaseInteraction;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
@@ -136,8 +137,8 @@ public class MainScreen{//TODO написать синглтон
 
     private void initTable(){
         data=FXCollections.observableArrayList();
-        InitTable initTable=new InitTable("init", data, table);
-        initTable.start();
+        DBIInit db=new DBIInit("init", data);
+        db.start();
         table.setItems(data);
     }
 

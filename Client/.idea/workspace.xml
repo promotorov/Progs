@@ -19,15 +19,108 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="MainScreenController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UDPServer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/serverSample/UDPServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="635">
+              <caret line="61" column="57" lean-forward="false" selection-start-line="61" selection-start-column="57" selection-end-line="61" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainScreenController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/controllers/MainScreenController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="934">
-              <caret line="524" column="29" lean-forward="false" selection-start-line="524" selection-start-column="29" selection-end-line="524" selection-end-column="29" />
+            <state relative-caret-position="237">
+              <caret line="484" column="58" lean-forward="false" selection-start-line="484" selection-start-column="58" selection-end-line="484" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBIInit.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DBIInit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="603">
+              <caret line="39" column="42" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
               <folding>
-                <marker date="1497367929324" expanded="false" signature="28752:28892" ph="updateItem(person, b) → {" />
-                <marker date="1497367929324" expanded="false" signature="32644:32668" ph="}" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBIChange.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DBIChange.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="381">
+              <caret line="35" column="55" lean-forward="false" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1213#1226#0" expanded="true" />
+                <element signature="e#1563#1576#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Queries.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/serverSample/Queries.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="70" column="187" lean-forward="false" selection-start-line="70" selection-start-column="187" selection-end-line="70" selection-end-column="187" />
+              <folding>
+                <element signature="docComment;class#Queries#0" expanded="false" />
+                <marker date="1497376625052" expanded="true" signature="616:630" ph="SELECT * FRO... missingValue" />
+                <marker date="1497376625052" expanded="true" signature="1261:1273" ph="DELETE FROM " />
+                <marker date="1497376625052" expanded="true" signature="1915:2010" ph="INSERT INTO missingValue... " />
+                <marker date="1497376625052" expanded="true" signature="2802:2810" ph="UPDATE publi... " />
+                <marker date="1497376625052" expanded="true" signature="2802:2827" ph="UPDATE missi... " />
+                <marker date="1497376625052" expanded="true" signature="2802:2838" ph="UPDATE missi... " />
+                <marker date="1497376625052" expanded="true" signature="2802:2859" ph="UPDATE missi... " />
+                <marker date="1497376625052" expanded="true" signature="2802:2871" ph="UPDATE missi... " />
+                <marker date="1497376625052" expanded="true" signature="2802:2900" ph="UPDATE missi... " />
+                <marker date="1497376625052" expanded="true" signature="2802:2911" ph="UPDATE missi... " />
+                <marker date="1497376625052" expanded="true" signature="2802:2947" ph="UPDATE missi... " />
+                <marker date="1497376625052" expanded="true" signature="2802:2968" ph="UPDATE missi... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataBaseInteraction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DataBaseInteraction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XMLworker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/serealize/XMLworker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="318">
+              <caret line="126" column="56" lean-forward="false" selection-start-line="126" selection-start-column="56" selection-end-line="126" selection-end-column="56" />
+              <folding>
+                <element signature="method#saveCollection#0;class#XMLworker#0" expanded="false" />
+                <element signature="method#saveCollection#1;class#XMLworker#0" expanded="false" />
+                <element signature="method#getCollection#0;class#XMLworker#0" expanded="false" />
+                <element signature="method#getCollection#1;class#XMLworker#0" expanded="false" />
+                <element signature="method#objectToXML#0;class#XMLworker#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClearController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/ClearController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="24">
+              <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -37,14 +130,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clear</find>
-      <find>erro</find>
       <find>buttonOkInfo</find>
       <find>aut</find>
       <find>infoOk</find>
@@ -73,6 +165,8 @@
       <find>getSta</find>
       <find>System.out.println(&quot;Уже есть&quot;);</find>
       <find>tableV</find>
+      <find>initTab</find>
+      <find>syst</find>
     </findStrings>
     <replaceStrings>
       <replace>MainScreen.getInstace()</replace>
@@ -104,16 +198,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/serealize/JSONworker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/serealize/ClassWrapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/MainScreen.java" />
-        <option value="$PROJECT_DIR$/src/main/java/screens/mainScreen/TopRightCornerContainer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/screens/mainScreen/LeftButtonsContainer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/screens/mainScreen/MainScreen.java" />
-        <option value="$PROJECT_DIR$/src/main/java/any/NumberTextfield.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controllers/ClearController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controllers/ErrorController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controllers/InfoApplicationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/any/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/changes/TableStatements.java" />
         <option value="$PROJECT_DIR$/src/main/java/controllers/RemoveElController.java" />
@@ -135,7 +219,6 @@
         <option value="$PROJECT_DIR$/src/main/java/screens/SaveSucsessfullWindow.java" />
         <option value="$PROJECT_DIR$/src/main/java/screens/SaveWindow.java" />
         <option value="$PROJECT_DIR$/src/main/java/screens/SetFiltersWindow.java" />
-        <option value="$PROJECT_DIR$/src/main/java/screens/MainScreen.java" />
         <option value="$PROJECT_DIR$/src/main/java/main/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/main/MainClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/serverSammple/DataBaseCommunication.java" />
@@ -148,13 +231,24 @@
         <option value="$PROJECT_DIR$/src/main/java/io/SaveTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/serverSample/DataBaseCommunication.java" />
         <option value="$PROJECT_DIR$/src/main/java/main/MainServer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/serverSample/Queries.java" />
-        <option value="$PROJECT_DIR$/src/main/java/serealize/XMLworker.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/SaveToDataBase.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/InitTable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/serverSample/UDPServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/controllers/SaveController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/UpdateDataBase.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/DataBaseCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/DatabaseInteraction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DataBaseCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DataBaseInit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DatabaseInteraction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/screens/MainScreen.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controllers/ClearController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DBIClear.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DBIInit.java" />
         <option value="$PROJECT_DIR$/src/main/java/controllers/MainScreenController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/serealize/XMLworker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/serverSample/UDPServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DBIChange.java" />
+        <option value="$PROJECT_DIR$/src/main/java/serverSample/Queries.java" />
       </list>
     </option>
   </component>
@@ -213,6 +307,58 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="serverSample" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="serealize" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -790,8 +936,8 @@
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.MainClient" />
         <item index="1" class="java.lang.String" itemvalue="Application.UDPServer" />
-        <item index="2" class="java.lang.String" itemvalue="Application.UDPClient" />
-        <item index="3" class="java.lang.String" itemvalue="Application.MainServer" />
+        <item index="2" class="java.lang.String" itemvalue="Application.MainServer" />
+        <item index="3" class="java.lang.String" itemvalue="Application.UDPClient" />
         <item index="4" class="java.lang.String" itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -812,12 +958,12 @@
       <workItem from="1497206551729" duration="2008000" />
       <workItem from="1497258308928" duration="3835000" />
       <workItem from="1497263428208" duration="24389000" />
-      <workItem from="1497357156943" duration="10008000" />
+      <workItem from="1497357156943" duration="18643000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69830000" />
+    <option name="totallyTimeSpent" value="78465000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -847,7 +993,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20139635" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20408164" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -871,7 +1017,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="53" />
+      <option name="time" value="54" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -880,42 +1026,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/screens/mainScreen/LeftButtonsContainer.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/changes/RemoveGreatestChange.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/changes/TableStatements.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2688">
-          <caret line="128" column="39" lean-forward="false" selection-start-line="128" selection-start-column="39" selection-end-line="128" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/RemoveElController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/SaveFiltersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1029">
-          <caret line="65" column="95" lean-forward="false" selection-start-line="65" selection-start-column="95" selection-end-line="65" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/SaveSucsessfullController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="72" lean-forward="false" selection-start-line="16" selection-start-column="72" selection-end-line="16" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controllers/SettingsScreenController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2328">
@@ -962,13 +1072,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/ClearController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="31" column="17" lean-forward="true" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1093,13 +1196,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/jre/lib/rt.jar!/java/lang/Thread.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="167" column="11" lean-forward="false" selection-start-line="167" selection-start-column="11" selection-end-line="167" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/serverSample/UDPClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
@@ -1107,13 +1203,6 @@
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/screens/MainScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="188" column="61" lean-forward="false" selection-start-line="188" selection-start-column="61" selection-end-line="188" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -1131,38 +1220,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/serverSample/Queries.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="59" column="9" lean-forward="true" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
-          <folding>
-            <element signature="docComment;class#Queries#0" expanded="false" />
-            <marker date="1497359227667" expanded="true" signature="616:630" ph="SELECT * FRO... missingValue" />
-            <marker date="1497359227667" expanded="true" signature="1261:1273" ph="DELETE FROM " />
-            <marker date="1497359227667" expanded="true" signature="1977:2072" ph="INSERT INTO missingValue... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/serverSample/DataBaseCommunication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/serealize/XMLworker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="131" column="77" lean-forward="true" selection-start-line="131" selection-start-column="77" selection-end-line="131" selection-end-column="77" />
-          <folding>
-            <element signature="method#saveCollection#0;class#XMLworker#0" expanded="false" />
-            <element signature="method#saveCollection#1;class#XMLworker#0" expanded="false" />
-            <element signature="method#getCollection#0;class#XMLworker#0" expanded="false" />
-            <element signature="method#getCollection#1;class#XMLworker#0" expanded="false" />
-            <element signature="method#objectToXML#0;class#XMLworker#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1184,40 +1246,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/serverSample/UDPServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="25" column="44" lean-forward="true" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controllers/SaveController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="27" column="16" lean-forward="false" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
           <folding>
             <element signature="docComment;class#SaveController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/SaveToDataBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="20" column="29" lean-forward="true" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding>
-            <element signature="docComment;class#SaveToDataBase#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/InitTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="31" column="25" lean-forward="false" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
-          <folding>
-            <element signature="docComment;class#InitTable#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1254,13 +1288,156 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/jre/lib/rt.jar!/java/lang/Thread.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="167" column="11" lean-forward="false" selection-start-line="167" selection-start-column="11" selection-end-line="167" selection-end-column="11" />
+          <folding>
+            <element signature="e#5767#5768#0" expanded="true" />
+            <element signature="e#5837#5838#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/changes/TypesChanges.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="29" lean-forward="false" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/SaveToDataBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="20" column="29" lean-forward="true" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+          <folding>
+            <element signature="docComment;class#SaveToDataBase#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/InitTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="614">
+          <caret line="41" column="16" lean-forward="true" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DataBaseInteraction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/screens/MainScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#MainScreen#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DBIClear.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="15" column="67" lean-forward="false" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DBIInit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="39" column="42" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/serealize/XMLworker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="126" column="56" lean-forward="false" selection-start-line="126" selection-start-column="56" selection-end-line="126" selection-end-column="56" />
+          <folding>
+            <element signature="method#saveCollection#0;class#XMLworker#0" expanded="false" />
+            <element signature="method#saveCollection#1;class#XMLworker#0" expanded="false" />
+            <element signature="method#getCollection#0;class#XMLworker#0" expanded="false" />
+            <element signature="method#getCollection#1;class#XMLworker#0" expanded="false" />
+            <element signature="method#objectToXML#0;class#XMLworker#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/ClearController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controllers/MainScreenController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="934">
-          <caret line="524" column="29" lean-forward="false" selection-start-line="524" selection-start-column="29" selection-end-line="524" selection-end-column="29" />
+        <state relative-caret-position="237">
+          <caret line="484" column="58" lean-forward="false" selection-start-line="484" selection-start-column="58" selection-end-line="484" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DataBaseInteraction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/serverSample/UDPServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="635">
+          <caret line="61" column="57" lean-forward="false" selection-start-line="61" selection-start-column="57" selection-end-line="61" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/dataBaseInteraction/DBIChange.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="35" column="55" lean-forward="false" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
           <folding>
-            <marker date="1497367929324" expanded="false" signature="28752:28892" ph="updateItem(person, b) → {" />
-            <marker date="1497367929324" expanded="false" signature="32644:32668" ph="}" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1213#1226#0" expanded="true" />
+            <element signature="e#1563#1576#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/serverSample/Queries.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="70" column="187" lean-forward="false" selection-start-line="70" selection-start-column="187" selection-end-line="70" selection-end-column="187" />
+          <folding>
+            <element signature="docComment;class#Queries#0" expanded="false" />
+            <marker date="1497376625052" expanded="true" signature="616:630" ph="SELECT * FRO... missingValue" />
+            <marker date="1497376625052" expanded="true" signature="1261:1273" ph="DELETE FROM " />
+            <marker date="1497376625052" expanded="true" signature="1915:2010" ph="INSERT INTO missingValue... " />
+            <marker date="1497376625052" expanded="true" signature="2802:2810" ph="UPDATE publi... " />
+            <marker date="1497376625052" expanded="true" signature="2802:2827" ph="UPDATE missi... " />
+            <marker date="1497376625052" expanded="true" signature="2802:2838" ph="UPDATE missi... " />
+            <marker date="1497376625052" expanded="true" signature="2802:2859" ph="UPDATE missi... " />
+            <marker date="1497376625052" expanded="true" signature="2802:2871" ph="UPDATE missi... " />
+            <marker date="1497376625052" expanded="true" signature="2802:2900" ph="UPDATE missi... " />
+            <marker date="1497376625052" expanded="true" signature="2802:2911" ph="UPDATE missi... " />
+            <marker date="1497376625052" expanded="true" signature="2802:2947" ph="UPDATE missi... " />
+            <marker date="1497376625052" expanded="true" signature="2802:2968" ph="UPDATE missi... " />
           </folding>
         </state>
       </provider>

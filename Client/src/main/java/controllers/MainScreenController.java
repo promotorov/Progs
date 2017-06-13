@@ -3,6 +3,7 @@ package controllers;
 import changes.*;
 import filters.SortedByName;
 import io.Loadtable;
+import io.dataBaseInteraction.DBIChange;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -343,6 +344,11 @@ public class MainScreenController {
                                 Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                         t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                 if(!data.contains(new Whine(t.getNewValue().trim(),t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight()))){
+                                    DBIChange dbiChange=new DBIChange("change", new Whine(t.getOldValue(), t.getTableView().getItems().get(
+                                            t.getTablePosition().getRow()).getWeight()),
+                                            new Whine(t.getNewValue(), t.getTableView().getItems().get(
+                                                    t.getTablePosition().getRow()).getWeight()));
+                                    dbiChange.start();
                                     t.getTableView().getItems().get(
                                             t.getTablePosition().getRow()).setName(t.getNewValue().trim());
                                     String temp=MainScreen.getInstace().getNameSearch().getText().trim();
@@ -381,6 +387,11 @@ public class MainScreenController {
                             Whine oldTemp=new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                     t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                             if(!data.contains(new Whine("Безыменный",t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight()))){
+                                DBIChange dbiChange=new DBIChange("change", new Whine(t.getOldValue(), t.getTableView().getItems().get(
+                                        t.getTablePosition().getRow()).getWeight()),
+                                        new Whine(t.getNewValue(), t.getTableView().getItems().get(
+                                                t.getTablePosition().getRow()).getWeight()));
+                                dbiChange.start();
                                 t.getTableView().getItems().get(
                                         t.getTablePosition().getRow()).setName("Безыменный");
                                 if(MainScreen.getInstace().getNameSearch().getText().trim().equals("Безыменный")) data.get(t.getTablePosition().getRow()).setHighlightProperty(true);
@@ -388,6 +399,7 @@ public class MainScreenController {
                                     data.get(t.getTablePosition().getRow()).setHighlightProperty(false);
                                     data.get(t.getTablePosition().getRow()).setActivehighlightProperty(false);
                                 }
+
                             }else{
                                 Platform.runLater(new Runnable() {
                                             @Override
@@ -430,6 +442,11 @@ public class MainScreenController {
                                     Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                     if(!data.contains(new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName().trim(), t.getNewValue()))){
+                                        DBIChange dbiChange=new DBIChange("change", new Whine(t.getTableView().getItems().get(
+                                                t.getTablePosition().getRow()).getName(), t.getOldValue()),
+                                                new Whine(t.getTableView().getItems().get(
+                                                        t.getTablePosition().getRow()).getName(), t.getNewValue()));
+                                        dbiChange.start();
                                         t.getTableView().getItems().get(
                                                 t.getTablePosition().getRow()).setWeight(t.getNewValue());
                                         if(MainScreen.getInstace().getWeightSearch().getText().trim().length()!=0) {
@@ -461,6 +478,11 @@ public class MainScreenController {
                                     Whine oldTemp = new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName(),
                                             t.getTableView().getItems().get(t.getTablePosition().getRow()).getWeight());
                                     if(!data.contains(new Whine(t.getTableView().getItems().get(t.getTablePosition().getRow()).getName().trim(), 0))){
+                                        DBIChange dbiChange=new DBIChange("change", new Whine(t.getTableView().getItems().get(
+                                                t.getTablePosition().getRow()).getName(), t.getOldValue()),
+                                                new Whine(t.getTableView().getItems().get(
+                                                        t.getTablePosition().getRow()).getName(), t.getNewValue()));
+                                        dbiChange.start();
                                         t.getTableView().getItems().get(
                                                 t.getTablePosition().getRow()).setWeight(0);
                                         if(MainScreen.getInstace().getWeightSearch().getText().length()!=0) {
@@ -489,7 +511,6 @@ public class MainScreenController {
                         }
                     }
             );
-
     }
     public static void tableViewRightClick(TableView tableView){
         tableView.setRowFactory(new Callback<TableView<FoodResidus>, TableRow<FoodResidus>>() {
