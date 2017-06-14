@@ -25,7 +25,7 @@ public class DBIChange extends Thread implements DataBaseInteraction {
     public void run(){
         try{
             DatagramSocket clientSocket = new DatagramSocket();
-            byte[] ipAddr = new byte[]{(byte) 192, (byte)168, 1, (byte)129};
+            byte[] ipAddr = DataBaseInteraction.IP;
             InetAddress IPAddress = InetAddress.getByAddress(ipAddr);
             byte[] sendData = new byte[1000];
             sendData[0]=(byte) DataBaseInteraction.CHANGE_ELEMENT; //TODO int to byte

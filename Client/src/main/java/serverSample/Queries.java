@@ -71,7 +71,6 @@ public class Queries {
                 statement.setInt(2, fr.getWeight());
                 statement.executeUpdate(sql);
                 count++;
-                System.out.println("IN WHILE");
                 connection.commit();
             };
             System.out.println("Inset was commited: "+count);

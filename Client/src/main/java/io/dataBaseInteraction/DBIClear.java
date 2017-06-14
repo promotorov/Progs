@@ -24,7 +24,7 @@ public class DBIClear extends Thread implements DataBaseInteraction {
         try{
             //TODO undo/redo for db
             DatagramSocket clientSocket = new DatagramSocket();
-            byte[] ipAddr = new byte[]{(byte) 192, (byte)168, 1, (byte)129};
+            byte[] ipAddr = DataBaseInteraction.IP;
             InetAddress IPAddress = InetAddress.getByAddress(ipAddr);
             byte[] sendData = new byte[1];
             sendData[0]=(byte) DataBaseInteraction.CLEAR_TABLE;

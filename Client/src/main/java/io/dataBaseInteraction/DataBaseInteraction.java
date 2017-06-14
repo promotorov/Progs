@@ -10,5 +10,6 @@ public interface DataBaseInteraction {
     public final int ADD_ELEMENT=3;
     public final int REMOVE_ELEMENT=4;
     public final int REFRESH_TABLE=5;
-    //TODO Команды для фильтра и RG
+    public final byte[] IP = new byte[]{(byte) 192, (byte)168, 1, (byte)129};
+
 }

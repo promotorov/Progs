@@ -26,7 +26,7 @@ public class DBIRefresh extends Thread implements DataBaseInteraction {
     public void run(){
         try {
             DatagramSocket clientSocket = new DatagramSocket();
-            byte[] ipAddr = new byte[]{(byte) 192, (byte)168, 1, (byte)129};
+            byte[] ipAddr = DataBaseInteraction.IP;
             InetAddress IPAddress = InetAddress.getByAddress(ipAddr);
             byte[] sendData = new byte[4096];
             ObservableList<FoodResidus> ob=data;
