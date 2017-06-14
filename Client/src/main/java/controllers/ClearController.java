@@ -28,9 +28,8 @@ public class ClearController {
                 Stage stage = (Stage) ClearWindow.getInstace().getClearOKbutton().getScene().getWindow();
                 stage.close();
                 MainScreenController.checkHighlight();
-                DBIClear db=new DBIClear("clear", data);
-
-                db.start();
+                /*DBIClear db=new DBIClear("clear", data);
+                db.start();*/
             }
         });
     }

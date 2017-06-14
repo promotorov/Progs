@@ -37,7 +37,6 @@ class UDPServer{
             if(!currentClientsIPs.contains(IPAddress)){
                 currentClientsIPs.add(IPAddress);
                 currentClientsPorts.add(port);
-                System.out.println(IPAddress+" "+port+"Вот что записал");
             }
             System.out.println(IPAddress.getHostName()+" was connected");
             if(receiveData[0]== DataBaseInteraction.INIT_TABLE){
@@ -139,6 +138,7 @@ class UDPServer{
                     if(currentClientsIPs.get(i).toString().equals(receiveCommand.getAddress().toString())){
                         continue;
                     }else{
+                        //System.out.println(currentClientsIPs.get(i));
                         byte[] sentToClient=new  byte[1];
                         //sentToClient=(DataBaseInteraction.CLEAR_TABLE+"").getBytes();
                         sentToClient[0]=DataBaseInteraction.REMOVE_ELEMENT;

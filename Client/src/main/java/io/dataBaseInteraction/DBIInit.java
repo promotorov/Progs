@@ -87,6 +87,7 @@ public class DBIInit extends Thread implements DataBaseInteraction{
                     MainScreen mainScreen = MainScreen.getInstace();
                     mainScreen.getTable().setItems(observableData);
                 }
+                MainScreen.getInstace().getTable().refresh();
             }
         }catch (Exception e){
             e.printStackTrace();

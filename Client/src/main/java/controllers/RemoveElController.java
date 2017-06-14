@@ -37,8 +37,8 @@ public class RemoveElController {
                     }
                     ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
                     RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
-                    DBIRefresh dbiRefresh=new DBIRefresh("refresh", data);
-                    dbiRefresh.start();
+                    /*DBIRefresh dbiRefresh=new DBIRefresh("refresh", data);
+                    dbiRefresh.start();*/
                     TableStatements.addChange(r);
                     System.out.println("Все элементы превышающие данный удалены");
                 } catch (IOException e) {

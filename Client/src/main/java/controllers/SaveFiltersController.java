@@ -44,8 +44,8 @@ public class SaveFiltersController {
                                     }
                                     ObservableList<FoodResidus> newTemp=FXCollections.observableArrayList(data);
                                     table.setItems(data);
-                                    DBIRefresh dbiRefresh=new DBIRefresh("refresh", data);
-                                    dbiRefresh.start();
+                                    /*DBIRefresh dbiRefresh=new DBIRefresh("refresh", data);
+                                    dbiRefresh.start();*/
                                     MainScreenController.checkHighlight();
                                     RemoveGreatestChange r=new RemoveGreatestChange(newTemp, oldTemp);
                                     TableStatements.addChange(r);
