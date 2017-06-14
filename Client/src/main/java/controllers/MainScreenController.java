@@ -592,7 +592,6 @@ public class MainScreenController {
                                     dbiAdd.start();
                                     AddChange addChange=new AddChange(new Whine("NULL", 0));
                                     TableStatements.addChange(addChange);
-                                    TableStatements.addChange(addChange);
                                     checkHighlight();
                                 }else{
                                     Platform.runLater(new Runnable() {
